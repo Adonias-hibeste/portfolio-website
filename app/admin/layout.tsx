@@ -2,6 +2,8 @@ import Link from "next/link";
 import { LayoutDashboard, FolderKanban, User, LogOut, Zap } from "lucide-react";
 import { signOut } from "@/auth";
 
+export const dynamic = "force-dynamic";
+
 export default function AdminLayout({
     children,
 }: {
