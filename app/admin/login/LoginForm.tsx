@@ -15,6 +15,9 @@ export default function LoginForm() {
                     <p className="text-muted-foreground mt-2">
                         Sign in to manage your portfolio
                     </p>
+                    <span className="inline-block mt-2 px-2 py-1 text-xs font-mono bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20">
+                        v1.1 (Debug Mode)
+                    </span>
                 </div>
 
                 <form action={dispatch} className="space-y-6">
