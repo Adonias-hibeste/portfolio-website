@@ -25,6 +25,13 @@ export async function authenticate(
                     return `Error: ${error.type}`;
             }
         }
+
+        // If it's a Next.js redirect (success), re-throw it
+        if ((error as any)?.digest?.startsWith("NEXT_REDIRECT") || (error as any)?.message === "NEXT_REDIRECT") {
+            throw error;
+        }
+
+        // Otherwise, return the actual system error message
         return `System Error: ${(error as Error).message}`;
     }
 }
