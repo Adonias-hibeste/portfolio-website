@@ -22,10 +22,10 @@ export async function authenticate(
                 case "CredentialsSignin":
                     return "Invalid credentials.";
                 default:
-                    return "Something went wrong.";
+                    return `Error: ${error.type}`;
             }
         }
-        throw error;
+        return `System Error: ${(error as Error).message}`;
     }
 }
 
