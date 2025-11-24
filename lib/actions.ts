@@ -4,6 +4,11 @@ import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { signOut } from "@/auth";
+
+export async function signOutAction() {
+    await signOut();
+}
 
 export async function authenticate(
     prevState: string | undefined,

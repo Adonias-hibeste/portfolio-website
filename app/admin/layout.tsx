@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LayoutDashboard, FolderKanban, User, LogOut, Zap } from "lucide-react";
-import { signOut } from "@/auth";
+import { SignOutButton } from "@/components/SignOutButton";
 
 export const dynamic = "force-dynamic";
 
@@ -48,17 +48,7 @@ export default function AdminLayout({
                         </Link>
                     </nav>
                     <div className="border-t p-4">
-                        <form
-                            action={async () => {
-                                "use server";
-                                await signOut();
-                            }}
-                        >
-                            <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-red-500 hover:bg-red-500/10">
-                                <LogOut className="h-4 w-4" />
-                                Sign Out
-                            </button>
-                        </form>
+                        <SignOutButton />
                     </div>
                 </div>
             </aside>
