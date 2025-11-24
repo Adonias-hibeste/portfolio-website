@@ -23,24 +23,38 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     providers: [
         Credentials({
             async authorize(credentials) {
-                const parsedCredentials = z
-                    .object({ email: z.string().email(), password: z.string().min(6) })
-                    .safeParse(credentials);
+                try {
+                    const parsedCredentials = z
+                        .object({ email: z.string().email(), password: z.string().min(6) })
+                        .safeParse(credentials);
 
-                if (parsedCredentials.success) {
-                    const { email, password } = parsedCredentials.data;
-                    const user = await getUser(email);
-                    if (!user) return null;
+                    if (parsedCredentials.success) {
+                        const { email, password } = parsedCredentials.data;
 
-                    // In a real app, use bcrypt.compare
-                    // For now, if I can't install bcryptjs easily without build tools, I might skip or try to install it.
-                    // I'll assume I can install it.
-                    const passwordsMatch = await bcrypt.compare(password, user.password);
-                    if (passwordsMatch) return user;
+                        console.log("Attempting login for:", email);
+                        const user = await getUser(email);
+                        if (!user) {
+                            console.log("User not found");
+                            return null;
+                        }
+
+                        console.log("User found, verifying password...");
+                        const passwordsMatch = await bcrypt.compare(password, user.password);
+                        if (passwordsMatch) {
+                            console.log("Password match!");
+                            return user;
+                        }
+
+                        console.log("Invalid password");
+                        return null;
+                    }
+
+                    console.log("Invalid credentials format");
+                    return null;
+                } catch (error: any) {
+                    console.error("AUTHORIZE ERROR:", error);
+                    throw new Error(`Auth Failed: ${error.message}`);
                 }
-
-                console.log("Invalid credentials");
-                return null;
             },
         }),
     ],
