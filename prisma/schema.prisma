@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  name        String
+  title       String
+  bio         String?
+  email       String
+  phone       String?
+  location    String?
+  github      String?
+  linkedin    String?
+  telegram    String?
+  avatarUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageUrl    String?
+  technologies String[]
+  liveLink    String?
+  repoLink    String?
+  githubLink  String?  // GitHub repository link
+  views       Int      @default(0) // Track project views
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id        Int      @id @default(autoincrement())
+  name      String
+  icon      String   // Icon identifier (e.g., "Smartphone", "Code", "Database")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String   // Page path (e.g., "/", "/projects")
+  userAgent String?  // Browser info
+  referrer  String?  // Where they came from
+  country   String?  // Visitor country (from IP)
+  createdAt DateTime @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+}
+
+model Visitor {
+  id           String   @id @default(cuid())
+  sessionId    String   @unique // Unique session identifier
+  firstVisit   DateTime @default(now())
+  lastVisit    DateTime @default(now())
+  pageViews    Int      @default(1)
+  country      String?
+  userAgent    String?
+
+  @@index([sessionId])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
