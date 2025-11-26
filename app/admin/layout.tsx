@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LayoutDashboard, FolderKanban, User, LogOut, Zap } from "lucide-react";
+import { LayoutDashboard, FolderKanban, LogOut, User, FileText, Zap } from "lucide-react";
 import { SignOutButton } from "@/components/SignOutButton";
 
 export const dynamic = "force-dynamic";
@@ -40,11 +40,11 @@ export default function AdminLayout({
                             Projects
                         </Link>
                         <Link
-                            href="/admin/profile"
+                            href="/admin/cv"
                             className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted"
                         >
-                            <User className="h-4 w-4" />
-                            Profile
+                            <FileText className="h-4 w-4" />
+                            CV / Resume
                         </Link>
                     </nav>
                     <div className="border-t p-4">

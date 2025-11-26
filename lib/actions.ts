@@ -111,6 +111,90 @@ export async function reorderSkills(skillIds: number[]) {
             })
         )
     );
-    revalidatePath("/");
     revalidatePath("/admin/skills");
+}
+
+// Experience Actions
+export async function createExperience(data: any) {
+    await prisma.experience.create({
+        data: {
+            ...data,
+            startDate: new Date(data.startDate),
+            endDate: data.endDate ? new Date(data.endDate) : null,
+        },
+    });
+    revalidatePath("/admin/cv");
+}
+
+export async function updateExperience(id: string, data: any) {
+    await prisma.experience.update({
+        where: { id },
+        data: {
+            ...data,
+            startDate: new Date(data.startDate),
+            endDate: data.endDate ? new Date(data.endDate) : null,
+        },
+    });
+    revalidatePath("/admin/cv");
+}
+
+export async function deleteExperience(id: string) {
+    await prisma.experience.delete({
+        where: { id },
+    });
+    revalidatePath("/admin/cv");
+}
+
+// Education Actions
+export async function createEducation(data: any) {
+    await prisma.education.create({
+        data: {
+            ...data,
+            startDate: new Date(data.startDate),
+            endDate: data.endDate ? new Date(data.endDate) : null,
+        },
+    });
+    revalidatePath("/admin/cv");
+}
+
+export async function updateEducation(id: string, data: any) {
+    await prisma.education.update({
+        where: { id },
+        data: {
+            ...data,
+            startDate: new Date(data.startDate),
+            endDate: data.endDate ? new Date(data.endDate) : null,
+        },
+    });
+    revalidatePath("/admin/cv");
+}
+
+export async function deleteEducation(id: string) {
+    await prisma.education.delete({
+        where: { id },
+    });
+    revalidatePath("/admin/cv");
+}
+
+// Profile Actions
+export async function updateProfile(data: any) {
+    // Check if profile exists, if not create one
+    const profile = await prisma.profile.findFirst();
+
+    if (profile) {
+        await prisma.profile.update({
+            where: { id: profile.id },
+            data: data,
+        });
+    } else {
+        await prisma.profile.create({
+            data: {
+                ...data,
+                email: data.email || "placeholder@email.com", // Ensure required fields
+                name: data.name || "Your Name",
+                title: data.title || "Your Title",
+            },
+        });
+    }
+    revalidatePath("/admin/cv");
 }

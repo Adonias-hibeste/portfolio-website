@@ -28,10 +28,12 @@ interface ProjectFormProps {
 export function ProjectForm({ project }: ProjectFormProps) {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [imagePreview, setImagePreview] = useState(project?.imageUrl || "");
 
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm<ProjectFormData>({
         resolver: zodResolver(formSchema) as any,
@@ -107,12 +109,71 @@ export function ProjectForm({ project }: ProjectFormProps) {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Image URL</label>
-                    <input
-                        {...register("imageUrl")}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="https://example.com/image.png"
-                    />
+                    <label className="text-sm font-medium">Project Image</label>
+                    <div className="space-y-4">
+                        {/* File Upload Input */}
+                        <div className="flex items-center gap-4">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={async (e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                        setIsSubmitting(true);
+                                        try {
+                                            const formData = new FormData();
+                                            formData.append("file", file);
+
+                                            const response = await fetch("/api/upload", {
+                                                method: "POST",
+                                                body: formData,
+                                            });
+
+                                            if (response.ok) {
+                                                const { imageUrl } = await response.json();
+                                                // Update the form value using setValue
+                                                setValue("imageUrl", imageUrl);
+                                                setImagePreview(imageUrl);
+                                            } else {
+                                                alert("Failed to upload image");
+                                            }
+                                        } catch (error) {
+                                            console.error(error);
+                                            alert("Failed to upload image");
+                                        } finally {
+                                            setIsSubmitting(false);
+                                        }
+                                    }
+                                }}
+                                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            />
+                        </div>
+
+                        {/* Or paste URL directly */}
+                        <div className="space-y-2">
+                            <label className="text-xs text-muted-foreground">Or paste image URL:</label>
+                            <input
+                                {...register("imageUrl")}
+                                onChange={(e) => {
+                                    setValue("imageUrl", e.target.value);
+                                    setImagePreview(e.target.value);
+                                }}
+                                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                placeholder="https://example.com/image.png"
+                            />
+                        </div>
+
+                        {/* Image Preview */}
+                        {imagePreview && (
+                            <div className="relative w-full h-48 border rounded-md overflow-hidden">
+                                <img
+                                    src={imagePreview}
+                                    alt="Preview"
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        )}
+                    </div>
                     {errors.imageUrl && (
                         <p className="text-red-500 text-xs">{errors.imageUrl.message}</p>
                     )}

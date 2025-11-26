@@ -17,6 +17,11 @@ async function getUser(email: string) {
 }
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
+    secret: process.env.AUTH_SECRET,
+    session: {
+        strategy: "jwt",
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+    },
     pages: {
         signIn: "/admin/login",
     },
@@ -59,10 +64,34 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
         }),
     ],
     callbacks: {
+        async redirect({ url, baseUrl }) {
+            // After successful login, redirect to admin dashboard
+            if (url === baseUrl + "/admin/login") {
+                return baseUrl + "/admin/dashboard";
+            }
+            // If the URL is relative, prepend baseUrl
+            if (url.startsWith("/")) return baseUrl + url;
+            // If the URL is on the same origin, allow it
+            if (new URL(url).origin === baseUrl) return url;
+            // Otherwise, redirect to baseUrl
+            return baseUrl;
+        },
         async session({ session, token }) {
+            // Add user info to session
+            if (token && session.user) {
+                session.user.id = token.sub as string;
+                session.user.email = token.email as string;
+                session.user.name = token.name as string;
+            }
             return session;
         },
         async jwt({ token, user }) {
+            // Persist user info in JWT token
+            if (user) {
+                token.id = user.id;
+                token.email = user.email;
+                token.name = user.name;
+            }
             return token;
         },
     },

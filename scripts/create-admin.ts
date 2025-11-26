@@ -4,39 +4,32 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function createAdminUser() {
-    const email = "admin@portfolio.com";
-    const password = "admin123456"; // Change this to your desired password
+    const email = "Adoniashibestegithub@gmail.com";
+    const password = "Adoni@#23";
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        // Check if user already exists
-        const existingUser = await prisma.user.findUnique({
+        // Upsert admin user (create or update if exists)
+        const user = await prisma.user.upsert({
             where: { email },
-        });
-
-        if (existingUser) {
-            console.log("❌ Admin user already exists!");
-            console.log("Email:", email);
-            return;
-        }
-
-        // Create admin user
-        const user = await prisma.user.create({
-            data: {
+            update: {
+                password: hashedPassword,
+                name: "Adonias",
+            },
+            create: {
                 email,
                 password: hashedPassword,
-                name: "Admin",
+                name: "Adonias",
             },
         });
 
-        console.log("✅ Admin user created successfully!");
+        console.log("✅ Admin user created/updated successfully!");
         console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         console.log("📧 Email:", email);
         console.log("🔑 Password:", password);
         console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        console.log("\n⚠️  IMPORTANT: Change the password after first login!");
         console.log("\nYou can now login at: http://localhost:3000/admin/login");
     } catch (error) {
         console.error("❌ Error creating admin user:", error);

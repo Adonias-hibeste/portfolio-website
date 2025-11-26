@@ -24,9 +24,10 @@ interface SkillFormProps {
         order: number;
     };
     onSubmit: (data: SkillFormData) => Promise<void>;
+    redirectPath?: string | null;
 }
 
-export default function SkillForm({ skill, onSubmit }: SkillFormProps) {
+export default function SkillForm({ skill, onSubmit, redirectPath = "/admin/skills" }: SkillFormProps) {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,7 +52,9 @@ export default function SkillForm({ skill, onSubmit }: SkillFormProps) {
         setIsSubmitting(true);
         try {
             await onSubmit(data);
-            router.push("/admin/skills");
+            if (redirectPath) {
+                router.push(redirectPath);
+            }
             router.refresh();
         } catch (error) {
             console.error("Error submitting skill:", error);
