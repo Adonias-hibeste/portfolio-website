@@ -452,10 +452,25 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                             <p className="text-gray-400">Projects are being added. Check back soon!</p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {projects.map((project: any, index: number) => (
-                                <ScrollReveal key={project.id} delay={index * 0.1}>
-                                    <div className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
+                        <div className="relative">
+                            {/* Horizontal Scrollable Container */}
+                            <motion.div
+                                drag="x"
+                                dragConstraints={{ left: -((projects.length - 1) * 400), right: 0 }}
+                                dragElastic={0.1}
+                                className="flex gap-8 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing pb-8"
+                                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                            >
+                                {projects.map((project: any, index: number) => (
+                                    <motion.div
+                                        key={project.id}
+                                        initial={{ opacity: 0, x: 100 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1, duration: 0.6 }}
+                                        whileHover={{ scale: 1.05, y: -10 }}
+                                        className="group relative flex-shrink-0 w-[350px] aspect-[3/4] rounded-2xl overflow-hidden bg-muted shadow-xl"
+                                    >
                                         {project.imageUrl ? (
                                             <Image
                                                 src={project.imageUrl}
@@ -489,9 +504,14 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                                 </a>
                                             )}
                                         </div>
-                                    </div>
-                                </ScrollReveal>
-                            ))}
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+
+                            {/* Scroll Hint */}
+                            <div className="text-center mt-4">
+                                <p className="text-gray-500 text-sm">← Drag to scroll →</p>
+                            </div>
                         </div>
                     )}
 
@@ -506,29 +526,6 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                 </Link>
                             </motion.div>
                         </div>
-                    </ScrollReveal>
-                </div>
-            </section>
-
-            {/* My Apps in Action Section */}
-            <section className="py-24 bg-black/30 relative overflow-hidden">
-                {/* Background Effects */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <ScrollReveal>
-                        <div className="text-center mb-16">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary uppercase tracking-widest">
-                                My Apps in Action
-                            </h2>
-                            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-                                See how my applications come to life on both iOS and Android platforms
-                            </p>
-                        </div>
-                    </ScrollReveal>
-
-                    <ScrollReveal delay={0.2}>
-                        <AppShowcase />
                     </ScrollReveal>
                 </div>
             </section>
