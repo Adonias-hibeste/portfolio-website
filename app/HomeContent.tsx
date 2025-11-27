@@ -433,18 +433,84 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
 
             {/* Contact Section */}
             <section id="contact" className="py-24 bg-white text-black relative">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-12 uppercase tracking-widest">Let&apos;s Have A Chat</h2>
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-widest">Let&apos;s Have A Chat</h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto">
+                            Have a project in mind or just want to say hi? I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+                        </p>
+                    </div>
 
-                    <form className="space-y-6">
-                        <input type="text" placeholder="YOUR NAME" className="w-full bg-gray-200 border-none rounded-lg px-6 py-4 text-black placeholder-gray-500 focus:ring-2 focus:ring-primary" />
-                        <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-gray-200 border-none rounded-lg px-6 py-4 text-black placeholder-gray-500 focus:ring-2 focus:ring-primary" />
-                        <textarea placeholder="CHAT HERE" rows={4} className="w-full bg-gray-200 border-none rounded-lg px-6 py-4 text-black placeholder-gray-500 focus:ring-2 focus:ring-primary resize-none"></textarea>
+                    <div className="grid md:grid-cols-2 gap-12 items-start">
+                        {/* Contact Info */}
+                        <div className="space-y-8">
+                            <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-lg">
+                                <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                                    <span className="w-2 h-8 bg-primary rounded-full"></span>
+                                    Connect With Me
+                                </h3>
 
-                        <button type="submit" className="w-full py-4 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 uppercase tracking-widest text-lg shadow-lg">
-                            Submit Here
-                        </button>
-                    </form>
+                                <div className="space-y-6">
+                                    <a
+                                        href="https://t.me/Adoni_2112"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-300 group"
+                                    >
+                                        <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <Download className="w-6 h-6 text-blue-500 rotate-[-90deg]" /> {/* Using Download rotated as Send icon replacement since Send isn't imported yet */}
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Telegram</p>
+                                            <p className="text-lg font-medium text-gray-900 group-hover:text-blue-600 transition-colors">@Adoni_2112</p>
+                                        </div>
+                                    </a>
+
+                                    <a
+                                        href="mailto:adoniassahilehibeste12@gmail.com"
+                                        className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-300 group"
+                                    >
+                                        <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <Mail className="w-6 h-6 text-red-500" />
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Email</p>
+                                            <p className="text-lg font-medium text-gray-900 group-hover:text-red-600 transition-colors break-all">adoniassahilehibeste12@gmail.com</p>
+                                        </div>
+                                    </a>
+
+                                    <a
+                                        href="https://www.linkedin.com/in/adonias-hibeste"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-300 group"
+                                    >
+                                        <div className="w-12 h-12 bg-blue-700/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <Linkedin className="w-6 h-6 text-blue-700" />
+                                        </div>
+                                        <div>
+                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">LinkedIn</p>
+                                            <p className="text-lg font-medium text-gray-900 group-hover:text-blue-700 transition-colors">Adonias Hibeste</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Contact Form */}
+                        <div className="bg-gray-900 p-8 rounded-3xl shadow-2xl text-white">
+                            <h3 className="text-xl font-bold mb-6 text-white">Send Me a Message</h3>
+                            <form className="space-y-6">
+                                <input type="text" placeholder="YOUR NAME" className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary transition-all" />
+                                <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary transition-all" />
+                                <textarea placeholder="HOW CAN I HELP YOU?" rows={4} className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary resize-none transition-all"></textarea>
+
+                                <button type="submit" className="w-full py-4 rounded-xl bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 uppercase tracking-widest text-lg shadow-[0_0_20px_rgba(204,255,0,0.3)] hover:shadow-[0_0_30px_rgba(204,255,0,0.5)]">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
