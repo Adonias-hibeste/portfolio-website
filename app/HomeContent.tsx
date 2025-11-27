@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { getIconComponent } from "@/lib/iconMap";
+import { useState } from "react";
 
 interface HomeContentProps {
     projects: any[];
@@ -12,6 +13,55 @@ interface HomeContentProps {
 }
 
 export default function HomeContent({ projects, skills }: HomeContentProps) {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' });
+                setFormData({ name: '', email: '', message: '' });
+
+                // If mailto link is provided, open it
+                if (data.mailtoLink) {
+                    window.location.href = data.mailtoLink;
+                }
+            } else {
+                setSubmitStatus({ type: 'error', message: data.error || 'Something went wrong. Please try again.' });
+            }
+        } catch (error) {
+            setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
+
     // Fallback skills if none provided
     if (skills.length === 0) {
         skills = [
@@ -494,13 +544,47 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                         {/* Contact Form */}
                         <div className="bg-gray-900 p-8 rounded-3xl shadow-2xl text-white">
                             <h3 className="text-xl font-bold mb-6 text-white">Send Me a Message</h3>
-                            <form className="space-y-6">
-                                <input type="text" placeholder="YOUR NAME" className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary transition-all" />
-                                <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary transition-all" />
-                                <textarea placeholder="HOW CAN I HELP YOU?" rows={4} className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary resize-none transition-all"></textarea>
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    placeholder="YOUR NAME"
+                                    required
+                                    className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary transition-all"
+                                />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="EMAIL ADDRESS"
+                                    required
+                                    className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary transition-all"
+                                />
+                                <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    placeholder="HOW CAN I HELP YOU?"
+                                    rows={4}
+                                    required
+                                    className="w-full bg-gray-800 border-none rounded-xl px-6 py-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-primary resize-none transition-all"
+                                ></textarea>
 
-                                <button type="submit" className="w-full py-4 rounded-xl bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 uppercase tracking-widest text-lg shadow-[0_0_20px_rgba(204,255,0,0.3)] hover:shadow-[0_0_30px_rgba(204,255,0,0.5)]">
-                                    Send Message
+                                {submitStatus && (
+                                    <div className={`p-4 rounded-xl ${submitStatus.type === 'success' ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
+                                        {submitStatus.message}
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="w-full py-4 rounded-xl bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 uppercase tracking-widest text-lg shadow-[0_0_20px_rgba(204,255,0,0.3)] hover:shadow-[0_0_30px_rgba(204,255,0,0.5)] disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {isSubmitting ? 'Sending...' : 'Send Message'}
                                 </button>
                             </form>
                         </div>
