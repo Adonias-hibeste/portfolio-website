@@ -450,48 +450,33 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                     Connect With Me
                                 </h3>
 
-                                <div className="space-y-6">
+                                <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
                                     <a
                                         href="https://t.me/Adoni_2112"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-300 group"
+                                        className="w-16 h-16 rounded-2xl bg-white border border-gray-100 flex items-center justify-center hover:border-blue-500 hover:bg-blue-50 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300 group"
+                                        aria-label="Telegram"
                                     >
-                                        <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <Download className="w-6 h-6 text-blue-500 rotate-[-90deg]" /> {/* Using Download rotated as Send icon replacement since Send isn't imported yet */}
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Telegram</p>
-                                            <p className="text-lg font-medium text-gray-900 group-hover:text-blue-600 transition-colors">@Adoni_2112</p>
-                                        </div>
+                                        <Download className="w-8 h-8 text-gray-400 group-hover:text-blue-500 rotate-[-90deg] transition-colors duration-300" />
                                     </a>
 
                                     <a
                                         href="mailto:adoniassahilehibeste12@gmail.com"
-                                        className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-300 group"
+                                        className="w-16 h-16 rounded-2xl bg-white border border-gray-100 flex items-center justify-center hover:border-red-500 hover:bg-red-50 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all duration-300 group"
+                                        aria-label="Email"
                                     >
-                                        <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <Mail className="w-6 h-6 text-red-500" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Email</p>
-                                            <p className="text-lg font-medium text-gray-900 group-hover:text-red-600 transition-colors break-all">adoniassahilehibeste12@gmail.com</p>
-                                        </div>
+                                        <Mail className="w-8 h-8 text-gray-400 group-hover:text-red-500 transition-colors duration-300" />
                                     </a>
 
                                     <a
                                         href="https://www.linkedin.com/in/adonias-hibeste"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100 hover:border-primary/50 hover:shadow-md transition-all duration-300 group"
+                                        className="w-16 h-16 rounded-2xl bg-white border border-gray-100 flex items-center justify-center hover:border-blue-700 hover:bg-blue-50 hover:shadow-[0_0_20px_rgba(29,78,216,0.3)] transition-all duration-300 group"
+                                        aria-label="LinkedIn"
                                     >
-                                        <div className="w-12 h-12 bg-blue-700/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                            <Linkedin className="w-6 h-6 text-blue-700" />
-                                        </div>
-                                        <div>
-                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">LinkedIn</p>
-                                            <p className="text-lg font-medium text-gray-900 group-hover:text-blue-700 transition-colors">Adonias Hibeste</p>
-                                        </div>
+                                        <Linkedin className="w-8 h-8 text-gray-400 group-hover:text-blue-700 transition-colors duration-300" />
                                     </a>
                                 </div>
                             </div>
