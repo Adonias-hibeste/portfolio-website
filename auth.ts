@@ -79,16 +79,24 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
                 env_VERCEL_URL: process.env.VERCEL_URL
             });
 
+            // Handle sign-out - redirect to home page
+            if (url.includes('/api/auth/signout') || url === baseUrl) {
+                return baseUrl + '/';
+            }
+
             // After successful login, redirect to admin dashboard
-            if (url === baseUrl + "/admin/login") {
+            if (url === baseUrl + "/admin/login" || url === "/admin/login") {
                 return baseUrl + "/admin/dashboard";
             }
+
             // If the URL is relative, prepend baseUrl
             if (url.startsWith("/")) return baseUrl + url;
+
             // If the URL is on the same origin, allow it
             if (new URL(url).origin === baseUrl) return url;
-            // Otherwise, redirect to baseUrl
-            return baseUrl;
+
+            // Otherwise, redirect to home page
+            return baseUrl + '/';
         },
         async session({ session, token }) {
             // Add user info to session
