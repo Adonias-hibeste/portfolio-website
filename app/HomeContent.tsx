@@ -11,6 +11,7 @@ import { TypewriterText } from "@/components/TypewriterText";
 import { ResponsiveShowcase } from "@/components/ResponsiveShowcase";
 import { TechStackShowcase } from "@/components/TechStackShowcase";
 import { PhoneMockup } from "@/components/PhoneMockup";
+import { AppShowcase } from "@/components/AppShowcase";
 
 interface HomeContentProps {
     projects: any[];
@@ -505,6 +506,29 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                 </Link>
                             </motion.div>
                         </div>
+                    </ScrollReveal>
+                </div>
+            </section>
+
+            {/* My Apps in Action Section */}
+            <section className="py-24 bg-black/30 relative overflow-hidden">
+                {/* Background Effects */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <ScrollReveal>
+                        <div className="text-center mb-16">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary uppercase tracking-widest">
+                                My Apps in Action
+                            </h2>
+                            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+                                See how my applications come to life on both iOS and Android platforms
+                            </p>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal delay={0.2}>
+                        <AppShowcase />
                     </ScrollReveal>
                 </div>
             </section>
