@@ -2,13 +2,12 @@ import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient }
 
-// Polyfill for Vercel Postgres
-if (!process.env.DATABASE_URL && process.env.POSTGRES_PRISMA_URL) {
+// Polyfill for Vercel Postgres and handle masked DATABASE_URL
+// If DATABASE_URL is masked (starts with asterisks) or invalid, use POSTGRES_PRISMA_URL
+if (process.env.POSTGRES_PRISMA_URL) {
     process.env.DATABASE_URL = process.env.POSTGRES_PRISMA_URL;
 }
-if (!process.env.DIRECT_URL && process.env.POSTGRES_URL_NON_POOLING) {
-    process.env.DIRECT_URL = process.env.POSTGRES_URL_NON_POOLING;
-}
+// Remove DIRECT_URL handling since we removed directUrl from schema
 
 let prisma: PrismaClient
 
