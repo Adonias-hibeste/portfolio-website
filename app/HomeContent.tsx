@@ -449,54 +449,60 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {projects.map((project: any) => (
-                                <div key={project.id} className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
-                                    {project.imageUrl ? (
-                                        <Image
-                                            src={project.imageUrl}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center bg-card">
-                                            <span className="text-muted-foreground">No Image</span>
-                                        </div>
-                                    )}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                        <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                                        <p className="text-sm text-gray-300 line-clamp-2 mb-4">{project.description}</p>
-                                        <div className="flex flex-wrap gap-2 mb-4">
-                                            {project.technologies.slice(0, 3).map((t: string) => (
-                                                <span key={t} className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">{t}</span>
-                                            ))}
-                                        </div>
-                                        {project.githubLink && (
-                                            <a
-                                                href={project.githubLink}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <Github className="w-4 h-4" />
-                                                View on GitHub
-                                            </a>
+                            {projects.map((project: any, index: number) => (
+                                <ScrollReveal key={project.id} delay={index * 0.1}>
+                                    <div className="group relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted">
+                                        {project.imageUrl ? (
+                                            <Image
+                                                src={project.imageUrl}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-card">
+                                                <span className="text-muted-foreground">No Image</span>
+                                            </div>
                                         )}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                                            <p className="text-sm text-gray-300 line-clamp-2 mb-4">{project.description}</p>
+                                            <div className="flex flex-wrap gap-2 mb-4">
+                                                {project.technologies.slice(0, 3).map((t: string) => (
+                                                    <span key={t} className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">{t}</span>
+                                                ))}
+                                            </div>
+                                            {project.githubLink && (
+                                                <a
+                                                    href={project.githubLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <Github className="w-4 h-4" />
+                                                    View on GitHub
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
+                                </ScrollReveal>
                             ))}
                         </div>
                     )}
 
-                    <div className="mt-12 text-center">
-                        <Link
-                            href="/projects"
-                            className="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300"
-                        >
-                            SHOW ALL PROJECTS
-                        </Link>
-                    </div>
+                    <ScrollReveal delay={0.4}>
+                        <div className="mt-12 text-center">
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link
+                                    href="/projects"
+                                    className="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 inline-block"
+                                >
+                                    SHOW ALL PROJECTS
+                                </Link>
+                            </motion.div>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 
