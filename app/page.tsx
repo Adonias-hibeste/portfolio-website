@@ -9,7 +9,6 @@ export default async function Home() {
 
   try {
     projects = await prisma.project.findMany({
-      take: 3,
       orderBy: { order: "asc" },
     });
 
