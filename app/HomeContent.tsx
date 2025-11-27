@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { getIconComponent } from "@/lib/iconMap";
 
@@ -451,33 +451,42 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                 </h3>
 
                                 <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
-                                    <a
+                                    <motion.a
                                         href="https://t.me/Adoni_2112"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-16 h-16 rounded-2xl bg-white border border-gray-100 flex items-center justify-center hover:border-blue-500 hover:bg-blue-50 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300 group"
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 flex items-center justify-center shadow-lg hover:shadow-blue-400/30 hover:border-blue-400 transition-all duration-300 group relative overflow-hidden"
                                         aria-label="Telegram"
                                     >
-                                        <Download className="w-8 h-8 text-gray-400 group-hover:text-blue-500 rotate-[-90deg] transition-colors duration-300" />
-                                    </a>
+                                        <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <Send className="w-7 h-7 text-gray-400 group-hover:text-blue-500 transition-colors duration-300" />
+                                    </motion.a>
 
-                                    <a
+                                    <motion.a
                                         href="mailto:adoniassahilehibeste12@gmail.com"
-                                        className="w-16 h-16 rounded-2xl bg-white border border-gray-100 flex items-center justify-center hover:border-red-500 hover:bg-red-50 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all duration-300 group"
+                                        whileHover={{ scale: 1.1, rotate: -5 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 flex items-center justify-center shadow-lg hover:shadow-red-400/30 hover:border-red-400 transition-all duration-300 group relative overflow-hidden"
                                         aria-label="Email"
                                     >
-                                        <Mail className="w-8 h-8 text-gray-400 group-hover:text-red-500 transition-colors duration-300" />
-                                    </a>
+                                        <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <Mail className="w-7 h-7 text-gray-400 group-hover:text-red-500 transition-colors duration-300" />
+                                    </motion.a>
 
-                                    <a
+                                    <motion.a
                                         href="https://www.linkedin.com/in/adonias-hibeste"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-16 h-16 rounded-2xl bg-white border border-gray-100 flex items-center justify-center hover:border-blue-700 hover:bg-blue-50 hover:shadow-[0_0_20px_rgba(29,78,216,0.3)] transition-all duration-300 group"
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 flex items-center justify-center shadow-lg hover:shadow-blue-700/30 hover:border-blue-700 transition-all duration-300 group relative overflow-hidden"
                                         aria-label="LinkedIn"
                                     >
-                                        <Linkedin className="w-8 h-8 text-gray-400 group-hover:text-blue-700 transition-colors duration-300" />
-                                    </a>
+                                        <div className="absolute inset-0 bg-blue-700/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                        <Linkedin className="w-7 h-7 text-gray-400 group-hover:text-blue-700 transition-colors duration-300" />
+                                    </motion.a>
                                 </div>
                             </div>
                         </div>
