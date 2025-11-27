@@ -16,6 +16,13 @@ async function getUser(email: string) {
     }
 }
 
+// CRITICAL FIX: Override incorrect NEXTAUTH_URL from Vercel environment
+// The logs show Vercel is passing the wrong domain, so we fix it here at runtime.
+if (process.env.NEXTAUTH_URL === 'https://portfolio-website.vercel.app') {
+    console.log('⚠️ DETECTED INCORRECT NEXTAUTH_URL. Overriding to: https://adonias-portfolio.vercel.app');
+    process.env.NEXTAUTH_URL = 'https://adonias-portfolio.vercel.app';
+}
+
 export const { auth, signIn, signOut, handlers } = NextAuth({
     secret: process.env.AUTH_SECRET,
     session: {
