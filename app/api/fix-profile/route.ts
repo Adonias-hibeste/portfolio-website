@@ -25,21 +25,30 @@ export async function GET() {
         });
 
         // Update or Create Profile
-        const profile = await prisma.profile.upsert({
-            where: { email: "adoniashibestegithub@gmail.com" },
-            update: {
-                name: "Adonias Hibeste",
-                title: "Full Stack Developer",
-                bio: "Passionate developer building amazing web applications.",
-                email: "adoniashibestegithub@gmail.com",
-            },
-            create: {
-                name: "Adonias Hibeste",
-                title: "Full Stack Developer",
-                bio: "Passionate developer building amazing web applications.",
-                email: "adoniashibestegithub@gmail.com",
-            },
-        });
+        // Since email is not unique in schema, we find first or create
+        const existingProfile = await prisma.profile.findFirst();
+
+        let profile;
+        if (existingProfile) {
+            profile = await prisma.profile.update({
+                where: { id: existingProfile.id },
+                data: {
+                    name: "Adonias Hibeste",
+                    title: "Full Stack Developer",
+                    bio: "Passionate developer building amazing web applications.",
+                    email: "adoniashibestegithub@gmail.com",
+                },
+            });
+        } else {
+            profile = await prisma.profile.create({
+                data: {
+                    name: "Adonias Hibeste",
+                    title: "Full Stack Developer",
+                    bio: "Passionate developer building amazing web applications.",
+                    email: "adoniashibestegithub@gmail.com",
+                },
+            });
+        }
 
         await prisma.$disconnect();
 
