@@ -3,26 +3,37 @@ import { PrismaClient } from '@prisma/client'
 const globalForPrisma = global as unknown as { prisma: PrismaClient }
 
 // Polyfill for Vercel Postgres and handle masked DATABASE_URL
-// If DATABASE_URL is masked (starts with asterisks) or invalid, use POSTGRES_PRISMA_URL
+// Priority: POSTGRES_PRISMA_URL > DATABASE_URL
 if (process.env.POSTGRES_PRISMA_URL) {
     process.env.DATABASE_URL = process.env.POSTGRES_PRISMA_URL;
+} else if (!process.env.DATABASE_URL) {
+    console.error('CRITICAL: No DATABASE_URL or POSTGRES_PRISMA_URL found!');
 }
-// Remove DIRECT_URL handling since we removed directUrl from schema
+
+// Log database URL status (without exposing the full URL)
+if (process.env.DATABASE_URL) {
+    const dbUrl = process.env.DATABASE_URL;
+    console.log('Database URL configured:', {
+        starts_with: dbUrl.substring(0, 10),
+        length: dbUrl.length,
+        is_valid: dbUrl.startsWith('postgres://') || dbUrl.startsWith('postgresql://')
+    });
+} else {
+    console.error('DATABASE_URL is not set!');
+}
 
 let prisma: PrismaClient
 
 try {
-    prisma = globalForPrisma.prisma || new PrismaClient()
-} catch (error) {
-    console.warn('Failed to initialize Prisma Client in this environment:', error)
-    // Fallback to a proxy that throws on access - allows imports to succeed during build
-    prisma = new Proxy({} as PrismaClient, {
-        get: (_target, prop) => {
-            // Allow 'then' to pass through for Promise-like checks
-            if (prop === 'then') return undefined;
-            throw new Error(`Prisma Client failed to initialize. Cannot access property: ${String(prop)}`)
-        }
+    prisma = globalForPrisma.prisma || new PrismaClient({
+        log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
     })
+    console.log('Prisma Client initialized successfully');
+} catch (error) {
+    console.error('Failed to initialize Prisma Client:', error)
+    // Re-throw the error instead of creating a proxy
+    // This will make the actual error visible
+    throw error;
 }
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
