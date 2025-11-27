@@ -489,8 +489,8 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                     <div className="grid md:grid-cols-2 gap-12 items-start">
                         {/* Contact Info */}
                         <div className="space-y-8">
-                            <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-lg">
-                                <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                            <div className="bg-gray-900 p-8 rounded-3xl border border-gray-800 shadow-2xl">
+                                <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
                                     <span className="w-2 h-8 bg-primary rounded-full"></span>
                                     Connect With Me
                                 </h3>
@@ -502,7 +502,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                         rel="noopener noreferrer"
                                         whileHover={{ scale: 1.1, rotate: 5 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 flex items-center justify-center shadow-lg hover:shadow-blue-400/30 hover:border-blue-400 transition-all duration-300 group relative overflow-hidden"
+                                        className="w-16 h-16 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center shadow-lg hover:shadow-blue-400/30 hover:border-blue-400 transition-all duration-300 group relative overflow-hidden"
                                         aria-label="Telegram"
                                     >
                                         <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -513,7 +513,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                         href="mailto:adoniassahilehibeste12@gmail.com"
                                         whileHover={{ scale: 1.1, rotate: -5 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 flex items-center justify-center shadow-lg hover:shadow-red-400/30 hover:border-red-400 transition-all duration-300 group relative overflow-hidden"
+                                        className="w-16 h-16 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center shadow-lg hover:shadow-red-400/30 hover:border-red-400 transition-all duration-300 group relative overflow-hidden"
                                         aria-label="Email"
                                     >
                                         <div className="absolute inset-0 bg-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -526,7 +526,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                         rel="noopener noreferrer"
                                         whileHover={{ scale: 1.1, rotate: 5 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white to-gray-50 border border-gray-200 flex items-center justify-center shadow-lg hover:shadow-blue-700/30 hover:border-blue-700 transition-all duration-300 group relative overflow-hidden"
+                                        className="w-16 h-16 rounded-2xl bg-gray-800 border border-gray-700 flex items-center justify-center shadow-lg hover:shadow-blue-700/30 hover:border-blue-700 transition-all duration-300 group relative overflow-hidden"
                                         aria-label="LinkedIn"
                                     >
                                         <div className="absolute inset-0 bg-blue-700/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
