@@ -65,6 +65,13 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     ],
     callbacks: {
         async redirect({ url, baseUrl }) {
+            console.log("DEBUG REDIRECT:", {
+                url,
+                baseUrl,
+                env_NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+                env_VERCEL_URL: process.env.VERCEL_URL
+            });
+
             // After successful login, redirect to admin dashboard
             if (url === baseUrl + "/admin/login") {
                 return baseUrl + "/admin/dashboard";
