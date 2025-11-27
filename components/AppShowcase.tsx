@@ -79,7 +79,23 @@ export function AppShowcase({ apps = defaultApps }: AppShowcaseProps) {
             </motion.div>
 
             {/* Phone Mockups - Side by Side */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto mb-12">
+            <motion.div
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, { offset, velocity }) => {
+                    const swipe = Math.abs(offset.x) * velocity.x;
+
+                    if (swipe > 10000) {
+                        // Swiped left -> next
+                        nextApp();
+                    } else if (swipe < -10000) {
+                        // Swiped right -> prev
+                        prevApp();
+                    }
+                }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto mb-12 cursor-grab active:cursor-grabbing"
+            >
                 {/* iOS */}
                 <motion.div
                     key={`ios-${currentApp.id}`}
@@ -111,7 +127,7 @@ export function AppShowcase({ apps = defaultApps }: AppShowcaseProps) {
                     </div>
                     <PhoneMockup type="android" imageUrl={currentApp.androidImage} />
                 </motion.div>
-            </div>
+            </motion.div>
 
             {/* Navigation */}
             {apps.length > 1 && (
@@ -132,8 +148,8 @@ export function AppShowcase({ apps = defaultApps }: AppShowcaseProps) {
                                 key={index}
                                 onClick={() => setCurrentIndex(index)}
                                 className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                                        ? "bg-primary w-8"
-                                        : "bg-gray-600 hover:bg-gray-500"
+                                    ? "bg-primary w-8"
+                                    : "bg-gray-600 hover:bg-gray-500"
                                     }`}
                             />
                         ))}
