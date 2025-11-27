@@ -36,7 +36,7 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <Link
-                                href="/contact"
+                                href="/#contact"
                                 className="px-6 py-2 rounded-full bg-transparent border border-primary text-primary text-sm font-bold hover:bg-primary hover:text-black transition-all duration-300 uppercase tracking-wider"
                             >
                                 Contact Me
@@ -75,7 +75,7 @@ export function Navbar() {
                                 </Link>
                             ))}
                             <Link
-                                href="/contact"
+                                href="/#contact"
                                 className="block w-full text-center mt-4 px-6 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-colors"
                                 onClick={() => setIsOpen(false)}
                             >
