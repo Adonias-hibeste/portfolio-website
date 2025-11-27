@@ -3,6 +3,9 @@ import { renderToBuffer } from "@react-pdf/renderer";
 import { CVTemplate } from "@/components/CVTemplate";
 import { prisma } from "@/lib/prisma";
 
+// Force dynamic rendering since we use request.url
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
     try {
         // Check if this is a download request
