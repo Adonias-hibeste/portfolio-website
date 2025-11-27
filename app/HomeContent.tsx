@@ -452,22 +452,42 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                             <p className="text-gray-400">Projects are being added. Check back soon!</p>
                         </div>
                     ) : (
-                        <div className="relative">
-                            {/* Horizontal Scrollable Container */}
+                        <div className="relative overflow-hidden">
+                            {/* Horizontal Scrollable Container with Auto-scroll */}
                             <motion.div
+                                animate={{
+                                    x: [0, -(projects.length * 400)],
+                                }}
+                                transition={{
+                                    x: {
+                                        repeat: Infinity,
+                                        repeatType: "loop",
+                                        duration: projects.length * 5, // 5 seconds per project
+                                        ease: "linear",
+                                    },
+                                }}
                                 drag="x"
-                                dragConstraints={{ left: -((projects.length - 1) * 400), right: 0 }}
+                                dragConstraints={{ left: -(projects.length * 400), right: 0 }}
                                 dragElastic={0.1}
-                                className="flex gap-8 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing pb-8"
-                                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                                whileHover={{ animationPlayState: "paused" }}
+                                onMouseEnter={(e) => {
+                                    const target = e.currentTarget as HTMLElement;
+                                    target.style.animationPlayState = 'paused';
+                                }}
+                                onMouseLeave={(e) => {
+                                    const target = e.currentTarget as HTMLElement;
+                                    target.style.animationPlayState = 'running';
+                                }}
+                                className="flex gap-8 cursor-grab active:cursor-grabbing pb-8"
                             >
-                                {projects.map((project: any, index: number) => (
+                                {/* Duplicate projects for seamless loop */}
+                                {[...projects, ...projects].map((project: any, index: number) => (
                                     <motion.div
-                                        key={project.id}
+                                        key={`${project.id}-${index}`}
                                         initial={{ opacity: 0, x: 100 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1, duration: 0.6 }}
+                                        transition={{ delay: (index % projects.length) * 0.1, duration: 0.6 }}
                                         whileHover={{ scale: 1.05, y: -10 }}
                                         className="group relative flex-shrink-0 w-[350px] aspect-[3/4] rounded-2xl overflow-hidden bg-muted shadow-xl"
                                     >
@@ -510,7 +530,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
 
                             {/* Scroll Hint */}
                             <div className="text-center mt-4">
-                                <p className="text-gray-500 text-sm">← Drag to scroll →</p>
+                                <p className="text-gray-500 text-sm">Hover or drag to pause auto-scroll</p>
                             </div>
                         </div>
                     )}
