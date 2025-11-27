@@ -8,7 +8,7 @@ import { getIconComponent } from "@/lib/iconMap";
 import { useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { TypewriterText } from "@/components/TypewriterText";
-import { PerformanceMetrics } from "@/components/PerformanceMetrics";
+import { ResponsiveShowcase } from "@/components/ResponsiveShowcase";
 import { TechStackShowcase } from "@/components/TechStackShowcase";
 import { PhoneMockup } from "@/components/PhoneMockup";
 
@@ -367,11 +367,14 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                     {/* Tech Stack Showcase */}
                     <TechStackShowcase skills={skills} />
 
-                    {/* Performance Metrics */}
+                    {/* Cross-Platform Responsive */}
                     <ScrollReveal delay={0.2}>
                         <div className="mt-20">
-                            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">Performance Excellence</h3>
-                            <PerformanceMetrics />
+                            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">Cross-Platform Responsive</h3>
+                            <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto">
+                                Building apps that work flawlessly across all devices and screen sizes
+                            </p>
+                            <ResponsiveShowcase />
                         </div>
                     </ScrollReveal>
 
