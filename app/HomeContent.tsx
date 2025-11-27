@@ -40,11 +40,6 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
             if (response.ok) {
                 setSubmitStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully.' });
                 setFormData({ name: '', email: '', message: '' });
-
-                // If mailto link is provided, open it
-                if (data.mailtoLink) {
-                    window.location.href = data.mailtoLink;
-                }
             } else {
                 setSubmitStatus({ type: 'error', message: data.error || 'Something went wrong. Please try again.' });
             }

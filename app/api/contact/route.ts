@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
     try {
@@ -22,14 +25,42 @@ export async function POST(request: Request) {
             );
         }
 
-        // For now, we'll use a mailto link approach
-        // In production, you'd integrate with a service like SendGrid, Resend, or Nodemailer
-        const mailtoLink = `mailto:adoniassahilehibeste12@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        // Check if Resend API key is configured
+        if (!process.env.RESEND_API_KEY) {
+            console.error('RESEND_API_KEY is not configured');
+            return NextResponse.json(
+                { error: 'Email service is not configured. Please contact the administrator.' },
+                { status: 500 }
+            );
+        }
+
+        // Send email using Resend
+        const { data, error } = await resend.emails.send({
+            from: 'Portfolio Contact <onboarding@resend.dev>', // Resend's test email
+            to: ['adoniassahilehibeste12@gmail.com'],
+            replyTo: email,
+            subject: `Portfolio Contact from ${name}`,
+            html: `
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message.replace(/\n/g, '<br>')}</p>
+            `,
+        });
+
+        if (error) {
+            console.error('Resend error:', error);
+            return NextResponse.json(
+                { error: 'Failed to send email. Please try again later.' },
+                { status: 500 }
+            );
+        }
 
         return NextResponse.json({
             success: true,
-            message: 'Message received! Opening your email client...',
-            mailtoLink
+            message: 'Message sent successfully!',
+            emailId: data?.id
         });
 
     } catch (error) {
