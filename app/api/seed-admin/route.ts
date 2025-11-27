@@ -31,6 +31,7 @@ export async function GET() {
         // 2. Select the best connection string
         // Prefer POSTGRES_URL (Standard) or POSTGRES_URL_NON_POOLING for direct connection
         const connectionString =
+            process.env.POSTGRES_PRISMA_URL ||
             process.env.POSTGRES_URL ||
             process.env.POSTGRES_URL_NON_POOLING ||
             process.env.DATABASE_URL;
