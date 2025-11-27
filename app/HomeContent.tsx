@@ -6,6 +6,11 @@ import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code, Send } from 
 import { motion } from "framer-motion";
 import { getIconComponent } from "@/lib/iconMap";
 import { useState } from "react";
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { TypewriterText } from "@/components/TypewriterText";
+import { PerformanceMetrics } from "@/components/PerformanceMetrics";
+import { TechStackShowcase } from "@/components/TechStackShowcase";
+import { PhoneMockup } from "@/components/PhoneMockup";
 
 interface HomeContentProps {
     projects: any[];
@@ -70,42 +75,83 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
         <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
-                {/* Background Glows */}
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] -z-10" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] -z-10" />
+                {/* Animated Background Glows */}
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.2, 0.3, 0.2]
+                    }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] -z-10"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [0.1, 0.2, 0.1]
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] -z-10"
+                />
 
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         {/* Left Side - Text Content */}
                         <motion.div
+                            initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.8 }}
                             className="text-left order-2 md:order-1"
                         >
-                            <h2 className="text-xl md:text-2xl font-medium text-gray-300 mb-4">
+                            <motion.h2
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                                className="text-xl md:text-2xl font-medium text-gray-300 mb-4"
+                            >
                                 I&apos;m <span className="text-primary font-bold italic">Adonias Hibeste</span>
-                            </h2>
+                            </motion.h2>
                             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white leading-tight">
-                                Senior Mobile<br />Architect
+                                <TypewriterText
+                                    sequence={[
+                                        'Senior Mobile',
+                                        500,
+                                        'Senior Mobile\nArchitect',
+                                    ]}
+                                    className="whitespace-pre-line"
+                                />
                             </h1>
-                            <p className="text-lg text-gray-400 mb-8 max-w-lg">
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.6, duration: 0.6 }}
+                                className="text-lg text-gray-400 mb-8 max-w-lg"
+                            >
                                 Transforming complex business requirements into elegant, high-performance mobile applications with Flutter & React Native.
-                            </p>
+                            </motion.p>
 
-                            <div className="flex flex-col sm:flex-row items-start gap-4">
-                                <Link
-                                    href="#projects"
-                                    className="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 shadow-[0_0_20px_rgba(204,255,0,0.4)] hover:shadow-[0_0_30px_rgba(204,255,0,0.6)] uppercase tracking-wider"
-                                >
-                                    View My Work
-                                </Link>
-                                <Link
-                                    href="#contact"
-                                    className="px-8 py-3 rounded-full bg-transparent border-2 border-primary text-primary font-bold hover:bg-primary hover:text-black transition-all duration-300 uppercase tracking-wider"
-                                >
-                                    Let&apos;s Talk
-                                </Link>
-                            </div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.8, duration: 0.6 }}
+                                className="flex flex-col sm:flex-row items-start gap-4"
+                            >
+                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <Link
+                                        href="#projects"
+                                        className="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 shadow-[0_0_20px_rgba(204,255,0,0.4)] hover:shadow-[0_0_30px_rgba(204,255,0,0.6)] uppercase tracking-wider inline-block"
+                                    >
+                                        View My Work
+                                    </Link>
+                                </motion.div>
+                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <Link
+                                        href="#contact"
+                                        className="px-8 py-3 rounded-full bg-transparent border-2 border-primary text-primary font-bold hover:bg-primary hover:text-black transition-all duration-300 uppercase tracking-wider inline-block"
+                                    >
+                                        Let&apos;s Talk
+                                    </Link>
+                                </motion.div>
+                            </motion.div>
                         </motion.div>
 
                         {/* Right Side - Image with Floating Elements */}
