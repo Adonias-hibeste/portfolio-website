@@ -129,17 +129,23 @@ export function ProjectForm({ project }: ProjectFormProps) {
                                                 body: formData,
                                             });
 
+                                            const data = await response.json();
+
                                             if (response.ok) {
-                                                const { imageUrl } = await response.json();
+                                                const { imageUrl } = data;
                                                 // Update the form value using setValue
                                                 setValue("imageUrl", imageUrl);
                                                 setImagePreview(imageUrl);
+                                                alert("Image uploaded successfully!");
                                             } else {
-                                                alert("Failed to upload image");
+                                                // Show detailed error message
+                                                const errorMessage = data.error || "Failed to upload image";
+                                                const suggestion = data.suggestion || "";
+                                                alert(`${errorMessage}\n\n${suggestion}`);
                                             }
                                         } catch (error) {
-                                            console.error(error);
-                                            alert("Failed to upload image");
+                                            console.error("Upload error:", error);
+                                            alert("Failed to upload image. Please try using the 'Or paste image URL' field below instead.");
                                         } finally {
                                             setIsSubmitting(false);
                                         }
@@ -151,7 +157,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
                         {/* Or paste URL directly */}
                         <div className="space-y-2">
-                            <label className="text-xs text-muted-foreground">Or paste image URL:</label>
+                            <label className="text-xs text-muted-foreground">Or paste image URL (recommended for Vercel):</label>
                             <input
                                 {...register("imageUrl")}
                                 onChange={(e) => {
@@ -159,7 +165,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
                                     setImagePreview(e.target.value);
                                 }}
                                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="https://example.com/image.png"
+                                placeholder="https://i.imgur.com/example.png"
                             />
                         </div>
 
