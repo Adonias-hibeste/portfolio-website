@@ -33,3 +33,15 @@ export async function getProfile() {
         return null;
     }
 }
+
+export async function getCVProjects() {
+    try {
+        const cvProjects = await prisma.cVProject.findMany({
+            orderBy: { order: "asc" },
+        });
+        return cvProjects;
+    } catch (error) {
+        console.error("Failed to fetch CV projects:", error);
+        return [];
+    }
+}

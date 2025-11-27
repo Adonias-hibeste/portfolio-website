@@ -8,42 +8,42 @@ datasource db {
 }
 
 model Profile {
-  id          String   @id @default(cuid())
-  name        String
-  title       String
-  bio         String?
-  email       String
-  phone       String?
-  location    String?
-  github      String?
-  linkedin    String?
-  telegram    String?
-  website     String?
-  avatarUrl   String?
-  cvSummary   String?  @db.Text
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  name      String
+  title     String
+  bio       String?
+  email     String
+  phone     String?
+  location  String?
+  github    String?
+  linkedin  String?
+  telegram  String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  cvSummary String?
+  website   String?
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  imageUrl    String?
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  imageUrl     String?
   technologies String[]
-  liveLink    String?
-  repoLink    String?
-  githubLink  String?  // GitHub repository link
-  views       Int      @default(0) // Track project views
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  liveLink     String?
+  repoLink     String?
+  githubLink   String?
+  views        Int      @default(0)
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model Skill {
   id        Int      @id @default(autoincrement())
   name      String
-  icon      String   // Icon identifier (e.g., "Smartphone", "Code", "Database")
+  icon      String
   order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,10 +51,10 @@ model Skill {
 
 model PageView {
   id        String   @id @default(cuid())
-  path      String   // Page path (e.g., "/", "/projects")
-  userAgent String?  // Browser info
-  referrer  String?  // Where they came from
-  country   String?  // Visitor country (from IP)
+  path      String
+  userAgent String?
+  referrer  String?
+  country   String?
   createdAt DateTime @default(now())
 
   @@index([path])
@@ -62,13 +62,13 @@ model PageView {
 }
 
 model Visitor {
-  id           String   @id @default(cuid())
-  sessionId    String   @unique // Unique session identifier
-  firstVisit   DateTime @default(now())
-  lastVisit    DateTime @default(now())
-  pageViews    Int      @default(1)
-  country      String?
-  userAgent    String?
+  id         String   @id @default(cuid())
+  sessionId  String   @unique
+  firstVisit DateTime @default(now())
+  lastVisit  DateTime @default(now())
+  pageViews  Int      @default(1)
+  country    String?
+  userAgent  String?
 
   @@index([sessionId])
 }
@@ -83,30 +83,42 @@ model User {
 }
 
 model Experience {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   position    String
   company     String
   location    String?
   startDate   DateTime
-  endDate     DateTime? // Null means "Present"
-  current     Boolean  @default(false)
-  description String   @db.Text
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  description String
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Education {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   institution String
   degree      String
   field       String
   location    String?
   startDate   DateTime
   endDate     DateTime?
-  current     Boolean  @default(false)
-  description String?  @db.Text
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  current     Boolean   @default(false)
+  description String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model CVProject {
+  id           String   @id @default(cuid())
+  title        String
+  description  String   @db.Text
+  technologies String[]
+  liveLink     String?
+  githubLink   String?
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

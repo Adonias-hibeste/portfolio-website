@@ -198,3 +198,26 @@ export async function updateProfile(data: any) {
     }
     revalidatePath("/admin/cv");
 }
+
+// CV Project Actions
+export async function createCVProject(data: any) {
+    await prisma.cVProject.create({
+        data,
+    });
+    revalidatePath("/admin/cv");
+}
+
+export async function updateCVProject(id: string, data: any) {
+    await prisma.cVProject.update({
+        where: { id },
+        data,
+    });
+    revalidatePath("/admin/cv");
+}
+
+export async function deleteCVProject(id: string) {
+    await prisma.cVProject.delete({
+        where: { id },
+    });
+    revalidatePath("/admin/cv");
+}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Download, FileText, Briefcase, GraduationCap, Eye, User, Wrench, Trash2 } from "lucide-react";
 import { ExperienceForm } from "@/components/ExperienceForm";
+import { CVProjectForm } from "@/components/CVProjectForm";
 import { EducationForm } from "@/components/EducationForm";
 import { CVProfileForm } from "@/components/CVProfileForm";
 import SkillForm from "@/components/SkillForm";
@@ -27,10 +28,11 @@ interface AdminCVClientProps {
     educations: any[];
     profile: any;
     skills: any[];
+    cvProjects: any[];
 }
 
-export function AdminCVClient({ experiences, educations, profile, skills }: AdminCVClientProps) {
-    const [activeTab, setActiveTab] = useState<"preview" | "profile" | "experience" | "education" | "skills">("preview");
+export function AdminCVClient({ experiences, educations, profile, skills, cvProjects }: AdminCVClientProps) {
+    const [activeTab, setActiveTab] = useState<"preview" | "profile" | "experience" | "education" | "skills" | "projects">("preview");
     const [isAddingSkill, setIsAddingSkill] = useState(false);
     const [isClient, setIsClient] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
@@ -51,7 +53,13 @@ export function AdminCVClient({ experiences, educations, profile, skills }: Admi
         linkedin: profile?.linkedin,
         telegram: profile?.telegram,
         skills: skills || [],
-        projects: [],
+        projects: cvProjects.map((proj: any) => ({
+            title: proj.title,
+            description: proj.description,
+            technologies: proj.technologies,
+            liveLink: proj.liveLink,
+            githubLink: proj.githubLink,
+        })),
         experiences: experiences.map((exp: any) => ({
             position: exp.position,
             company: exp.company,
@@ -143,6 +151,18 @@ export function AdminCVClient({ experiences, educations, profile, skills }: Admi
                     <div className="flex items-center justify-center gap-2">
                         <Wrench className="w-4 h-4" />
                         Skills
+                    </div>
+                </button>
+                <button
+                    onClick={() => setActiveTab("projects")}
+                    className={`min-w-[120px] rounded-lg px-4 py-2.5 text-sm font-medium leading-5 ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2 transition-all ${activeTab === "projects"
+                        ? "bg-background text-foreground shadow"
+                        : "text-muted-foreground hover:bg-white/[0.12] hover:text-white"
+                        }`}
+                >
+                    <div className="flex items-center justify-center gap-2">
+                        <Briefcase className="w-4 h-4" />
+                        Projects
                     </div>
                 </button>
             </div>
@@ -245,6 +265,10 @@ export function AdminCVClient({ experiences, educations, profile, skills }: Admi
                             ))}
                         </div>
                     </div>
+                )}
+
+                {activeTab === "projects" && (
+                    <CVProjectForm cvProjects={cvProjects} />
                 )}
             </div>
         </div>
