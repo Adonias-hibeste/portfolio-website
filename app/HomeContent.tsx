@@ -357,96 +357,74 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
             {/* Skills Section */}
             <section id="skills" className="py-24 bg-black/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        transition={{ duration: 0.5 }}
-                        className="text-center"
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary uppercase tracking-widest">My Tech Stack</h2>
-                        <p className="text-gray-400 mb-16 max-w-2xl mx-auto">The tools and technologies I use to build world-class mobile applications</p>
-
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                            {skills.map((skill, index) => {
-                                const IconComponent = getIconComponent(skill.icon);
-                                return (
-                                    <motion.div
-                                        key={skill.id || skill.name}
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.05 }}
-                                        className="group relative bg-gradient-to-br from-card/60 to-card/40 border border-white/10 p-6 rounded-2xl flex flex-col items-center justify-center gap-4 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(204,255,0,0.15)] transition-all duration-300 cursor-pointer"
-                                    >
-                                        {/* App Icon Style Background */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-
-                                        {/* Icon */}
-                                        <div className="relative w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/5 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                                            {IconComponent ? (
-                                                <IconComponent className="w-7 h-7 text-primary group-hover:text-primary transition-colors" />
-                                            ) : (
-                                                <Code className="w-7 h-7 text-primary group-hover:text-primary transition-colors" />
-                                            )}
-                                        </div>
-
-                                        {/* Skill Name */}
-                                        <span className="relative text-sm font-semibold text-gray-300 group-hover:text-white text-center leading-tight transition-colors">
-                                            {skill.name}
-                                        </span>
-
-                                        {/* Subtle Badge */}
-                                        <div className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    </motion.div>
-                                );
-                            })}
+                    <ScrollReveal>
+                        <div className="text-center">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary uppercase tracking-widest">My Tech Stack</h2>
+                            <p className="text-gray-400 mb-16 max-w-2xl mx-auto">The tools and technologies I use to build world-class mobile applications</p>
                         </div>
+                    </ScrollReveal>
 
-                        {/* Experience Stats */}
-                        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                className="bg-gradient-to-br from-primary/10 to-primary/5 p-8 rounded-2xl border border-primary/20 backdrop-blur-sm"
-                            >
-                                <div className="text-5xl font-bold text-primary mb-2">4+</div>
-                                <div className="text-lg text-gray-300">Years Experience</div>
-                            </motion.div>
+                    {/* Tech Stack Showcase */}
+                    <TechStackShowcase skills={skills} />
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.3 }}
-                                className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 p-8 rounded-2xl border border-blue-500/20 backdrop-blur-sm"
-                            >
-                                <div className="text-5xl font-bold text-blue-400 mb-2">15+</div>
-                                <div className="text-lg text-gray-300">Technologies</div>
-                            </motion.div>
+                    {/* Performance Metrics */}
+                    <ScrollReveal delay={0.2}>
+                        <div className="mt-20">
+                            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">Performance Excellence</h3>
+                            <PerformanceMetrics />
+                        </div>
+                    </ScrollReveal>
 
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4 }}
-                                className="bg-gradient-to-br from-purple-500/10 to-purple-500/5 p-8 rounded-2xl border border-purple-500/20 backdrop-blur-sm"
-                            >
-                                <div className="text-5xl font-bold text-purple-400 mb-2">100%</div>
-                                <div className="text-lg text-gray-300">Client Satisfaction</div>
+                    {/* Experience Stats */}
+                    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.2 }}
+                            className="bg-gradient-to-br from-primary/10 to-primary/5 p-8 rounded-2xl border border-primary/20 backdrop-blur-sm"
+                        >
+                            <div className="text-5xl font-bold text-primary mb-2">4+</div>
+                            <div className="text-lg text-gray-300">Years Experience</div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 p-8 rounded-2xl border border-blue-500/20 backdrop-blur-sm"
+                        >
+                            <div className="text-5xl font-bold text-blue-400 mb-2">15+</div>
+                            <div className="text-lg text-gray-300">Technologies</div>
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.4 }}
+                            className="bg-gradient-to-br from-purple-500/10 to-purple-500/5 p-8 rounded-2xl border border-purple-500/20 backdrop-blur-sm"
+                        >
+                            <div className="text-5xl font-bold text-purple-400 mb-2">100%</div>
+                            <div className="text-lg text-gray-300">Client Satisfaction</div>
+                        </motion.div>
+                    </div>
+
+                    {/* CV Download */}
+                    <ScrollReveal delay={0.4}>
+                        <div className="mt-16 text-center">
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link
+                                    href="/cv"
+                                    className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-primary to-primary/80 text-black font-bold hover:shadow-[0_0_40px_rgba(204,255,0,0.4)] transition-all duration-300 text-lg uppercase tracking-wider"
+                                >
+                                    <Download className="w-5 h-5" />
+                                    Download My CV
+                                </Link>
                             </motion.div>
                         </div>
-
-                        {/* CV Download */}
-                        <div className="mt-16">
-                            <Link
-                                href="/cv"
-                                className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-primary to-primary/80 text-black font-bold hover:shadow-[0_0_40px_rgba(204,255,0,0.4)] transition-all duration-300 text-lg uppercase tracking-wider"
-                            >
-                                <Download className="w-5 h-5" />
-                                Download My CV
-                            </Link>
-                        </div>
-                    </motion.div>
+                    </ScrollReveal>
                 </div>
             </section>
 
