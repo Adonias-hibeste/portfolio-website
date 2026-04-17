@@ -70,48 +70,50 @@ const styles = StyleSheet.create({
         lineHeight: 1.5,
     },
     
-    // Experience & Projects
     itemHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "flex-end",
-        marginBottom: 2,
+        alignItems: "flex-start",
+        marginBottom: 3,
     },
     itemTitleBlock: {
         flex: 1,
     },
     itemTitle: {
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: "bold",
         color: "#000000",
+        marginBottom: 1,
     },
     itemSubtitle: {
-        fontSize: 10,
+        fontSize: 11,
         fontStyle: "italic",
-        color: "#333333",
+        color: "#222222",
     },
     itemDateLocation: {
         fontSize: 10,
-        color: "#333333",
+        color: "#444444",
         textAlign: "right",
+        marginBottom: 1,
     },
     bulletContainer: {
         flexDirection: "row",
-        marginBottom: 3,
+        marginBottom: 4,
         paddingLeft: 8,
     },
     bulletPoint: {
-        width: 10,
+        width: 12,
         fontSize: 10,
+        color: "#444444",
     },
     bulletText: {
         flex: 1,
         fontSize: 10,
         lineHeight: 1.4,
-        color: "#333333",
+        color: "#222222",
     },
     itemWrapper: {
-        marginBottom: 10,
+        marginBottom: 12,
     }
 });
 
@@ -161,31 +163,39 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
         return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
     };
 
-    // Construct the contact line array safely
+    // Construct the contact line array safely, removing duplicates (like duplicate emails)
     const contactItems: React.ReactNode[] = [];
+    const seenContactStrings = new Set<string>();
     
-    if (data.location) contactItems.push(<Text key="loc">{data.location}</Text>);
-    if (data.phone) contactItems.push(<Text key="phone">{data.phone}</Text>);
-    if (data.email) contactItems.push(
-        <Link src={`mailto:${data.email}`} style={styles.contactLink} key="email">
-            {data.email}
-        </Link>
-    );
-    if (data.linkedin) contactItems.push(
-        <Link src={data.linkedin} style={styles.contactLink} key="ln">
-            {data.linkedin.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, 'linkedin.com/in/')}
-        </Link>
-    );
-    if (data.github) contactItems.push(
-        <Link src={data.github} style={styles.contactLink} key="gh">
-            {data.github.replace(/^https?:\/\/(www\.)?github\.com\//, 'github.com/')}
-        </Link>
-    );
-    if (data.website) contactItems.push(
-        <Link src={data.website} style={styles.contactLink} key="web">
-            {data.website.replace(/^https?:\/\//, '')}
-        </Link>
-    );
+    if (data.location) {
+        contactItems.push(<Text key="loc">{data.location}</Text>);
+        seenContactStrings.add(data.location.toLowerCase());
+    }
+    if (data.phone && !seenContactStrings.has(data.phone.toLowerCase())) {
+        contactItems.push(<Text key="phone">{data.phone}</Text>);
+        seenContactStrings.add(data.phone.toLowerCase());
+    }
+    if (data.email && !seenContactStrings.has(data.email.toLowerCase())) {
+        contactItems.push(
+            <Link src={`mailto:${data.email}`} style={styles.contactLink} key="email">
+                {data.email}
+            </Link>
+        );
+        seenContactStrings.add(data.email.toLowerCase());
+    }
+    // Exclude LinkedIn and GitHub specifically as requested by the user
+    // Only add website if it's not somehow duplicating the email
+    if (data.website && !seenContactStrings.has(data.website.toLowerCase())) {
+        const cleanWeb = data.website.replace(/^https?:\/\//, '');
+        if (!seenContactStrings.has(cleanWeb.toLowerCase())) {
+            contactItems.push(
+                <Link src={data.website} style={styles.contactLink} key="web">
+                    {cleanWeb}
+                </Link>
+            );
+            seenContactStrings.add(cleanWeb.toLowerCase());
+        }
+    }
 
     // Render contact line with separators
     const renderedContact = contactItems.map((item, index) => (
@@ -235,14 +245,14 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                             <View key={index} style={styles.itemWrapper}>
                                 <View style={styles.itemHeader}>
                                     <View style={styles.itemTitleBlock}>
-                                        <Text style={styles.itemTitle}>{exp.position}</Text>
-                                        <Text style={styles.itemSubtitle}>{exp.company}</Text>
+                                        <Text style={styles.itemTitle}>{exp.company}</Text>
+                                        <Text style={styles.itemSubtitle}>{exp.position}</Text>
                                     </View>
                                     <View>
+                                        {exp.location && <Text style={styles.itemDateLocation}>{exp.location}</Text>}
                                         <Text style={styles.itemDateLocation}>
                                             {formatMonthYear(exp.startDate)} – {exp.current ? "Present" : formatMonthYear(exp.endDate!)}
                                         </Text>
-                                        {exp.location && <Text style={styles.itemDateLocation}>{exp.location}</Text>}
                                     </View>
                                 </View>
                                 <View>
