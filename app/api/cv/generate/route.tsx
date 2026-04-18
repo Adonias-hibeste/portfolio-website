@@ -17,9 +17,8 @@ export async function GET(request: Request) {
             prisma.skill.findMany({
                 orderBy: { order: "asc" },
             }),
-            prisma.project.findMany({
+            prisma.cVProject.findMany({
                 orderBy: { order: "asc" },
-                take: 5, // Top 5 projects
             }),
             prisma.experience.findMany({
                 orderBy: { startDate: "desc" },
