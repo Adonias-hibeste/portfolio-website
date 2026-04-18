@@ -116,7 +116,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                     sequence={[
                                         'Senior Mobile',
                                         500,
-                                        'Senior Mobile\nArchitect',
+                                        'Senior Mobile\nDeveloper',
                                     ]}
                                     className="whitespace-pre-line"
                                 />
@@ -127,7 +127,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                 transition={{ delay: 0.6, duration: 0.6 }}
                                 className="text-lg text-gray-400 mb-8 max-w-lg"
                             >
-                                Transforming complex business requirements into elegant, high-performance mobile applications with Flutter & React Native.
+                                Transforming complex business requirements into elegant, high-performance mobile applications with Swift, React Native & Flutter.
                             </motion.p>
 
                             <motion.div
@@ -239,7 +239,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                             <div className="relative w-full max-w-md mx-auto aspect-[3/4] rounded-3xl overflow-hidden border-4 border-primary/30 shadow-[0_0_60px_rgba(204,255,0,0.4)]">
                                 <Image
                                     src="/profile.jpg"
-                                    alt="Adonias Hibeste - Senior Mobile Architect"
+                                    alt="Adonias Hibeste - Senior Mobile Developer"
                                     fill
                                     className="object-cover"
                                     style={{ objectPosition: '50% 35%' }}
@@ -270,7 +270,7 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                     Building Mobile Excellence from Concept to Launch
                                 </p>
                                 <p>
-                                    As a Senior Mobile Architect, I transform complex business requirements into elegant, high-performance mobile applications. With deep expertise in <span className="text-primary font-semibold">Flutter</span> and <span className="text-primary font-semibold">React Native</span>, I deliver full-cycle iOS and Android solutions that don&apos;t just meet expectations—they exceed them.
+                                    As a Senior Mobile Developer, I transform complex business requirements into elegant, high-performance mobile applications. With deep expertise in <span className="text-primary font-semibold">Swift/SwiftUI</span>, <span className="text-primary font-semibold">React Native/Expo</span>, and <span className="text-primary font-semibold">Flutter</span>, I deliver full-cycle iOS and cross-platform solutions — from Figma design to App Store publication. Published the Sefere app on the Apple App Store.
                                 </p>
                             </div>
 
