@@ -11,9 +11,8 @@ export default async function CVPage() {
             prisma.skill.findMany({
                 orderBy: { order: "asc" },
             }),
-            prisma.project.findMany({
+            prisma.cVProject.findMany({
                 orderBy: { order: "asc" },
-                take: 5,
             }),
             prisma.experience.findMany({
                 orderBy: { startDate: "desc" },
