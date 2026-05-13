@@ -12,6 +12,7 @@ import { ResponsiveShowcase } from "@/components/ResponsiveShowcase";
 import { TechStackShowcase } from "@/components/TechStackShowcase";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { AppShowcase } from "@/components/AppShowcase";
+import { ClientProjectShowcase } from "@/components/ClientProjectShowcase";
 
 interface HomeContentProps {
     projects: any[];
@@ -432,8 +433,30 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                 </div>
             </section>
 
-            {/* Projects Section */}
+            {/* Enterprise Client Work Section */}
             <section id="projects" className="py-24">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest leading-tight">
+                            Enterprise Client <br />
+                            <span className="text-primary">Work</span>
+                        </h2>
+                        <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+                            Production applications built for real clients — from enterprise practice management to social platforms serving thousands of users.
+                        </p>
+                    </motion.div>
+
+                    <ClientProjectShowcase />
+                </div>
+            </section>
+
+            {/* Open Source & Showcase Projects */}
+            <section className="py-24 bg-black/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
