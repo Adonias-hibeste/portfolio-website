@@ -25,7 +25,7 @@ async function main() {
         {
             title: "Secure VPN",
             description: "A premium, high-performance VPN application featuring a minimalist dark-theme UI, one-tap secure connectivity, and real-time speed monitoring. Built with Flutter and Riverpod.",
-            imageUrl: "/projects/vpn_home.png",
+            imageUrl: "/projects/vpn.png",
             technologies: ["Flutter", "Riverpod", "Lucide Icons", "Secure VPN"],
             repoLink: "https://github.com/Adonias-hibeste/Vpn-app",
             order: 1
@@ -33,15 +33,15 @@ async function main() {
         {
             title: "Swift Calendar",
             description: "A professional iOS-style calendar and scheduling app built with Flutter. Features a clean Cupertino design, intuitive event management, and smooth animations.",
-            imageUrl: "/projects/calendar_home.png",
+            imageUrl: "/projects/calendar.png",
             technologies: ["Flutter", "Cupertino UI", "Dart", "Local Storage"],
             repoLink: "https://github.com/Adonias-hibeste/Swift-Calender-App-",
             order: 2
         },
         {
-            title: "Flame Dating",
+            title: "Dating App",
             description: "A modern, high-fidelity dating application built with React Native. Features a sophisticated Cyber-Amber UI, swipe-to-match architecture, and premium animations.",
-            imageUrl: "/projects/dating_home.png",
+            imageUrl: "/projects/dating.png",
             technologies: ["React Native", "Expo", "Reanimated 3", "TypeScript"],
             repoLink: "https://github.com/Adonias-hibeste/React-Native-Dating-App-",
             order: 3
@@ -49,23 +49,23 @@ async function main() {
         {
             title: "Urban Taxi",
             description: "A high-fidelity ride-hailing application with a professional black and yellow theme. Features real-time map integration, ride selection, and fare estimation.",
-            imageUrl: "/projects/taxi_home.png",
+            imageUrl: "/projects/taxi.png",
             technologies: ["Flutter", "Google Maps", "Riverpod", "Geolocation"],
             repoLink: "https://github.com/Adonias-hibeste/Flutter-Taxi-App",
             order: 4
         },
         {
-            title: "Pulse Social",
+            title: "Social Media App",
             description: "A vibrant social networking application with a clean, modern UI. Features story bubbles, a rich media feed, and high-performance interactive components.",
-            imageUrl: "/projects/pulse_home.png",
+            imageUrl: "/projects/social.png",
             technologies: ["Flutter", "Riverpod", "Cached Image", "Social UI"],
             repoLink: "https://github.com/Adonias-hibeste/Flutter-Social-Network-App",
             order: 5
         },
         {
-            title: "Elite Store",
+            title: "Ecommerce App",
             description: "A premium e-commerce marketplace featuring a minimalist 'Apple Store' aesthetic. Optimized for product discovery with a high-end black and gold theme.",
-            imageUrl: "/projects/elite_home.png",
+            imageUrl: "/projects/ecommerce.png",
             technologies: ["Flutter", "Riverpod", "E-commerce", "Clean Architecture"],
             repoLink: "https://github.com/Adonias-hibeste/Eccomerce-App-",
             order: 6
@@ -73,7 +73,7 @@ async function main() {
         {
             title: "Express Delivery",
             description: "A fresh and energetic food/logistics delivery application. Features location-aware restaurant discovery, trending deals, and real-time order tracking UI.",
-            imageUrl: "/projects/delivery_home.png",
+            imageUrl: "/projects/delivery.png",
             technologies: ["Flutter", "Riverpod", "Delivery UI", "Real-time Tracking"],
             repoLink: "https://github.com/Adonias-hibeste/Flutter-Delivery-app-",
             order: 7
@@ -81,7 +81,7 @@ async function main() {
         {
             title: "Meditrack Pro",
             description: "AI-driven healthcare companion for vitals tracking and symptom analysis. Built with Flutter and BLoC for high-performance medical data management.",
-            imageUrl: "/projects/meditrack_home.png",
+            imageUrl: "/projects/meditrack.png",
             technologies: ["Flutter", "BLoC", "Firebase", "HealthKit"],
             repoLink: "https://github.com/Adonias-hibeste/flutter-meditrack-pro",
             order: 8
@@ -89,7 +89,7 @@ async function main() {
         {
             title: "SwiftUI Chat",
             description: "A real-time messaging application with end-to-end encryption. Features premium iOS aesthetics, blur effects, and high-performance socket integration.",
-            imageUrl: "/projects/chat_home.png",
+            imageUrl: "/projects/chat.png",
             technologies: ["SwiftUI", "Combine", "CryptoKit", "WebSockets"],
             repoLink: "https://github.com/Adonias-hibeste/swiftui-chat-app",
             order: 9
@@ -97,7 +97,7 @@ async function main() {
         {
             title: "FinanceFlow",
             description: "A personal finance and expense tracking application with biometric security. Features interactive data visualization and Core Data persistence.",
-            imageUrl: "/projects/finance_home.png",
+            imageUrl: "/projects/finance.png",
             technologies: ["SwiftUI", "Swift Charts", "Core Data", "Local Auth"],
             repoLink: "https://github.com/Adonias-hibeste/swift-financeflow-ios",
             order: 10
