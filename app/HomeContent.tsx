@@ -2,24 +2,29 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code, Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code, Send, LucideIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { getIconComponent } from "@/lib/iconMap";
 import { useState } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { TypewriterText } from "@/components/TypewriterText";
+import { ClientProjectShowcase, ProjectData } from "@/components/ClientProjectShowcase";
+import { ProjectModal } from "@/components/ProjectModal";
 import { ResponsiveShowcase } from "@/components/ResponsiveShowcase";
 import { TechStackShowcase } from "@/components/TechStackShowcase";
 import { PhoneMockup } from "@/components/PhoneMockup";
 import { AppShowcase } from "@/components/AppShowcase";
-import { ClientProjectShowcase } from "@/components/ClientProjectShowcase";
 
 interface HomeContentProps {
     projects: any[];
     skills: any[];
+    profile?: any;
+    experiences?: any[];
 }
 
-export default function HomeContent({ projects, skills }: HomeContentProps) {
+export default function HomeContent({ projects, skills, profile, experiences }: HomeContentProps) {
+    const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -455,11 +460,119 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                 </div>
             </section>
 
-            {/* View All Projects CTA */}
-            <section className="py-16 bg-black/20">
+            {/* The Works Closest To My Heart — Non-Enterprise DB Projects */}
+            <section className="py-24 bg-black/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <ScrollReveal>
-                        <div className="text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest leading-tight">
+                            The Works <br />
+                            <span className="text-primary">Closest To My Heart</span>
+                        </h2>
+                    </motion.div>
+
+                    {(() => {
+                        const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababondlite'];
+                        const nonEnterprise = projects.filter((p: any) => {
+                            const titleLower = p.title.toLowerCase();
+                            return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
+                        });
+
+                        if (nonEnterprise.length === 0) {
+                            return (
+                                <div className="text-center py-20 border border-dashed border-white/10 rounded-2xl bg-card/20">
+                                    <p className="text-gray-400">Projects are being added. Check back soon!</p>
+                                </div>
+                            );
+                        }
+
+                        return (
+                            <div className="relative overflow-hidden">
+                                <motion.div
+                                    animate={{
+                                        x: [0, -(nonEnterprise.length * 400)],
+                                    }}
+                                    transition={{
+                                        x: {
+                                            repeat: Infinity,
+                                            repeatType: "loop",
+                                            duration: nonEnterprise.length * 5,
+                                            ease: "linear",
+                                        },
+                                    }}
+                                    drag="x"
+                                    dragConstraints={{ left: -(nonEnterprise.length * 400), right: 0 }}
+                                    dragElastic={0.1}
+                                    className="flex gap-8 cursor-grab active:cursor-grabbing pb-8"
+                                >
+                                    {[...nonEnterprise, ...nonEnterprise].map((project: any, index: number) => {
+                                        const projectData: ProjectData = {
+                                            id: project.id,
+                                            title: project.title,
+                                            type: "Open Source",
+                                            category: project.title.toLowerCase().includes('app') || project.technologies.includes('Flutter') ? "mobile" : "web",
+                                            tagline: project.description.split('.')[0] + '.',
+                                            desc: project.description,
+                                            stack: project.technologies,
+                                            imageUrl: project.imageUrl,
+                                            liveLink: project.liveLink,
+                                            repoLink: project.repoLink || project.githubLink,
+                                            isEnterprise: false
+                                        };
+
+                                        return (
+                                            <motion.div
+                                                key={`${project.id}-${index}`}
+                                                initial={{ opacity: 0, x: 100 }}
+                                                whileInView={{ opacity: 1, x: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: (index % nonEnterprise.length) * 0.1, duration: 0.6 }}
+                                                whileHover={{ scale: 1.05, y: -10 }}
+                                                onClick={() => setSelectedProject(projectData)}
+                                                className="group relative flex-shrink-0 w-[350px] aspect-[3/4] rounded-2xl overflow-hidden bg-muted shadow-xl cursor-pointer"
+                                            >
+                                                {project.imageUrl ? (
+                                                    <Image
+                                                        src={project.imageUrl}
+                                                        alt={project.title}
+                                                        fill
+                                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center bg-card">
+                                                        <span className="text-muted-foreground">No Image</span>
+                                                    </div>
+                                                )}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-6">
+                                                    <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                                                    <p className="text-sm text-gray-300 line-clamp-2 mb-4">{project.description}</p>
+                                                    <div className="flex flex-wrap gap-2 mb-4">
+                                                        {project.technologies.slice(0, 3).map((t: string) => (
+                                                            <span key={t} className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">{t}</span>
+                                                        ))}
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-sm text-primary group-hover:underline">
+                                                        View Case Study <ArrowRight className="w-4 h-4" />
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        );
+                                    })}
+                                </motion.div>
+
+                                <div className="text-center mt-4">
+                                    <p className="text-gray-500 text-sm">Hover or drag to pause auto-scroll · Click for Case Study</p>
+                                </div>
+                            </div>
+                        );
+                    })()}
+
+                    <ScrollReveal delay={0.4}>
+                        <div className="mt-12 text-center">
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                 <Link
                                     href="/projects"
@@ -472,6 +585,16 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                     </ScrollReveal>
                 </div>
             </section>
+
+            {/* Case Study Modal for Carousel */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <ProjectModal
+                        project={selectedProject}
+                        onClose={() => setSelectedProject(null)}
+                    />
+                )}
+            </AnimatePresence>
 
             {/* Contact Section */}
             <section id="contact" className="py-24 bg-white text-black relative">
