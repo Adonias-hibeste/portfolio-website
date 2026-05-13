@@ -476,7 +476,7 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                     </motion.div>
 
                     {(() => {
-                        const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababondlite'];
+                        const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite'];
                         const nonEnterprise = projects.filter((p: any) => {
                             const titleLower = p.title.toLowerCase();
                             return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
@@ -510,14 +510,29 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                                     className="flex gap-8 cursor-grab active:cursor-grabbing pb-8"
                                 >
                                     {[...nonEnterprise, ...nonEnterprise].map((project: any, index: number) => {
+                                        const features = [
+                                            `Built with ${project.technologies.slice(0, 3).join(', ')}`,
+                                            "Responsive and high-performance architecture",
+                                            "Clean code and modular design patterns"
+                                        ];
+
+                                        if (project.technologies.includes('Flutter')) {
+                                            features.push("Cross-platform mobile delivery");
+                                            features.push("Smooth 60fps animations & UI");
+                                        } else if (project.technologies.includes('React') || project.technologies.includes('Next.js')) {
+                                            features.push("Modern React hooks and state management");
+                                            features.push("SEO optimized and fast loading");
+                                        }
+
                                         const projectData: ProjectData = {
                                             id: project.id,
                                             title: project.title,
                                             type: "Open Source",
                                             category: project.title.toLowerCase().includes('app') || project.technologies.includes('Flutter') ? "mobile" : "web",
                                             tagline: project.description.split('.')[0] + '.',
-                                            desc: project.description,
+                                            desc: project.description.length < 50 ? `${project.description}. A high-performance solution built with professional standards and modern best practices.` : project.description,
                                             stack: project.technologies,
+                                            features: features,
                                             imageUrl: project.imageUrl,
                                             liveLink: project.liveLink,
                                             repoLink: project.repoLink || project.githubLink,

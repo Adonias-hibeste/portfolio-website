@@ -18,26 +18,44 @@ async function getProjects() {
 export default async function ProjectsPage() {
     const dbProjects = await getProjects();
     
-    const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababondlite'];
+    const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite'];
     
     const filteredProjects: ProjectData[] = dbProjects
         .filter((p: any) => {
             const titleLower = p.title.toLowerCase();
             return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
         })
-        .map((p: any) => ({
-            id: p.id,
-            title: p.title,
-            type: "Open Source",
-            category: p.title.toLowerCase().includes('app') || p.technologies.includes('Flutter') || p.technologies.includes('React Native') ? "mobile" : "web",
-            tagline: p.description.split('.')[0] + '.',
-            desc: p.description,
-            stack: p.technologies,
-            imageUrl: p.imageUrl,
-            liveLink: p.liveLink,
-            repoLink: p.repoLink || p.githubLink,
-            isEnterprise: false
-        }));
+        .map((p: any) => {
+            // Generate intelligent highlights (features) if missing
+            const features = [
+                `Built with ${p.technologies.slice(0, 3).join(', ')}`,
+                "Responsive and high-performance architecture",
+                "Clean code and modular design patterns"
+            ];
+
+            if (p.technologies.includes('Flutter')) {
+                features.push("Cross-platform mobile delivery");
+                features.push("Smooth 60fps animations & UI");
+            } else if (p.technologies.includes('React') || p.technologies.includes('Next.js')) {
+                features.push("Modern React hooks and state management");
+                features.push("SEO optimized and fast loading");
+            }
+
+            return {
+                id: p.id,
+                title: p.title,
+                type: "Open Source",
+                category: p.title.toLowerCase().includes('app') || p.technologies.includes('Flutter') || p.technologies.includes('React Native') ? "mobile" : "web",
+                tagline: p.description.split('.')[0] + '.',
+                desc: p.description.length < 50 ? `${p.description}. A high-performance solution built with professional standards and modern best practices.` : p.description,
+                stack: p.technologies,
+                features: features,
+                imageUrl: p.imageUrl,
+                liveLink: p.liveLink,
+                repoLink: p.repoLink || p.githubLink,
+                isEnterprise: false
+            };
+        });
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-background text-foreground">
