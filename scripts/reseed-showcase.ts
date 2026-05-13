@@ -11,7 +11,7 @@ async function main() {
     const allProjects = await prisma.project.findMany();
     
     // Filter out projects to delete (those NOT matching enterprise keywords)
-    const toDelete = allProjects.filter(p => {
+    const toDelete = allProjects.filter((p: any) => {
         const titleLower = p.title.toLowerCase();
         return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
     });
