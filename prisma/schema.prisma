@@ -30,6 +30,7 @@ model Project {
   title        String
   description  String
   imageUrl     String?
+  screenshots  String[]
   technologies String[]
   liveLink     String?
   repoLink     String?

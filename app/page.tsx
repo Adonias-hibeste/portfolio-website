@@ -15,6 +15,7 @@ export default async function Home() {
       technologies: ["Flutter", "Riverpod", "Lucide Icons", "Secure VPN"],
       repoLink: "https://github.com/Adonias-hibeste/Vpn-app",
       imageUrl: "/projects/vpn.png",
+      screenshots: ["/projects/vpn.png", "/projects/vpn_nodes.png", "/projects/vpn_stats.png"],
       order: 1
     },
     {
@@ -24,6 +25,7 @@ export default async function Home() {
       technologies: ["Flutter", "Cupertino UI", "Dart", "Local Storage"],
       repoLink: "https://github.com/Adonias-hibeste/Swift-Calender-App-",
       imageUrl: "/projects/calendar.png",
+      screenshots: ["/projects/calendar.png", "/projects/calendar_detail.png", "/projects/calendar_schedule.png"],
       order: 2
     },
     {
@@ -33,6 +35,7 @@ export default async function Home() {
       technologies: ["React Native", "Expo", "Reanimated 3", "TypeScript"],
       repoLink: "https://github.com/Adonias-hibeste/React-Native-Dating-App-",
       imageUrl: "/projects/dating.png",
+      screenshots: ["/projects/dating.png", "/projects/dating_match.png", "/projects/dating_chat.png"],
       order: 3
     },
     {
@@ -42,6 +45,7 @@ export default async function Home() {
       technologies: ["Flutter", "Google Maps", "Riverpod", "Geolocation"],
       repoLink: "https://github.com/Adonias-hibeste/Flutter-Taxi-App",
       imageUrl: "/projects/taxi.png",
+      screenshots: ["/projects/taxi.png", "/projects/taxi_selection.png", "/projects/taxi_summary.png"],
       order: 4
     },
     {
@@ -51,6 +55,7 @@ export default async function Home() {
       technologies: ["Flutter", "Riverpod", "Cached Image", "Social UI"],
       repoLink: "https://github.com/Adonias-hibeste/Flutter-Social-Network-App",
       imageUrl: "/projects/social.png",
+      screenshots: ["/projects/social.png", "/projects/pulse_feed.png", "/projects/pulse_story.png", "/projects/pulse_profile.png"],
       order: 5
     },
     {
@@ -60,6 +65,7 @@ export default async function Home() {
       technologies: ["Flutter", "Riverpod", "E-commerce", "Clean Architecture"],
       repoLink: "https://github.com/Adonias-hibeste/Eccomerce-App-",
       imageUrl: "/projects/ecommerce.png",
+      screenshots: ["/projects/ecommerce.png", "/projects/elite_detail.png"],
       order: 6
     },
     {
@@ -69,6 +75,7 @@ export default async function Home() {
       technologies: ["Flutter", "Riverpod", "Delivery UI", "Real-time Tracking"],
       repoLink: "https://github.com/Adonias-hibeste/Flutter-Delivery-app-",
       imageUrl: "/projects/delivery.png",
+      screenshots: ["/projects/delivery.png", "/projects/delivery_menu.png", "/projects/delivery_tracking.png", "/projects/delivery_discovery.png"],
       order: 7
     },
     {
@@ -78,6 +85,7 @@ export default async function Home() {
       technologies: ["Flutter", "BLoC", "Firebase", "HealthKit"],
       repoLink: "https://github.com/Adonias-hibeste/flutter-meditrack-pro",
       imageUrl: "/projects/meditrack.png",
+      screenshots: ["/projects/meditrack.png", "/projects/meditrack_chat.png"],
       order: 8
     },
     {
@@ -87,6 +95,7 @@ export default async function Home() {
       technologies: ["SwiftUI", "Combine", "CryptoKit", "WebSockets"],
       repoLink: "https://github.com/Adonias-hibeste/swiftui-chat-app",
       imageUrl: "/projects/chat.png",
+      screenshots: ["/projects/chat.png", "/projects/chat_conversation.png", "/projects/chat_profile.png"],
       order: 9
     },
     {
@@ -96,6 +105,7 @@ export default async function Home() {
       technologies: ["SwiftUI", "Swift Charts", "Core Data", "Local Auth"],
       repoLink: "https://github.com/Adonias-hibeste/swift-financeflow-ios",
       imageUrl: "/projects/finance.png",
+      screenshots: ["/projects/finance.png", "/projects/finance_transactions.png"],
       order: 10
     }
   ];

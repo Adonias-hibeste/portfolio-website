@@ -516,7 +516,7 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                                             "Clean code and modular design patterns"
                                         ];
 
-                                        if (project.technologies.includes('Flutter')) {
+                                        if (project.technologies.includes('Flutter') || project.technologies.includes('SwiftUI') || project.technologies.includes('Swift')) {
                                             features.push("Cross-platform mobile delivery");
                                             features.push("Smooth 60fps animations & UI");
                                         } else if (project.technologies.includes('React') || project.technologies.includes('Next.js')) {
@@ -524,16 +524,26 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                                             features.push("SEO optimized and fast loading");
                                         }
 
+                                        // Map screenshots to the format expected by the UI
+                                        const screenshots = project.screenshots && project.screenshots.length > 0 
+                                            ? project.screenshots.map((src: string) => ({ src, label: "Screenshot" }))
+                                            : [];
+
                                         const projectData: ProjectData = {
                                             id: project.id,
                                             title: project.title,
                                             type: "Open Source",
-                                            category: project.title.toLowerCase().includes('app') || project.technologies.includes('Flutter') ? "mobile" : "web",
+                                            category: project.title.toLowerCase().includes('app') || 
+                                                     project.technologies.includes('Flutter') || 
+                                                     project.technologies.includes('React Native') ||
+                                                     project.technologies.includes('SwiftUI') ||
+                                                     project.technologies.includes('Swift') ? "mobile" : "web",
                                             tagline: project.description.split('.')[0] + '.',
                                             desc: project.description.length < 50 ? `${project.description}. A high-performance solution built with professional standards and modern best practices.` : project.description,
                                             stack: project.technologies,
                                             features: features,
                                             imageUrl: project.imageUrl,
+                                            screenshots: screenshots,
                                             liveLink: project.liveLink,
                                             repoLink: project.repoLink || project.githubLink,
                                             isEnterprise: false

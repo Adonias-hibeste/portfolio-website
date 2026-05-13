@@ -33,7 +33,7 @@ export default async function ProjectsPage() {
                 "Clean code and modular design patterns"
             ];
 
-            if (p.technologies.includes('Flutter')) {
+            if (p.technologies.includes('Flutter') || p.technologies.includes('SwiftUI') || p.technologies.includes('Swift')) {
                 features.push("Cross-platform mobile delivery");
                 features.push("Smooth 60fps animations & UI");
             } else if (p.technologies.includes('React') || p.technologies.includes('Next.js')) {
@@ -41,16 +41,26 @@ export default async function ProjectsPage() {
                 features.push("SEO optimized and fast loading");
             }
 
+            // Map screenshots to the format expected by the UI
+            const screenshots = p.screenshots && p.screenshots.length > 0 
+                ? p.screenshots.map((src: string) => ({ src, label: "Screenshot" }))
+                : [];
+
             return {
                 id: p.id,
                 title: p.title,
                 type: "Open Source",
-                category: p.title.toLowerCase().includes('app') || p.technologies.includes('Flutter') || p.technologies.includes('React Native') ? "mobile" : "web",
+                category: p.title.toLowerCase().includes('app') || 
+                         p.technologies.includes('Flutter') || 
+                         p.technologies.includes('React Native') ||
+                         p.technologies.includes('SwiftUI') ||
+                         p.technologies.includes('Swift') ? "mobile" : "web",
                 tagline: p.description.split('.')[0] + '.',
                 desc: p.description.length < 50 ? `${p.description}. A high-performance solution built with professional standards and modern best practices.` : p.description,
                 stack: p.technologies,
                 features: features,
                 imageUrl: p.imageUrl,
+                screenshots: screenshots,
                 liveLink: p.liveLink,
                 repoLink: p.repoLink || p.githubLink,
                 isEnterprise: false
