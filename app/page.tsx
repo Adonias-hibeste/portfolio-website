@@ -27,12 +27,12 @@ export default async function Home() {
       order: 2
     },
     {
-      id: "flame-dating",
-      title: "Flame Dating",
+      id: "dating-app",
+      title: "Dating App",
       description: "A modern, high-fidelity dating application built with React Native. Features a sophisticated Cyber-Amber UI, swipe-to-match architecture, and premium animations.",
       technologies: ["React Native", "Expo", "Reanimated 3", "TypeScript"],
       repoLink: "https://github.com/Adonias-hibeste/React-Native-Dating-App-",
-      imageUrl: "/projects/flame.png",
+      imageUrl: "/projects/dating.png",
       order: 3
     },
     {
@@ -45,8 +45,8 @@ export default async function Home() {
       order: 4
     },
     {
-      id: "pulse-social",
-      title: "Pulse Social",
+      id: "social-media-app",
+      title: "Social Media App",
       description: "A vibrant social networking application with a clean, modern UI. Features story bubbles, a rich media feed, and high-performance interactive components.",
       technologies: ["Flutter", "Riverpod", "Cached Image", "Social UI"],
       repoLink: "https://github.com/Adonias-hibeste/Flutter-Social-Network-App",
@@ -54,12 +54,12 @@ export default async function Home() {
       order: 5
     },
     {
-      id: "elite-store",
-      title: "Elite Store",
+      id: "ecommerce-app",
+      title: "Ecommerce App",
       description: "A premium e-commerce marketplace featuring a minimalist 'Apple Store' aesthetic. Optimized for product discovery with a high-end black and gold theme.",
       technologies: ["Flutter", "Riverpod", "E-commerce", "Clean Architecture"],
       repoLink: "https://github.com/Adonias-hibeste/Eccomerce-App-",
-      imageUrl: "/projects/store.png",
+      imageUrl: "/projects/ecommerce.png",
       order: 6
     },
     {
