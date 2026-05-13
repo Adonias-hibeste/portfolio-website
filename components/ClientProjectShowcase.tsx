@@ -82,7 +82,7 @@ const CLIENT_PROJECTS: ClientProject[] = [
   },
   {
     id: "hababondlite",
-    title: "HababBondlite",
+    title: "HababBondlite Dating App",
     type: "Enterprise Client",
     category: "mobile",
     tagline: "Premium dating app for the Ethiopian community",

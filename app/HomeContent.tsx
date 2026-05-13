@@ -162,11 +162,11 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                             transition={{ duration: 0.8 }}
                             className="relative order-1 md:order-2"
                         >
-                            {/* Floating Client Review Card - Top Left */}
+                            {/* Floating Client Review Card - Top Left (hidden on mobile) */}
                             <motion.div
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1, duration: 0.8 }}
-                                className="absolute -top-4 -left-4 md:-left-12 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] max-w-[200px] z-10"
+                                className="hidden md:block absolute -top-4 -left-4 md:-left-12 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] max-w-[200px] z-10"
                             >
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="flex gap-0.5">
@@ -182,12 +182,12 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                                 <p className="text-[10px] text-gray-500 mt-2">Client Review From Upwork</p>
                             </motion.div>
 
-                            {/* Floating Expertise Card - Top Right */}
+                            {/* Floating Expertise Card - Top Right (hidden on mobile) */}
                             <motion.div
                                 initial={{ opacity: 0, y: -30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.2, duration: 0.8 }}
-                                className="absolute -top-4 -right-4 md:-right-12 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-md border border-primary/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(204,255,0,0.2)] z-10"
+                                className="hidden md:block absolute -top-4 -right-4 md:-right-12 bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-md border border-primary/30 rounded-2xl p-4 shadow-[0_0_30px_rgba(204,255,0,0.2)] z-10"
                             >
                                 <h4 className="text-primary font-bold text-sm mb-3 uppercase tracking-wider">My Expertise</h4>
                                 <div className="space-y-2">
@@ -455,115 +455,15 @@ export default function HomeContent({ projects, skills }: HomeContentProps) {
                 </div>
             </section>
 
-            {/* Open Source & Showcase Projects */}
-            <section className="py-24 bg-black/20">
+            {/* View All Projects CTA */}
+            <section className="py-16 bg-black/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest leading-tight">
-                            The Works <br />
-                            <span className="text-primary">Closest To My Heart</span>
-                        </h2>
-                    </motion.div>
-
-                    {projects.length === 0 ? (
-                        <div className="text-center py-20 border border-dashed border-white/10 rounded-2xl bg-card/20">
-                            <p className="text-gray-400">Projects are being added. Check back soon!</p>
-                        </div>
-                    ) : (
-                        <div className="relative overflow-hidden">
-                            {/* Horizontal Scrollable Container with Auto-scroll */}
-                            <motion.div
-                                animate={{
-                                    x: [0, -(projects.length * 400)],
-                                }}
-                                transition={{
-                                    x: {
-                                        repeat: Infinity,
-                                        repeatType: "loop",
-                                        duration: projects.length * 5, // 5 seconds per project
-                                        ease: "linear",
-                                    },
-                                }}
-                                drag="x"
-                                dragConstraints={{ left: -(projects.length * 400), right: 0 }}
-                                dragElastic={0.1}
-                                whileHover={{ animationPlayState: "paused" }}
-                                onMouseEnter={(e) => {
-                                    const target = e.currentTarget as HTMLElement;
-                                    target.style.animationPlayState = 'paused';
-                                }}
-                                onMouseLeave={(e) => {
-                                    const target = e.currentTarget as HTMLElement;
-                                    target.style.animationPlayState = 'running';
-                                }}
-                                className="flex gap-8 cursor-grab active:cursor-grabbing pb-8"
-                            >
-                                {/* Duplicate projects for seamless loop */}
-                                {[...projects, ...projects].map((project: any, index: number) => (
-                                    <motion.div
-                                        key={`${project.id}-${index}`}
-                                        initial={{ opacity: 0, x: 100 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: (index % projects.length) * 0.1, duration: 0.6 }}
-                                        whileHover={{ scale: 1.05, y: -10 }}
-                                        className="group relative flex-shrink-0 w-[350px] aspect-[3/4] rounded-2xl overflow-hidden bg-muted shadow-xl"
-                                    >
-                                        {project.imageUrl ? (
-                                            <Image
-                                                src={project.imageUrl}
-                                                alt={project.title}
-                                                fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center bg-card">
-                                                <span className="text-muted-foreground">No Image</span>
-                                            </div>
-                                        )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-6">
-                                            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                                            <p className="text-sm text-gray-300 line-clamp-2 mb-4">{project.description}</p>
-                                            <div className="flex flex-wrap gap-2 mb-4">
-                                                {project.technologies.slice(0, 3).map((t: string) => (
-                                                    <span key={t} className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">{t}</span>
-                                                ))}
-                                            </div>
-                                            {project.githubLink && (
-                                                <a
-                                                    href={project.githubLink}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    <Github className="w-4 h-4" />
-                                                    View on GitHub
-                                                </a>
-                                            )}
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </motion.div>
-
-                            {/* Scroll Hint */}
-                            <div className="text-center mt-4">
-                                <p className="text-gray-500 text-sm">Hover or drag to pause auto-scroll</p>
-                            </div>
-                        </div>
-                    )}
-
-                    <ScrollReveal delay={0.4}>
-                        <div className="mt-12 text-center">
+                    <ScrollReveal>
+                        <div className="text-center">
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                 <Link
                                     href="/projects"
-                                    className="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 inline-block"
+                                    className="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/90 transition-all duration-300 inline-block uppercase tracking-wider"
                                 >
                                     SHOW ALL PROJECTS
                                 </Link>
