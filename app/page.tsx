@@ -99,6 +99,17 @@ export default async function Home() {
       order: 9
     },
     {
+      id: "football-club-mgmt",
+      title: "Football Club Manager",
+      description: "A comprehensive member management platform for professional football clubs. Features player profiles, performance tracking, payment history, and team scheduling. Built with a professional sports-tech aesthetic.",
+      technologies: ["Flutter", "Riverpod", "Firebase", "PDF Generation"],
+      repoLink: "https://github.com/Adonias-hibeste/Football-Club-Member-Management-app-",
+      imageUrl: "/projects/football.png",
+      screenshots: ["/projects/football.png", "/projects/football_players.png", "/projects/football_stats.png", "/projects/football_admin.png"],
+      order: 10
+    },
+
+    {
       id: "finance-flow",
       title: "FinanceFlow",
       description: "A personal finance and expense tracking application with biometric security. Features interactive data visualization and Core Data persistence.",
@@ -107,6 +118,16 @@ export default async function Home() {
       imageUrl: "/projects/finance.png",
       screenshots: ["/projects/finance.png", "/projects/finance_transactions.png"],
       order: 10
+    },
+    {
+      id: "football-club-management",
+      title: "Football Club Manager",
+      description: "A comprehensive football club member management system with blog publishing, event scheduling, e-commerce merchandise store, monthly payment processing, and personalized member profiles.",
+      technologies: ["Flutter", "Dart", "Firebase", "E-commerce"],
+      repoLink: "https://github.com/Adonias-hibeste/football-Club-Member-Management-app-",
+      imageUrl: "/projects/football_club.jpg",
+      screenshots: ["/projects/football_club.jpg", "/projects/football_club_store.jpg", "/projects/football_club_events.jpg", "/projects/football_club_profile.jpg"],
+      order: 11
     }
   ];
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Github, Linkedin, Mail, Phone, Download, Code, Send, LucideIcon } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Phone, Code, Send, LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getIconComponent } from "@/lib/iconMap";
 import { useState } from "react";
@@ -421,20 +421,7 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                         </motion.div>
                     </div>
 
-                    {/* CV Download */}
-                    <ScrollReveal delay={0.4}>
-                        <div className="mt-16 text-center">
-                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <Link
-                                    href="/cv"
-                                    className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-primary to-primary/80 text-black font-bold hover:shadow-[0_0_40px_rgba(204,255,0,0.4)] transition-all duration-300 text-lg uppercase tracking-wider"
-                                >
-                                    <Download className="w-5 h-5" />
-                                    Download My CV
-                                </Link>
-                            </motion.div>
-                        </div>
-                    </ScrollReveal>
+                </div>
                 </div>
             </section>
 
@@ -460,7 +447,7 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                 </div>
             </section>
 
-            {/* The Works Closest To My Heart — Non-Enterprise DB Projects */}
+            {/* Passion Projects — Self-Initiated Portfolio & Hobby Projects */}
             <section className="py-24 bg-black/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
@@ -470,9 +457,12 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                         className="text-center mb-16"
                     >
                         <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-widest leading-tight">
-                            The Works <br />
-                            <span className="text-primary">Closest To My Heart</span>
+                            Passion <br />
+                            <span className="text-primary">Projects</span>
                         </h2>
+                        <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+                            Self-initiated builds — exploring new stacks, solving fun problems, and keeping the craft sharp.
+                        </p>
                     </motion.div>
 
                     {(() => {
