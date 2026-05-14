@@ -422,7 +422,6 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                     </div>
 
                 </div>
-                </div>
             </section>
 
             {/* Enterprise Client Work Section */}
