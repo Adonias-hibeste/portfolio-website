@@ -88,10 +88,6 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
                     company = "Doulado";
                     position = "Lead Mobile App Developer";
                     description = "Engineered a professional practice management platform tailored for doulas. The application automates mission-critical workflows including client intake, automated scheduling, and complex billing/invoicing systems. It integrates secure telehealth video bridges, HIPAA-compliant clinical rich-text documentation, and real-time messaging to facilitate seamless provider-client coordination.";
-                } else if (company.toLowerCase().includes("safari")) {
-                    company = "Safari";
-                    position = "Lead Mobile App Developer";
-                    description = exp.description.replace(/HababBond/g, "Hababond").replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "").replace(/\(Personal Project\)/gi, "").trim().split('\n').map(l => l.trim()).filter(l => l.length > 0).join(" ");
                 } else if (company.toLowerCase().includes("freelance") || company.toLowerCase().includes("independent")) {
                     company = "Independent / Freelance";
                     description = "";
