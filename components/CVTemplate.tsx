@@ -150,9 +150,9 @@ interface CVData {
         degree: string;
         field: string;
         location?: string;
-        startDate: string;
+        startDate?: string;
         endDate?: string;
-        current: boolean;
+        current?: boolean;
         description?: string;
     }[];
 }
@@ -266,9 +266,13 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                                         <Text style={[styles.itemSubtitle, { fontSize: 9 }]}>{edu.degree} in {edu.field}</Text>
                                     </View>
                                     <View>
-                                        <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>
-                                            {new Date(edu.startDate).getFullYear()} – {edu.current ? "Present" : new Date(edu.endDate!).getFullYear()}
-                                        </Text>
+                                        {(edu.startDate || edu.endDate) && (
+                                            <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>
+                                                {edu.startDate ? new Date(edu.startDate).getFullYear() : ""}
+                                                {edu.startDate && (edu.endDate || edu.current) ? " – " : ""}
+                                                {edu.current ? "Present" : (edu.endDate ? new Date(edu.endDate).getFullYear() : "")}
+                                            </Text>
+                                        )}
                                     </View>
                                 </View>
                             </View>
