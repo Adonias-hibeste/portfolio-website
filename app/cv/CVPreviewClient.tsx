@@ -98,7 +98,7 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
                             description: p.description.split('\n')[0] + " Features include high-performance architecture, clean state management, and production-ready UI/UX standards."
                         }));
                 } else {
-                    description = exp.description.replace(/HababBond/g, "Hababond").replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "").replace(/\(Personal Project\)/gi, "").trim().split('\n').map(l => l.trim()).filter(l => l.length > 0).join(" ");
+                    description = exp.description.replace(/HababBond/g, "Hababond").replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "").replace(/\(Personal Project\)/gi, "").trim().split('\n').map((l: string) => l.trim()).filter((l: string) => l.length > 0).join(" ");
                 }
 
                 return {
