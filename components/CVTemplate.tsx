@@ -198,15 +198,13 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                 <Text style={[styles.separator, { color: "#999999", marginHorizontal: 8 }]}>•</Text>
             )}
         </View>
-    ));
-
-    return (
-        <Document>
-            <Page size="A4" style={styles.page}>
+    ));    return (
+        <Document title={`${data.name} - CV`}>
+            <Page size="A4" style={[styles.page, { paddingVertical: 25, paddingHorizontal: 35 }]}>
                 
                 {/* --- HEADER --- */}
-                <View style={styles.header}>
-                    <Text style={styles.headerName}>{data.name}</Text>
+                <View style={[styles.header, { marginBottom: 12 }]}>
+                    <Text style={[styles.headerName, { fontSize: 22 }]}>{data.name}</Text>
                     <View style={styles.headerContact}>
                         {renderedContact}
                     </View>
@@ -214,50 +212,38 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
 
                 {/* --- SUMMARY --- */}
                 {data.summary && (
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Professional Summary</Text>
-                        <Text style={styles.bodyText}>{data.summary}</Text>
-                    </View>
-                )}
-
-                {/* --- SKILLS --- */}
-                {data.skills && data.skills.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Skills</Text>
-                        <View style={styles.skillsContainer}>
-                            <Text style={styles.skillsText}>
-                                {data.skills.map(s => s.name).join(' • ')}
-                            </Text>
-                        </View>
+                    <View style={[styles.section, { marginBottom: 10 }]}>
+                        <Text style={[styles.sectionTitle, { fontSize: 11, marginBottom: 5 }]}>Professional Summary</Text>
+                        <Text style={[styles.bodyText, { fontSize: 9.5, textAlign: "justify" }]}>{data.summary}</Text>
                     </View>
                 )}
 
                 {/* --- EXPERIENCE --- */}
                 {data.experiences && data.experiences.length > 0 && (
                     <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Experience</Text>
+                        <Text style={[styles.sectionTitle, { fontSize: 11, marginBottom: 6 }]}>Professional Experience</Text>
                         {data.experiences.map((exp, index) => (
-                            <View key={index} style={styles.itemWrapper}>
+                            <View key={index} style={[styles.itemWrapper, { marginBottom: 8 }]}>
                                 <View style={styles.itemHeader}>
                                     <View style={styles.itemTitleBlock}>
-                                        <Text style={styles.itemTitle}>{exp.company}</Text>
-                                        <Text style={styles.itemSubtitle}>{exp.position}</Text>
+                                        <Text style={[styles.itemTitle, { fontSize: 11 }]}>{exp.company}</Text>
+                                        <Text style={[styles.itemSubtitle, { fontSize: 10 }]}>{exp.position}</Text>
                                     </View>
                                     <View>
-                                        {exp.location && <Text style={styles.itemDateLocation}>{exp.location}</Text>}
-                                        <Text style={styles.itemDateLocation}>
+                                        {exp.location && <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>{exp.location}</Text>}
+                                        <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>
                                             {formatMonthYear(exp.startDate)} – {exp.current ? "Present" : formatMonthYear(exp.endDate!)}
                                         </Text>
                                     </View>
                                 </View>
                                 <View>
-                                    <Text style={styles.paragraphText}>{exp.description}</Text>
+                                    <Text style={[styles.paragraphText, { fontSize: 9.5, lineHeight: 1.3 }]}>{exp.description}</Text>
                                     {exp.subItems && exp.subItems.length > 0 && (
-                                        <View style={{ marginTop: 6, paddingLeft: 10 }}>
+                                        <View style={{ marginTop: 4, paddingLeft: 8 }}>
                                             {exp.subItems.map((item, idx) => (
-                                                <View key={idx} style={{ marginBottom: 4 }}>
-                                                    <Text style={{ fontSize: 10, fontWeight: "bold", color: "#000000" }}>• {item.title}</Text>
-                                                    <Text style={[styles.paragraphText, { color: "#444444", fontSize: 9 }]}>{item.description}</Text>
+                                                <View key={idx} style={{ marginBottom: 3 }}>
+                                                    <Text style={{ fontSize: 9, fontWeight: "bold", color: "#000000" }}>• {item.title}</Text>
+                                                    <Text style={[styles.paragraphText, { color: "#444444", fontSize: 8.5, lineHeight: 1.2 }]}>{item.description}</Text>
                                                 </View>
                                             ))}
                                         </View>
@@ -268,23 +254,21 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                     </View>
                 )}
 
-
                 {/* --- EDUCATION --- */}
                 {data.educations && data.educations.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Education</Text>
+                    <View style={[styles.section, { marginTop: 4 }]}>
+                        <Text style={[styles.sectionTitle, { fontSize: 11, marginBottom: 5 }]}>Education</Text>
                         {data.educations.map((edu, index) => (
-                            <View key={index} style={styles.itemWrapper}>
+                            <View key={index} style={[styles.itemWrapper, { marginBottom: 4 }]}>
                                 <View style={styles.itemHeader}>
                                     <View style={styles.itemTitleBlock}>
-                                        <Text style={styles.itemTitle}>{edu.institution}</Text>
-                                        <Text style={styles.itemSubtitle}>{edu.degree} in {edu.field}</Text>
+                                        <Text style={[styles.itemTitle, { fontSize: 10 }]}>{edu.institution}</Text>
+                                        <Text style={[styles.itemSubtitle, { fontSize: 9 }]}>{edu.degree} in {edu.field}</Text>
                                     </View>
                                     <View>
-                                        <Text style={styles.itemDateLocation}>
+                                        <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>
                                             {new Date(edu.startDate).getFullYear()} – {edu.current ? "Present" : new Date(edu.endDate!).getFullYear()}
                                         </Text>
-                                        {edu.location && <Text style={styles.itemDateLocation}>{edu.location}</Text>}
                                     </View>
                                 </View>
                             </View>

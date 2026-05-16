@@ -68,59 +68,41 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         experiences: experiences
             .filter((exp: any) => {
                 const company = exp.company.toLowerCase();
-                // Remove Upwork and various startups as requested
                 return !company.includes("upwork") && !company.includes("various startup");
             })
             .map((exp: any) => {
                 let position = exp.position;
                 let company = exp.company.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
-                let description = exp.description
-                    .replace(/HababBond/g, "Hababond")
-                    .replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "")
-                    .replace(/\(Personal Project\)/gi, "")
-                    .trim();
-                
-                // Remove tech stack bullet points or lists from description
-                description = description.split('\n')
-                    .map(l => l.trim().replace(/^[-•]\s*/, ""))
-                    .filter(l => l.length > 0 && !l.toLowerCase().includes("tech stack") && !l.toLowerCase().includes("technologies"))
-                    .join(" ");
-
+                let description = "";
                 let subItems: { title: string; description: string }[] = [];
 
-                // Safari/Sefere overrides
-                if (company.toLowerCase().includes("safari") || company.toLowerCase().includes("sefere")) {
-                    position = "Lead Mobile App Developer";
-                    if (company.toLowerCase().includes("sefere")) {
-                        company = "Sefere";
-                        description = "Architected a multi-role community platform including a comprehensive web portal and a visual design studio for theme management.";
-                    } else {
-                        company = "Safari";
-                    }
-                }
-
-                if (company.toLowerCase().includes("hababond")) {
+                if (company.toLowerCase().includes("sefere")) {
+                    company = "Sefere";
+                    position = "Lead Full Stack Developer";
+                    description = "Architected and delivered the Sefere ecosystem, a multi-platform community networking solution. This involved leading the development of the Sefere Social mobile application for diaspora connection, a robust multi-role Web Portal for administration and community management, and the Sefere Theme Studio, a visual design engine for real-time UI/UX customization across the platform.";
+                } else if (company.toLowerCase().includes("hababond")) {
                     company = "Hababond";
                     position = "Lead Mobile Developer";
-                    description = "Lead developer for two flagship applications: a high-fidelity dating platform and a full-featured social media marketplace.";
-                }
-
-                if (company.toLowerCase().includes("freelance") || company.toLowerCase().includes("independent")) {
+                    description = "Spearheaded the development of the Hababond mobile ecosystem, delivering two high-impact applications. This included a premium dating platform with real-time matching and video connectivity, as well as a comprehensive social networking marketplace that integrates community engagement with seamless commerce and real-time communication features.";
+                } else if (company.toLowerCase().includes("doulado")) {
+                    company = "Doulado";
+                    position = "Lead Mobile App Developer";
+                    description = "Engineered a professional practice management platform tailored for doulas. The application automates mission-critical workflows including client intake, automated scheduling, and complex billing/invoicing systems. It integrates secure telehealth video bridges, HIPAA-compliant clinical rich-text documentation, and real-time messaging to facilitate seamless provider-client coordination.";
+                } else if (company.toLowerCase().includes("safari")) {
+                    company = "Safari";
+                    position = "Lead Mobile App Developer";
+                    description = exp.description.replace(/HababBond/g, "Hababond").replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "").replace(/\(Personal Project\)/gi, "").trim().split('\n').map(l => l.trim()).filter(l => l.length > 0).join(" ");
+                } else if (company.toLowerCase().includes("freelance") || company.toLowerCase().includes("independent")) {
                     company = "Independent / Freelance";
-                    description = ""; // Remove general paragraph
+                    description = "";
                     subItems = projects
-                        .filter((p: any) => {
-                            const title = p.title.toLowerCase();
-                            return requestedPassionProjectTitles.some(t => title.includes(t.toLowerCase()));
-                        })
+                        .filter((p: any) => requestedPassionProjectTitles.some(t => p.title.toLowerCase().includes(t.toLowerCase())))
                         .map((p: any) => ({
                             title: p.title.replace(/HababBond/g, "Hababond"),
-                            description: p.description.split('\n')
-                                .map(l => l.trim().replace(/^[-•]\s*/, ""))
-                                .filter(l => l.length > 0 && !l.toLowerCase().includes("tech stack") && !l.toLowerCase().includes("technologies"))
-                                .join(" ")
-                                .split('.')[0] + "." // Keep it concise
+                            description: p.description.split('\n')[0] + " Features include high-performance architecture, clean state management, and production-ready UI/UX standards."
                         }));
+                } else {
+                    description = exp.description.replace(/HababBond/g, "Hababond").replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "").replace(/\(Personal Project\)/gi, "").trim().split('\n').map(l => l.trim()).filter(l => l.length > 0).join(" ");
                 }
 
                 return {
