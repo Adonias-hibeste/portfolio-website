@@ -128,9 +128,16 @@ export default async function Home() {
     // Merge DB projects (Enterprise) with our Showcase projects
     projects = [...dbProjects, ...showcaseProjects];
 
-    skills = await prisma.skill.findMany({
+    const dbSkills = await prisma.skill.findMany({
       orderBy: { order: "asc" },
     });
+
+    skills = [
+      ...dbSkills,
+      { name: "Supabase", icon: "database", proficiency: 95 },
+      { name: "Cursor AI", icon: "code", proficiency: 98 },
+      { name: "Claude Code", icon: "terminal", proficiency: 96 }
+    ];
   } catch (e) {
     console.warn("DB connection failed in Home, using fallback projects.");
     projects = showcaseProjects;

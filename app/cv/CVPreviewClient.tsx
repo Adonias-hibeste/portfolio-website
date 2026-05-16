@@ -33,31 +33,73 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         setIsClient(true);
     }, []);
 
+    // Refine summary to include Google Play Store and AI tools
+    const refinedSummary = (profile?.cvSummary || profile?.bio || "")
+        .replace(/App Store/g, "App Store and Google Play Store")
+        .replace(/\.$/, "") + " specializing in AI-assisted development using Cursor and Claude Code.";
+
+    // Passion projects requested by the user
+    const requestedPassionProjectTitles = [
+        "Dating App", 
+        "Ecommerce App", 
+        "ShopEasy", 
+        "Meditrack Pro", 
+        "FinanceFlow", 
+        "Secure VPN", 
+        "Urban Taxi", 
+        "Express Delivery", 
+        "Football Club Manager"
+    ];
+
+    const enterpriseKeywords = ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite', 'safari'];
+    
     const cvData = {
-        name: profile?.name || "Your Name",
-        title: profile?.title || "Professional Title",
+        name: profile?.name || "Adonias Hibeste",
+        title: profile?.title || "Senior Mobile Developer",
         email: profile?.email || "email@example.com",
         phone: profile?.phone || "",
         location: profile?.location || "",
-        summary: profile?.cvSummary || profile?.bio || "",
+        summary: refinedSummary,
         website: profile?.website,
         github: profile?.github,
         linkedin: profile?.linkedin,
         telegram: profile?.telegram,
-        skills: skills || [],
-        projects: projects.map((p: any) => ({
-            ...p,
-            isEnterprise: p.isEnterprise || ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite'].some(kw => p.title.toLowerCase().includes(kw))
-        })) || [],
-        experiences: experiences.map((exp: any) => ({
-            position: exp.position,
-            company: exp.company,
-            location: exp.location || undefined,
-            startDate: new Date(exp.startDate).toISOString(),
-            endDate: exp.endDate ? new Date(exp.endDate).toISOString() : undefined,
-            current: exp.current,
-            description: exp.description,
-        })),
+        skills: [...(skills || []), { name: "Supabase" }],
+        projects: projects
+            .filter((p: any) => {
+                const title = p.title.toLowerCase();
+                return requestedPassionProjectTitles.some(t => title.includes(t.toLowerCase())) || 
+                       enterpriseKeywords.some(kw => title.includes(kw));
+            })
+            .map((p: any) => {
+                const title = p.title.replace(/HababBond/g, "Hababond");
+                const isEnt = enterpriseKeywords.some(kw => title.toLowerCase().includes(kw));
+                return {
+                    ...p,
+                    title: title,
+                    isEnterprise: isEnt
+                };
+            }) || [],
+        experiences: experiences.map((exp: any) => {
+            let position = exp.position;
+            let company = exp.company.replace(/HababBond/g, "Hababond");
+            
+            // Safari overrides
+            if (company.toLowerCase().includes("safari")) {
+                position = "Lead Mobile App Developer";
+                company = "Safari"; // Just "Safari"
+            }
+
+            return {
+                position: position,
+                company: company,
+                location: exp.location || undefined,
+                startDate: new Date(exp.startDate).toISOString(),
+                endDate: exp.endDate ? new Date(exp.endDate).toISOString() : undefined,
+                current: exp.current,
+                description: exp.description.replace(/HababBond/g, "Hababond"),
+            };
+        }),
         educations: educations.map((edu: any) => ({
             institution: edu.institution,
             degree: edu.degree,
