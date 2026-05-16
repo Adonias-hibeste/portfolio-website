@@ -86,7 +86,7 @@ export const CLIENT_PROJECTS: ProjectData[] = [
   },
   {
     id: "hababondlite",
-    title: "HababBondlite Dating App",
+    title: "Hababond Dating App",
     type: "Enterprise Client",
     category: "mobile",
     isEnterprise: true,
