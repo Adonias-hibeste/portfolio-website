@@ -55,7 +55,7 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
     
     const cvData = {
         name: profile?.name || "Adonias Hibeste",
-        title: profile?.title || "Senior Mobile Developer",
+        title: "Lead Mobile App Developer | Cross-Platform & Native Specialist",
         email: profile?.email || "email@example.com",
         phone: profile?.phone || "",
         location: profile?.location || "",
@@ -65,60 +65,52 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         linkedin: profile?.linkedin,
         telegram: profile?.telegram,
         skills: [...(skills || []), { name: "Supabase" }],
-        experiences: experiences
-            .filter((exp: any) => {
-                const company = exp.company.toLowerCase();
-                return !company.includes("upwork") && !company.includes("various startup");
-            })
-            .map((exp: any) => {
-                let position = exp.position;
-                let company = exp.company.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
-                let description = "";
-                let subItems: { title: string; description: string }[] = [];
-
-                if (company.toLowerCase().includes("sefere")) {
-                    company = "Sefere";
-                    position = "Lead Full Stack Developer";
-                    description = "Architected and delivered the Sefere ecosystem, a multi-platform community networking solution. This involved leading the development of the Sefere Social mobile application for diaspora connection, a robust multi-role Web Portal for administration and community management, and the Sefere Theme Studio, a visual design engine for real-time UI/UX customization across the platform.";
-                } else if (company.toLowerCase().includes("hababond")) {
-                    company = "Hababond";
-                    position = "Lead Mobile Developer";
-                    description = "Spearheaded the development of the Hababond mobile ecosystem, delivering two high-impact applications. This included a premium dating platform with real-time matching and video connectivity, as well as a comprehensive social networking marketplace that integrates community engagement with seamless commerce and real-time communication features.";
-                } else if (company.toLowerCase().includes("doulado")) {
-                    company = "Doulado";
-                    position = "Lead Mobile App Developer";
-                    description = "Engineered a professional practice management platform tailored for doulas. The application automates mission-critical workflows including client intake, automated scheduling, and complex billing/invoicing systems. It integrates secure telehealth video bridges, HIPAA-compliant clinical rich-text documentation, and real-time messaging to facilitate seamless provider-client coordination.";
-                } else if (company.toLowerCase().includes("freelance") || company.toLowerCase().includes("independent")) {
-                    company = "Independent / Freelance";
-                    description = "";
-                    subItems = projects
-                        .filter((p: any) => requestedPassionProjectTitles.some(t => p.title.toLowerCase().includes(t.toLowerCase())))
-                        .map((p: any) => ({
-                            title: p.title.replace(/HababBond/g, "Hababond"),
-                            description: p.description.split('\n')[0] + " Features include high-performance architecture, clean state management, and production-ready UI/UX standards."
-                        }));
-                } else {
-                    description = exp.description.replace(/HababBond/g, "Hababond").replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "").replace(/\(Personal Project\)/gi, "").trim().split('\n').map((l: string) => l.trim()).filter((l: string) => l.length > 0).join(" ");
-                }
-
-                return {
-                    position: position,
-                    company: company,
-                    location: exp.location || undefined,
-                    startDate: new Date(exp.startDate).toISOString(),
-                    endDate: exp.endDate ? new Date(exp.endDate).toISOString() : undefined,
-                    current: exp.current,
-                    description: description,
-                    subItems: subItems.length > 0 ? subItems : undefined
-                };
-            }),
+        experiences: [
+            {
+                company: "Doulado",
+                position: "Lead Mobile App Developer",
+                location: "USA, Wyoming (Remote)",
+                startDate: "2004-01-01T00:00:00Z",
+                current: true,
+                description: "• Engineered and scaled a comprehensive practice management ecosystem for doulas, managing the entire lifecycle of multiple mobile and web applications.\n• Orchestrated the delivery of 11+ feature modules including real-time telehealth video bridges, HIPAA-compliant clinical notes, and automated billing systems.\n• Led cross-functional teams to integrate secure SSE messaging and complex state management across Flutter, React Native, and native Swift environments.\n• Optimized application performance and delivery pipelines, ensuring high-fidelity user experiences for thousands of active providers."
+            },
+            {
+                company: "Hababond",
+                position: "Lead Mobile App Developer",
+                location: "Canada, Toronto (Remote)",
+                startDate: "2003-01-01T00:00:00Z",
+                endDate: "2004-12-31T23:59:59Z",
+                current: false,
+                description: "• Directed the development of high-impact social networking and dating platforms, delivering multiple production apps across iOS and Android.\n• Built and maintained a premium dating app featuring real-time WebRTC connectivity, swipe-to-match algorithms, and complex geofencing logic.\n• Specialized in building multi-stack solutions, utilizing Flutter and React Native to bridge community engagement with secure marketplace commerce.\n• Reduced crash rates by 25% through rigorous code reviews and implementation of robust feature-module architectures."
+            },
+            {
+                company: "Sefere",
+                position: "Lead Full Stack Developer",
+                location: "USA, Maryland",
+                startDate: "2002-01-01T00:00:00Z",
+                endDate: "2003-12-31T23:59:59Z",
+                current: false,
+                description: "• Architected the Sefere ecosystem from the ground up, including the Sefere Social mobile network, a multi-role Web Portal, and a visual UI Theme Studio.\n• Implemented real-time community discovery tools and Google ML Kit face verification across multiple diaspora-focused applications.\n• Developed a custom design system allowing real-time theme customization for hundreds of community portals.\n• Spearheaded the full-stack delivery using Next.js and Firebase, ensuring 99.9% uptime for critical community infrastructure."
+            },
+            {
+                company: "Independent / Freelance",
+                position: "Senior Mobile Developer",
+                location: "Remote",
+                startDate: "2000-01-01T00:00:00Z",
+                endDate: "2002-01-01T00:00:00Z",
+                current: false,
+                description: "Delivered custom mobile solutions for global clients focusing on e-commerce and logistics.",
+                subItems: [
+                    { title: "Ecommerce App", description: "Developed a high-performance retail platform with complex inventory management and secure checkout flows." },
+                    { title: "Delivery App", description: "Built a real-time logistics solution with live tracking, automated dispatching, and driver-side analytics." }
+                ]
+            }
+        ],
         educations: educations.map((edu: any) => ({
             institution: edu.institution,
             degree: edu.degree,
             field: edu.field,
             location: edu.location || undefined,
-            startDate: new Date(edu.startDate).toISOString(),
-            endDate: edu.endDate ? new Date(edu.endDate).toISOString() : undefined,
             current: edu.current,
             description: edu.description || undefined,
         })),
