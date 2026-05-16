@@ -33,26 +33,10 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         setIsClient(true);
     }, []);
 
-    // Refine summary to include Google Play Store and AI tools
+    // Refine summary to include Google Play Store but remove AI tools addition
     const refinedSummary = (profile?.cvSummary || profile?.bio || "")
-        .replace(/App Store/g, "App Store and Google Play Store")
-        .replace(/\.$/, "") + " specializing in AI-assisted development using Cursor, Claude Code, and Codex.";
+        .replace(/App Store/g, "App Store and Google Play Store");
 
-    // Passion projects requested by the user
-    const requestedPassionProjectTitles = [
-        "Dating App", 
-        "Ecommerce App", 
-        "ShopEasy", 
-        "Meditrack Pro", 
-        "FinanceFlow", 
-        "Secure VPN", 
-        "Urban Taxi", 
-        "Express Delivery", 
-        "Football Club Manager"
-    ];
-
-    const enterpriseKeywords = ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite', 'safari'];
-    
     const cvData = {
         name: profile?.name || "Adonias Hibeste",
         title: "Lead Mobile App Developer | Cross-Platform & Native Specialist",
@@ -67,28 +51,28 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         skills: [...(skills || []), { name: "Supabase" }],
         experiences: [
             {
-                company: "Doulado",
+                company: "Doulado LLC",
                 position: "Lead Mobile App Developer",
                 location: "USA, Wyoming (Remote)",
-                startDate: "2004-01-01T00:00:00Z",
+                startDate: "2024-01-01T00:00:00Z",
                 current: true,
                 description: "• Engineered and scaled a comprehensive practice management ecosystem for doulas, managing the entire lifecycle of multiple mobile and web applications.\n• Orchestrated the delivery of 11+ feature modules including real-time telehealth video bridges, HIPAA-compliant clinical notes, and automated billing systems.\n• Led cross-functional teams to integrate secure SSE messaging and complex state management across Flutter, React Native, and native Swift environments.\n• Optimized application performance and delivery pipelines, ensuring high-fidelity user experiences for thousands of active providers."
             },
             {
-                company: "Hababond",
+                company: "Hababond Inc",
                 position: "Lead Mobile App Developer",
                 location: "Canada, Toronto (Remote)",
-                startDate: "2003-01-01T00:00:00Z",
-                endDate: "2004-12-31T23:59:59Z",
+                startDate: "2023-01-01T00:00:00Z",
+                endDate: "2024-12-31T23:59:59Z",
                 current: false,
                 description: "• Directed the development of high-impact social networking and dating platforms, delivering multiple production apps across iOS and Android.\n• Built and maintained a premium dating app featuring real-time WebRTC connectivity, swipe-to-match algorithms, and complex geofencing logic.\n• Specialized in building multi-stack solutions, utilizing Flutter and React Native to bridge community engagement with secure marketplace commerce.\n• Reduced crash rates by 25% through rigorous code reviews and implementation of robust feature-module architectures."
             },
             {
-                company: "Sefere",
+                company: "Sefere PLC",
                 position: "Lead Full Stack Developer",
                 location: "USA, Maryland",
-                startDate: "2002-01-01T00:00:00Z",
-                endDate: "2003-12-31T23:59:59Z",
+                startDate: "2022-01-01T00:00:00Z",
+                endDate: "2023-12-31T23:59:59Z",
                 current: false,
                 description: "• Architected the Sefere ecosystem from the ground up, including the Sefere Social mobile network, a multi-role Web Portal, and a visual UI Theme Studio.\n• Implemented real-time community discovery tools and Google ML Kit face verification across multiple diaspora-focused applications.\n• Developed a custom design system allowing real-time theme customization for hundreds of community portals.\n• Spearheaded the full-stack delivery using Next.js and Firebase, ensuring 99.9% uptime for critical community infrastructure."
             },
@@ -96,8 +80,8 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
                 company: "Independent / Freelance",
                 position: "Senior Mobile Developer",
                 location: "Remote",
-                startDate: "2000-01-01T00:00:00Z",
-                endDate: "2002-01-01T00:00:00Z",
+                startDate: "2021-01-01T00:00:00Z",
+                endDate: "2022-01-01T00:00:00Z",
                 current: false,
                 description: "Delivered custom mobile solutions for global clients focusing on e-commerce and logistics.",
                 subItems: [
