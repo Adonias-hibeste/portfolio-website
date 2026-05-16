@@ -113,7 +113,13 @@ const styles = StyleSheet.create({
         color: "#222222",
     },
     itemWrapper: {
-        marginBottom: 12,
+        marginBottom: 10,
+    },
+    paragraphText: {
+        fontSize: 10,
+        lineHeight: 1.4,
+        color: "#222222",
+        textAlign: "justify",
     }
 });
 
@@ -256,15 +262,14 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                                     </View>
                                 </View>
                                 <View>
-                                    {exp.description.split('\n').map((line, i) => {
-                                        const cleanLine = line.trim().replace(/^[-•]\s*/, ""); // remove existing bullets if any
-                                        return cleanLine ? (
-                                            <View key={i} style={styles.bulletContainer}>
-                                                <Text style={styles.bulletPoint}>•</Text>
-                                                <Text style={styles.bulletText}>{cleanLine}</Text>
-                                            </View>
-                                        ) : null;
-                                    })}
+                                    <Text style={styles.paragraphText}>
+                                        {((text) => text.length > 200 ? text.substring(0, 197) + "..." : text)(
+                                            exp.description.split('\n')
+                                                .map(line => line.trim().replace(/^[-•]\s*/, ""))
+                                                .filter(Boolean)
+                                                .join(' ')
+                                        )}
+                                    </Text>
                                 </View>
                             </View>
                         ))}
@@ -286,22 +291,21 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                                             )}
                                         </Text>
                                         {project.technologies && project.technologies.length > 0 && (
-                                            <Text style={styles.itemSubtitle}>
-                                                Technologies: {Array.isArray(project.technologies) ? project.technologies.join(', ') : project.technologies}
+                                            <Text style={[styles.itemSubtitle, { fontSize: 9, marginTop: 1 }]}>
+                                                {Array.isArray(project.technologies) ? project.technologies.join(' | ') : project.technologies}
                                             </Text>
                                         )}
                                     </View>
                                 </View>
                                 <View>
-                                    {project.description.split('\n').map((line, i) => {
-                                        const cleanLine = line.trim().replace(/^[-•]\s*/, "");
-                                        return cleanLine ? (
-                                            <View key={i} style={styles.bulletContainer}>
-                                                <Text style={styles.bulletPoint}>•</Text>
-                                                <Text style={styles.bulletText}>{cleanLine}</Text>
-                                            </View>
-                                        ) : null;
-                                    })}
+                                    <Text style={styles.paragraphText}>
+                                        {((text) => text.length > 180 ? text.substring(0, 177) + "..." : text)(
+                                            project.description.split('\n')
+                                                .map(line => line.trim().replace(/^[-•]\s*/, ""))
+                                                .filter(Boolean)
+                                                .join(' ')
+                                        )}
+                                    </Text>
                                 </View>
                             </View>
                         ))}

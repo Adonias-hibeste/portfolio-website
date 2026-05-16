@@ -191,7 +191,7 @@ export const CLIENT_PROJECTS: ProjectData[] = [
 /* ─────────────────────────────────────────────
    Main Exported Component
    ───────────────────────────────────────────── */
-type Category = "all" | "mobile" | "web";
+type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift";
 
 interface ProjectShowcaseProps {
   projects?: ProjectData[];
@@ -205,12 +205,20 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
   const filtered =
     filter === "all"
       ? projects
+      : filter === "flutter"
+      ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("flutter")))
+      : filter === "react-native"
+      ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("react native")))
+      : filter === "swift"
+      ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("swift")))
       : projects.filter((p) => p.category === filter);
 
   const filters: { key: Category; label: string; icon: React.ReactNode }[] = [
-    { key: "all", label: "All", icon: <Layers className="w-4 h-4" /> },
-    { key: "mobile", label: "Mobile Apps", icon: <Smartphone className="w-4 h-4" /> },
-    { key: "web", label: "Web Platforms", icon: <Globe className="w-4 h-4" /> },
+    { key: "all", label: "All Projects", icon: <Layers className="w-4 h-4" /> },
+    { key: "flutter", label: "Flutter", icon: <Smartphone className="w-4 h-4 text-[#02569B]" /> },
+    { key: "react-native", label: "React Native", icon: <Smartphone className="w-4 h-4 text-[#61DAFB]" /> },
+    { key: "swift", label: "Swift / iOS", icon: <Smartphone className="w-4 h-4 text-[#F05138]" /> },
+    { key: "web", label: "Web", icon: <Globe className="w-4 h-4" /> },
   ];
 
   return (

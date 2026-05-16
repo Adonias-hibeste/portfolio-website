@@ -135,7 +135,17 @@ export default async function ProjectsPage() {
     
     const combinedProjects = [...dbProjects, ...showcaseProjects];
 
-    const filteredProjects: ProjectData[] = combinedProjects
+    // Deduplicate by title to prevent doubling
+    const uniqueProjectsMap = new Map();
+    combinedProjects.forEach(p => {
+        const title = p.title.toLowerCase().trim();
+        if (!uniqueProjectsMap.has(title)) {
+            uniqueProjectsMap.set(title, p);
+        }
+    });
+    const uniqueProjects = Array.from(uniqueProjectsMap.values());
+
+    const filteredProjects: ProjectData[] = uniqueProjects
         .filter((p: any) => {
             const titleLower = p.title.toLowerCase();
             return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
@@ -205,18 +215,82 @@ export default async function ProjectsPage() {
                     <ClientProjectShowcase />
                 </div>
 
-                {/* DB Projects Grid (Below) — Now with Case Studies */}
-                {filteredProjects.length > 0 && (
-                    <div>
-                        <h2 className="text-2xl font-bold text-white uppercase tracking-widest mb-2 text-center">
-                            Open Source & <span className="text-primary">Showcase</span>
-                        </h2>
-                        <p className="text-gray-500 text-sm text-center mb-10">
-                            Public projects and technical demonstrations — now featuring full case studies
-                        </p>
-                        <ClientProjectShowcase projects={filteredProjects} showFilters={false} />
-                    </div>
-                )}
+                {/* Grouped Projects by Stack */}
+                <div className="space-y-24">
+                    {/* Flutter Projects */}
+                    {filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('flutter'))).length > 0 && (
+                        <div>
+                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
+                                Flutter <span className="text-primary">Mastery</span>
+                            </h2>
+                            <p className="text-gray-500 text-sm text-center mb-10">
+                                High-performance cross-platform mobile applications
+                            </p>
+                            <ClientProjectShowcase 
+                                projects={filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('flutter')))} 
+                                showFilters={false} 
+                            />
+                        </div>
+                    )}
+
+                    {/* React Native Projects */}
+                    {filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('react native'))).length > 0 && (
+                        <div>
+                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
+                                React Native <span className="text-primary">Expertise</span>
+                            </h2>
+                            <p className="text-gray-500 text-sm text-center mb-10">
+                                Native-feel hybrid applications with modern React patterns
+                            </p>
+                            <ClientProjectShowcase 
+                                projects={filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('react native')))} 
+                                showFilters={false} 
+                            />
+                        </div>
+                    )}
+
+                    {/* Swift / SwiftUI Projects */}
+                    {filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('swift'))).length > 0 && (
+                        <div>
+                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
+                                Swift & <span className="text-primary">iOS</span>
+                            </h2>
+                            <p className="text-gray-500 text-sm text-center mb-10">
+                                Premium native iOS experiences with SwiftUI and Swift
+                            </p>
+                            <ClientProjectShowcase 
+                                projects={filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('swift')))} 
+                                showFilters={false} 
+                            />
+                        </div>
+                    )}
+
+                    {/* Other Projects (Web, etc.) */}
+                    {filteredProjects.filter(p => 
+                        !p.stack.some(s => {
+                            const low = s.toLowerCase();
+                            return low.includes('flutter') || low.includes('react native') || low.includes('swift');
+                        })
+                    ).length > 0 && (
+                        <div>
+                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
+                                Other <span className="text-primary">Projects</span>
+                            </h2>
+                            <p className="text-gray-500 text-sm text-center mb-10">
+                                Web platforms and technical demonstrations
+                            </p>
+                            <ClientProjectShowcase 
+                                projects={filteredProjects.filter(p => 
+                                    !p.stack.some(s => {
+                                        const low = s.toLowerCase();
+                                        return low.includes('flutter') || low.includes('react native') || low.includes('swift');
+                                    })
+                                )} 
+                                showFilters={false} 
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
