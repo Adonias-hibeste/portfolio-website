@@ -191,7 +191,7 @@ export const CLIENT_PROJECTS: ProjectData[] = [
 /* ─────────────────────────────────────────────
    Main Exported Component
    ───────────────────────────────────────────── */
-type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift";
+type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift" | "supabase";
 
 interface ProjectShowcaseProps {
   projects?: ProjectData[];

@@ -170,45 +170,40 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
         return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
     };
 
-    // Construct the contact line array safely, removing duplicates (like duplicate emails)
+    // Construct the contact line array safely
     const contactItems: React.ReactNode[] = [];
-    const seenContactStrings = new Set<string>();
     
     if (data.location) {
         contactItems.push(<Text key="loc">{data.location}</Text>);
-        seenContactStrings.add(data.location.toLowerCase());
     }
-    if (data.phone && !seenContactStrings.has(data.phone.toLowerCase())) {
+    if (data.phone) {
         contactItems.push(<Text key="phone">{data.phone}</Text>);
-        seenContactStrings.add(data.phone.toLowerCase());
     }
-    if (data.email && !seenContactStrings.has(data.email.toLowerCase())) {
+    if (data.email) {
         contactItems.push(
             <Link src={`mailto:${data.email}`} style={styles.contactLink} key="email">
                 {data.email}
             </Link>
         );
-        seenContactStrings.add(data.email.toLowerCase());
     }
-    // Exclude LinkedIn and GitHub specifically as requested by the user
-    // Only add website if it's not somehow duplicating the email
-    if (data.website && !seenContactStrings.has(data.website.toLowerCase())) {
+    
+    // Ensure Portfolio website is included and labeled professionally
+    if (data.website) {
         const cleanWeb = data.website.replace(/^https?:\/\//, '');
-        if (!seenContactStrings.has(cleanWeb.toLowerCase())) {
-            contactItems.push(
-                <Link src={data.website} style={styles.contactLink} key="web">
-                    {cleanWeb}
-                </Link>
-            );
-            seenContactStrings.add(cleanWeb.toLowerCase());
-        }
+        contactItems.push(
+            <Link src={data.website} style={styles.contactLink} key="web">
+                Portfolio: {cleanWeb}
+            </Link>
+        );
     }
 
-    // Render contact line with separators
+    // Render contact line with professional separators
     const renderedContact = contactItems.map((item, index) => (
-        <View style={{ flexDirection: "row" }} key={index}>
+        <View style={{ flexDirection: "row", alignItems: "center" }} key={index}>
             {item}
-            {index < contactItems.length - 1 && <Text style={styles.separator}> | </Text>}
+            {index < contactItems.length - 1 && (
+                <Text style={[styles.separator, { color: "#999999", marginHorizontal: 8 }]}>•</Text>
+            )}
         </View>
     ));
 
@@ -285,7 +280,8 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Projects</Text>
                         {data.projects.map((project, index) => {
-                            const techStr = Array.isArray(project.technologies) ? project.technologies.join(' | ') : project.technologies;
+                            const technologies = project.technologies || [];
+                            const techStr = Array.isArray(technologies) ? technologies.join(' | ') : technologies;
                             const cleanDesc = project.description.split('\n')
                                 .map(line => line.trim().replace(/^[-•]\s*/, ""))
                                 .filter(Boolean)
