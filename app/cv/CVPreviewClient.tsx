@@ -65,41 +65,75 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         linkedin: profile?.linkedin,
         telegram: profile?.telegram,
         skills: [...(skills || []), { name: "Supabase" }],
-        projects: projects
-            .filter((p: any) => {
-                const title = p.title.toLowerCase();
-                return requestedPassionProjectTitles.some(t => title.includes(t.toLowerCase())) || 
-                       enterpriseKeywords.some(kw => title.includes(kw));
+        experiences: experiences
+            .filter((exp: any) => {
+                const company = exp.company.toLowerCase();
+                // Remove Upwork and various startups as requested
+                return !company.includes("upwork") && !company.includes("various startup");
             })
-            .map((p: any) => {
-                let title = p.title.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
-                const isEnt = enterpriseKeywords.some(kw => title.toLowerCase().includes(kw));
-                return {
-                    ...p,
-                    title: title,
-                    isEnterprise: isEnt
-                };
-            }) || [],
-        experiences: experiences.map((exp: any) => {
-            let position = exp.position;
-            let company = exp.company.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
-            
-            // Safari/Sefere overrides
-            if (company.toLowerCase().includes("safari") || company.toLowerCase().includes("sefere")) {
-                position = "Lead Mobile App Developer";
-                company = company.toLowerCase().includes("safari") ? "Safari" : "Sefere";
-            }
+            .map((exp: any) => {
+                let position = exp.position;
+                let company = exp.company.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
+                let description = exp.description
+                    .replace(/HababBond/g, "Hababond")
+                    .replace(/AI-assisted development tools \(Cursor, Google DeepMind Antigravity\)/gi, "")
+                    .replace(/\(Personal Project\)/gi, "")
+                    .trim();
+                
+                // Remove tech stack bullet points or lists from description
+                description = description.split('\n')
+                    .map(l => l.trim().replace(/^[-•]\s*/, ""))
+                    .filter(l => l.length > 0 && !l.toLowerCase().includes("tech stack") && !l.toLowerCase().includes("technologies"))
+                    .join(" ");
 
-            return {
-                position: position,
-                company: company,
-                location: exp.location || undefined,
-                startDate: new Date(exp.startDate).toISOString(),
-                endDate: exp.endDate ? new Date(exp.endDate).toISOString() : undefined,
-                current: exp.current,
-                description: exp.description.replace(/HababBond/g, "Hababond"),
-            };
-        }),
+                let subItems: { title: string; description: string }[] = [];
+
+                // Safari/Sefere overrides
+                if (company.toLowerCase().includes("safari") || company.toLowerCase().includes("sefere")) {
+                    position = "Lead Mobile App Developer";
+                    if (company.toLowerCase().includes("sefere")) {
+                        company = "Sefere";
+                        description = "Architected a multi-role community platform including a comprehensive web portal and a visual design studio for theme management.";
+                    } else {
+                        company = "Safari";
+                    }
+                }
+
+                if (company.toLowerCase().includes("hababond")) {
+                    company = "Hababond";
+                    position = "Lead Mobile Developer";
+                    description = "Lead developer for two flagship applications: a high-fidelity dating platform and a full-featured social media marketplace.";
+                }
+
+                if (company.toLowerCase().includes("freelance") || company.toLowerCase().includes("independent")) {
+                    company = "Independent / Freelance";
+                    description = ""; // Remove general paragraph
+                    subItems = projects
+                        .filter((p: any) => {
+                            const title = p.title.toLowerCase();
+                            return requestedPassionProjectTitles.some(t => title.includes(t.toLowerCase()));
+                        })
+                        .map((p: any) => ({
+                            title: p.title.replace(/HababBond/g, "Hababond"),
+                            description: p.description.split('\n')
+                                .map(l => l.trim().replace(/^[-•]\s*/, ""))
+                                .filter(l => l.length > 0 && !l.toLowerCase().includes("tech stack") && !l.toLowerCase().includes("technologies"))
+                                .join(" ")
+                                .split('.')[0] + "." // Keep it concise
+                        }));
+                }
+
+                return {
+                    position: position,
+                    company: company,
+                    location: exp.location || undefined,
+                    startDate: new Date(exp.startDate).toISOString(),
+                    endDate: exp.endDate ? new Date(exp.endDate).toISOString() : undefined,
+                    current: exp.current,
+                    description: description,
+                    subItems: subItems.length > 0 ? subItems : undefined
+                };
+            }),
         educations: educations.map((edu: any) => ({
             institution: edu.institution,
             degree: edu.degree,

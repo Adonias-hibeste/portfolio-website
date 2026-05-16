@@ -135,14 +135,6 @@ interface CVData {
     linkedin?: string | null;
     telegram?: string | null;
     skills: { name: string }[];
-    projects: {
-        title: string;
-        description: string;
-        technologies: string[];
-        liveLink?: string;
-        githubLink?: string;
-        isEnterprise?: boolean;
-    }[];
     experiences: {
         position: string;
         company: string;
@@ -151,6 +143,7 @@ interface CVData {
         endDate?: string;
         current: boolean;
         description: string;
+        subItems?: { title: string; description: string }[];
     }[];
     educations: {
         institution: string;
@@ -243,82 +236,38 @@ export const CVTemplate = ({ data }: { data: CVData }) => {
                 {data.experiences && data.experiences.length > 0 && (
                     <View style={styles.section}>
                         <Text style={styles.sectionTitle}>Experience</Text>
-                        {data.experiences.map((exp, index) => {
-                            const cleanDesc = exp.description.split('\n')
-                                .map(line => line.trim().replace(/^[-•]\s*/, ""))
-                                .filter(Boolean)
-                                .join(' ');
-                            
-                            // Formulate concise enterprise-style paragraph
-                            const paragraph = `${exp.position} at ${exp.company}. ${cleanDesc}`;
-
-                            return (
-                                <View key={index} style={styles.itemWrapper}>
-                                    <View style={styles.itemHeader}>
-                                        <View style={styles.itemTitleBlock}>
-                                            <Text style={styles.itemTitle}>{exp.company}</Text>
-                                            <Text style={styles.itemSubtitle}>{exp.position}</Text>
-                                        </View>
-                                        <View>
-                                            {exp.location && <Text style={styles.itemDateLocation}>{exp.location}</Text>}
-                                            <Text style={styles.itemDateLocation}>
-                                                {formatMonthYear(exp.startDate)} – {exp.current ? "Present" : formatMonthYear(exp.endDate!)}
-                                            </Text>
-                                        </View>
+                        {data.experiences.map((exp, index) => (
+                            <View key={index} style={styles.itemWrapper}>
+                                <View style={styles.itemHeader}>
+                                    <View style={styles.itemTitleBlock}>
+                                        <Text style={styles.itemTitle}>{exp.company}</Text>
+                                        <Text style={styles.itemSubtitle}>{exp.position}</Text>
                                     </View>
                                     <View>
-                                        <Text style={styles.paragraphText}>{paragraph}</Text>
+                                        {exp.location && <Text style={styles.itemDateLocation}>{exp.location}</Text>}
+                                        <Text style={styles.itemDateLocation}>
+                                            {formatMonthYear(exp.startDate)} – {exp.current ? "Present" : formatMonthYear(exp.endDate!)}
+                                        </Text>
                                     </View>
                                 </View>
-                            );
-                        })}
+                                <View>
+                                    <Text style={styles.paragraphText}>{exp.description}</Text>
+                                    {exp.subItems && exp.subItems.length > 0 && (
+                                        <View style={{ marginTop: 6, paddingLeft: 10 }}>
+                                            {exp.subItems.map((item, idx) => (
+                                                <View key={idx} style={{ marginBottom: 4 }}>
+                                                    <Text style={{ fontSize: 10, fontWeight: "bold", color: "#000000" }}>• {item.title}</Text>
+                                                    <Text style={[styles.paragraphText, { color: "#444444", fontSize: 9 }]}>{item.description}</Text>
+                                                </View>
+                                            ))}
+                                        </View>
+                                    )}
+                                </View>
+                            </View>
+                        ))}
                     </View>
                 )}
 
-                {/* --- PROJECTS --- */}
-                {data.projects && data.projects.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={styles.sectionTitle}>Projects</Text>
-                        {data.projects.map((project, index) => {
-                            const technologies = project.technologies || [];
-                            const techStr = Array.isArray(technologies) ? technologies.join(' | ') : technologies;
-                            const cleanDesc = project.description.split('\n')
-                                .map(line => line.trim().replace(/^[-•]\s*/, ""))
-                                .filter(Boolean)
-                                .join(' ');
-
-                            let paragraph = "";
-                            if (project.isEnterprise) {
-                                // Short and concise for enterprise
-                                paragraph = `${project.title} is an enterprise-grade mobile application built for production clients using ${techStr}. ${cleanDesc}`;
-                            } else {
-                                // More detailed for personal/open source
-                                paragraph = `${project.title} is an advanced software solution demonstrating technical excellence in ${techStr}. ${cleanDesc} The project focuses on high-performance architecture, clean code standards, and seamless user experiences.`;
-                            }
-
-                            return (
-                                <View key={index} style={styles.itemWrapper}>
-                                    <View style={styles.itemHeader}>
-                                        <View style={styles.itemTitleBlock}>
-                                            <Text style={styles.itemTitle}>
-                                                {project.title}
-                                                {project.liveLink && (
-                                                    <Link src={project.liveLink} style={styles.contactLink}> (Live)</Link>
-                                                )}
-                                            </Text>
-                                            <Text style={[styles.itemSubtitle, { fontSize: 9, marginTop: 1 }]}>
-                                                {techStr}
-                                            </Text>
-                                        </View>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.paragraphText}>{paragraph}</Text>
-                                    </View>
-                                </View>
-                            );
-                        })}
-                    </View>
-                )}
 
                 {/* --- EDUCATION --- */}
                 {data.educations && data.educations.length > 0 && (
