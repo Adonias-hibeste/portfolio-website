@@ -191,7 +191,7 @@ export const CLIENT_PROJECTS: ProjectData[] = [
 /* ─────────────────────────────────────────────
    Main Exported Component
    ───────────────────────────────────────────── */
-type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift" | "supabase";
+type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift";
 
 interface ProjectShowcaseProps {
   projects?: ProjectData[];
@@ -211,8 +211,6 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
       ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("react native")))
       : filter === "swift"
       ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("swift")))
-      : filter === "supabase"
-      ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("supabase")))
       : projects.filter((p) => p.category === filter);
 
   const filters: { key: Category; label: string; icon: React.ReactNode }[] = [
@@ -221,7 +219,6 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
     { key: "react-native", label: "React Native", icon: <Smartphone className="w-4 h-4 text-[#61DAFB]" /> },
     { key: "swift", label: "Swift / iOS", icon: <Smartphone className="w-4 h-4 text-[#F05138]" /> },
     { key: "web", label: "Web", icon: <Globe className="w-4 h-4" /> },
-    { key: "supabase", label: "Supabase", icon: <Globe className="w-4 h-4 text-[#3ECF8E]" /> },
   ];
 
   return (

@@ -51,7 +51,7 @@ export function TechStackShowcase({ skills }: TechStackShowcaseProps) {
                                 </div>
 
                                 {/* Proficiency Bar (if provided) */}
-                                {skill.proficiency && (
+                                {skill.proficiency && !['supabase', 'cursor ai', 'claude code'].includes(skill.name.toLowerCase()) && (
                                     <div className="mt-3">
                                         <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
                                             <motion.div

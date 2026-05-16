@@ -36,7 +36,7 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
     // Refine summary to include Google Play Store and AI tools
     const refinedSummary = (profile?.cvSummary || profile?.bio || "")
         .replace(/App Store/g, "App Store and Google Play Store")
-        .replace(/\.$/, "") + " specializing in AI-assisted development using Cursor and Claude Code.";
+        .replace(/\.$/, "") + " specializing in AI-assisted development using Cursor, Claude Code, and Codex.";
 
     // Passion projects requested by the user
     const requestedPassionProjectTitles = [
@@ -72,7 +72,7 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
                        enterpriseKeywords.some(kw => title.includes(kw));
             })
             .map((p: any) => {
-                const title = p.title.replace(/HababBond/g, "Hababond");
+                let title = p.title.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
                 const isEnt = enterpriseKeywords.some(kw => title.toLowerCase().includes(kw));
                 return {
                     ...p,
@@ -82,12 +82,12 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
             }) || [],
         experiences: experiences.map((exp: any) => {
             let position = exp.position;
-            let company = exp.company.replace(/HababBond/g, "Hababond");
+            let company = exp.company.replace(/HababBond/g, "Hababond").replace(/\(Personal Project\)/gi, "").trim();
             
-            // Safari overrides
-            if (company.toLowerCase().includes("safari")) {
+            // Safari/Sefere overrides
+            if (company.toLowerCase().includes("safari") || company.toLowerCase().includes("sefere")) {
                 position = "Lead Mobile App Developer";
-                company = "Safari"; // Just "Safari"
+                company = company.toLowerCase().includes("safari") ? "Safari" : "Sefere";
             }
 
             return {
