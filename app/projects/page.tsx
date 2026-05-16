@@ -151,21 +151,6 @@ export default async function ProjectsPage() {
             return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
         })
         .map((p: any) => {
-            // Generate intelligent highlights (features) if missing
-            const features = [
-                `Built with ${p.technologies.slice(0, 3).join(', ')}`,
-                "Responsive and high-performance architecture",
-                "Clean code and modular design patterns"
-            ];
-
-            if (p.technologies.includes('Flutter') || p.technologies.includes('SwiftUI') || p.technologies.includes('Swift')) {
-                features.push("Cross-platform mobile delivery");
-                features.push("Smooth 60fps animations & UI");
-            } else if (p.technologies.includes('React') || p.technologies.includes('Next.js')) {
-                features.push("Modern React hooks and state management");
-                features.push("SEO optimized and fast loading");
-            }
-
             // Map screenshots to the format expected by the UI
             const screenshots = p.screenshots && p.screenshots.length > 0 
                 ? p.screenshots.map((src: string) => ({ src, label: "Screenshot" }))
@@ -183,7 +168,6 @@ export default async function ProjectsPage() {
                 tagline: p.description.split('.')[0] + '.',
                 desc: p.description.length < 50 ? `${p.description}. A high-performance solution built with professional standards and modern best practices.` : p.description,
                 stack: p.technologies,
-                features: features,
                 imageUrl: p.imageUrl,
                 screenshots: screenshots,
                 liveLink: p.liveLink,
@@ -191,6 +175,22 @@ export default async function ProjectsPage() {
                 isEnterprise: false
             };
         });
+
+    // Implement alternating sort: Flutter -> React Native -> Swift -> Repeat
+    const flutterProjects = filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('flutter')));
+    const rnProjects = filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('react native')));
+    const swiftProjects = filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('swift')));
+    const otherProjects = filteredProjects.filter(p => !flutterProjects.includes(p) && !rnProjects.includes(p) && !swiftProjects.includes(p));
+
+    const sortedProjects: ProjectData[] = [];
+    const maxLength = Math.max(flutterProjects.length, rnProjects.length, swiftProjects.length, otherProjects.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (flutterProjects[i]) sortedProjects.push(flutterProjects[i]);
+        if (rnProjects[i]) sortedProjects.push(rnProjects[i]);
+        if (swiftProjects[i]) sortedProjects.push(swiftProjects[i]);
+        if (otherProjects[i]) sortedProjects.push(otherProjects[i]);
+    }
 
     return (
         <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-background text-foreground">
@@ -215,81 +215,15 @@ export default async function ProjectsPage() {
                     <ClientProjectShowcase />
                 </div>
 
-                {/* Grouped Projects by Stack */}
-                <div className="space-y-24">
-                    {/* Flutter Projects */}
-                    {filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('flutter'))).length > 0 && (
-                        <div>
-                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
-                                Flutter <span className="text-primary">Mastery</span>
-                            </h2>
-                            <p className="text-gray-500 text-sm text-center mb-10">
-                                High-performance cross-platform mobile applications
-                            </p>
-                            <ClientProjectShowcase 
-                                projects={filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('flutter')))} 
-                                showFilters={false} 
-                            />
-                        </div>
-                    )}
-
-                    {/* React Native Projects */}
-                    {filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('react native'))).length > 0 && (
-                        <div>
-                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
-                                React Native <span className="text-primary">Expertise</span>
-                            </h2>
-                            <p className="text-gray-500 text-sm text-center mb-10">
-                                Native-feel hybrid applications with modern React patterns
-                            </p>
-                            <ClientProjectShowcase 
-                                projects={filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('react native')))} 
-                                showFilters={false} 
-                            />
-                        </div>
-                    )}
-
-                    {/* Swift / SwiftUI Projects */}
-                    {filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('swift'))).length > 0 && (
-                        <div>
-                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
-                                Swift & <span className="text-primary">iOS</span>
-                            </h2>
-                            <p className="text-gray-500 text-sm text-center mb-10">
-                                Premium native iOS experiences with SwiftUI and Swift
-                            </p>
-                            <ClientProjectShowcase 
-                                projects={filteredProjects.filter(p => p.stack.some(s => s.toLowerCase().includes('swift')))} 
-                                showFilters={false} 
-                            />
-                        </div>
-                    )}
-
-                    {/* Other Projects (Web, etc.) */}
-                    {filteredProjects.filter(p => 
-                        !p.stack.some(s => {
-                            const low = s.toLowerCase();
-                            return low.includes('flutter') || low.includes('react native') || low.includes('swift');
-                        })
-                    ).length > 0 && (
-                        <div>
-                            <h2 className="text-2xl font-bold text-white uppercase tracking-[4px] mb-2 text-center">
-                                Other <span className="text-primary">Projects</span>
-                            </h2>
-                            <p className="text-gray-500 text-sm text-center mb-10">
-                                Web platforms and technical demonstrations
-                            </p>
-                            <ClientProjectShowcase 
-                                projects={filteredProjects.filter(p => 
-                                    !p.stack.some(s => {
-                                        const low = s.toLowerCase();
-                                        return low.includes('flutter') || low.includes('react native') || low.includes('swift');
-                                    })
-                                )} 
-                                showFilters={false} 
-                            />
-                        </div>
-                    )}
+                {/* Alternating Showcase Grid */}
+                <div>
+                    <h2 className="text-2xl font-bold text-white uppercase tracking-widest mb-2 text-center">
+                        Open Source & <span className="text-primary">Showcase</span>
+                    </h2>
+                    <p className="text-gray-500 text-sm text-center mb-10">
+                        Public projects and technical demonstrations — organized by expertise (Flutter, React Native, Swift)
+                    </p>
+                    <ClientProjectShowcase projects={sortedProjects} showFilters={true} />
                 </div>
             </div>
         </div>

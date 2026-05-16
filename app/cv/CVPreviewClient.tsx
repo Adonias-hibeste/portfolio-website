@@ -45,7 +45,10 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
         linkedin: profile?.linkedin,
         telegram: profile?.telegram,
         skills: skills || [],
-        projects: projects || [],
+        projects: projects.map((p: any) => ({
+            ...p,
+            isEnterprise: p.isEnterprise || ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite'].some(kw => p.title.toLowerCase().includes(kw))
+        })) || [],
         experiences: experiences.map((exp: any) => ({
             position: exp.position,
             company: exp.company,
