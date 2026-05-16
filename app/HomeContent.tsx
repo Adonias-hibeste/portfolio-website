@@ -442,7 +442,7 @@ export default function HomeContent({ projects, skills, profile, experiences }: 
                         </p>
                     </motion.div>
 
-                    <ClientProjectShowcase />
+                    <ClientProjectShowcase showFilters={false} />
                 </div>
             </section>
 
