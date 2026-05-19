@@ -102,6 +102,7 @@ export const CLIENT_PROJECTS: ProjectData[] = [
     stack: ["Flutter", "Firebase", "BLoC 9", "WebRTC", "Google Maps", "ML Kit"],
     architecture: "Feature-module · BLoC + Provider hybrid",
     screenshots: [
+      { src: "/projects/hababondlite/home_discovery.jpg", label: "Home" },
       { src: "/projects/hababondlite/swipe_card.png", label: "Swipe" },
       { src: "/projects/hababondlite/matches.png", label: "Matches" },
       { src: "/projects/hababondlite/account.png", label: "Account" },
