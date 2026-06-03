@@ -128,6 +128,37 @@ export default async function ProjectsPage() {
             imageUrl: "/projects/finance.png",
             screenshots: ["/projects/finance.png", "/projects/finance_transactions.png"],
             order: 11
+        },
+        {
+            id: "velo-wallet",
+            title: "Velo — Multi-Currency Digital Wallet",
+            description: "A production-grade digital wallet and cryptocurrency simulator. Features biometric security locks, real-time balance history charts, dynamic exchange rates, instant peer-to-peer transfers, and a simulated trading engine. Built with React Native, Expo, Zustand state management, and custom animated UI components.",
+            technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Reanimated 3"],
+            repoLink: "https://github.com/Adonias-hibeste/velo-wallet",
+            imageUrl: "/projects/velo/velo_dashboard_dark.png",
+            screenshots: [
+                "/projects/velo/velo_lock.png",
+                "/projects/velo/velo_dashboard_dark.png",
+                "/projects/velo/velo_dashboard_light.png",
+                "/projects/velo/velo_send.png",
+                "/projects/velo/velo_crypto.png"
+            ],
+            order: 12
+        },
+        {
+            id: "gymflow",
+            title: "Gymflow — AI Workout Coach",
+            description: "A high-performance AI-powered personalized workout planner and fitness coach. Features real-time workout tracking, physiological sensor simulation, an interactive AI fitness coach chat, and visual historical progress charts. Built with React Native, Expo, Zustand state management, and custom vector UI elements.",
+            technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Reanimated 3", "Gemini API"],
+            repoLink: "https://github.com/Adonias-hibeste/gymflow",
+            imageUrl: "/projects/gymflow/dashboard.png",
+            screenshots: [
+                "/projects/gymflow/dashboard.png",
+                "/projects/gymflow/workout.png",
+                "/projects/gymflow/coach.png",
+                "/projects/gymflow/history.png"
+            ],
+            order: 13
         }
     ];
 
