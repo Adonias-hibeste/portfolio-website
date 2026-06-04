@@ -171,7 +171,15 @@ export default async function Home() {
     });
 
     // Merge DB projects (Enterprise) with our Showcase projects
-    projects = [...dbProjects, ...showcaseProjects];
+    const combinedProjects = [...dbProjects, ...showcaseProjects];
+    const uniqueProjectsMap = new Map();
+    combinedProjects.forEach(p => {
+      const title = p.title.toLowerCase().trim();
+      if (!uniqueProjectsMap.has(title)) {
+        uniqueProjectsMap.set(title, p);
+      }
+    });
+    projects = Array.from(uniqueProjectsMap.values());
 
     const dbSkills = await prisma.skill.findMany({
       orderBy: { order: "asc" },
