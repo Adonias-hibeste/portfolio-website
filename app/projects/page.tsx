@@ -159,6 +159,20 @@ export default async function ProjectsPage() {
                 "/projects/gymflow/history.png"
             ],
             order: 13
+        },
+        {
+            id: "acre",
+            title: "Acre - Real Estate Showcase",
+            description: "A premium React Native & Expo real estate marketplace application showcasing enterprise-grade property browsing, search, and discovery capabilities. Features immersive property galleries, interactive category filtering, and a professional Executive Slate & Sapphire design language.",
+            technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Lucide React Native"],
+            repoLink: "https://github.com/Adonias-hibeste/acre-realestate",
+            imageUrl: "/projects/acre/acre_discover.png",
+            screenshots: [
+                "/projects/acre/acre_discover.png",
+                "/projects/acre/acre_detail.png",
+                "/projects/acre/acre_saved.png"
+            ],
+            order: 14
         }
     ];
 
