@@ -182,14 +182,16 @@ export default async function Home() {
     {
       id: "slate",
       title: "Slate — AI Smart Notebook",
-      description: "A native Android smart notebook application built with Kotlin and Jetpack Compose. Designed with a premium midnight-carbon theme with neon gold-orange and cobalt accents. Features an interactive custom Canvas-drawn note mind map graph with drag-and-drop gesture physics, an automated speech-to-text dictation voice recorder with live transcribing streams and waveform visualizers, and a dual-tabbed AI assistant featuring custom summaries, task extractions, and an interactive simulated copilot chatbot playground.",
+      description: "A native Android smart notebook with AI copilot chat, interactive mind map graph, voice recorder with live waveform visualizer, and custom Canvas analytics charts. Built with Kotlin and Jetpack Compose.",
       technologies: ["Kotlin", "Jetpack Compose", "Material 3", "Coroutines", "Canvas API", "Android SDK"],
       repoLink: "https://github.com/Adonias-hibeste/slate-notebook",
-      imageUrl: "/projects/slate/slate_dashboard_dark.png",
+      imageUrl: "/projects/slate/slate_dashboard.png",
       screenshots: [
-        "/projects/slate/slate_dashboard_dark.png",
-        "/projects/slate/slate_editor_dark.png",
-        "/projects/slate/slate_fab_expanded.png"
+        "/projects/slate/slate_dashboard.png",
+        "/projects/slate/slate_editor.png",
+        "/projects/slate/slate_mindmap.png",
+        "/projects/slate/slate_voice.png",
+        "/projects/slate/slate_analytics.png"
       ],
       order: 16
     }
