@@ -162,6 +162,22 @@ export default async function Home() {
         "/projects/acre/acre_saved.png"
       ],
       order: 14
+    },
+    {
+      id: "bite",
+      title: "Bite — Multivendor Delivery Suite",
+      description: "An enterprise-grade multivendor food delivery platform showcase application. Features synchronized role-based modules for Client, Vendor, Driver, and Manager portals, integrated with simulated GPS telemetry, real-time status transitions, and robust BI dashboards. Built with a premium beU-inspired neon green and charcoal theme.",
+      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Lucide React Native"],
+      repoLink: "https://github.com/Adonias-hibeste/bite-delivery",
+      imageUrl: "/projects/bite/bite_client.png",
+      screenshots: [
+        "/projects/bite/bite_roles.png",
+        "/projects/bite/bite_client.png",
+        "/projects/bite/bite_vendor.png",
+        "/projects/bite/bite_driver.png",
+        "/projects/bite/bite_manager.png"
+      ],
+      order: 15
     }
   ];
 
