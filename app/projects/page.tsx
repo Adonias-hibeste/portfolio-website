@@ -189,6 +189,20 @@ export default async function ProjectsPage() {
                 "/projects/bite/bite_manager.png"
             ],
             order: 15
+        },
+        {
+            id: "slate",
+            title: "Slate — AI Smart Notebook",
+            description: "A native Android smart notebook application built with Kotlin and Jetpack Compose. Designed with a premium midnight-carbon theme with neon gold-orange and cobalt accents. Features an interactive custom Canvas-drawn note mind map graph with drag-and-drop gesture physics, an automated speech-to-text dictation voice recorder with live transcribing streams and waveform visualizers, and a dual-tabbed AI assistant featuring custom summaries, task extractions, and an interactive simulated copilot chatbot playground.",
+            technologies: ["Kotlin", "Jetpack Compose", "Material 3", "Coroutines", "Canvas API", "Android SDK"],
+            repoLink: "https://github.com/Adonias-hibeste/slate-notebook",
+            imageUrl: "/projects/slate/slate_dashboard_dark.png",
+            screenshots: [
+                "/projects/slate/slate_dashboard_dark.png",
+                "/projects/slate/slate_editor_dark.png",
+                "/projects/slate/slate_fab_expanded.png"
+            ],
+            order: 16
         }
     ];
 
