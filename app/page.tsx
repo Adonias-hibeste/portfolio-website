@@ -176,7 +176,8 @@ export default async function Home() {
       screenshots: [
         "/projects/acre/acre_discover.png",
         "/projects/acre/acre_detail.png",
-        "/projects/acre/acre_saved.png"
+        "/projects/acre/acre_saved.png",
+        "/projects/acre/acre_ai_evaluation.png"
       ],
       features: [
         "AI-Powered Valuation Engine: Generates dynamic real-time market value assessments, confidence intervals, and neighborhood qualitative indicators.",
