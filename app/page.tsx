@@ -121,8 +121,8 @@ export default async function Home() {
     {
       id: "velo-wallet",
       title: "Velo — Multi-Currency Digital Wallet",
-      description: "A production-grade digital wallet and cryptocurrency simulator. Features biometric security locks, real-time balance history charts, dynamic exchange rates, instant peer-to-peer transfers, and a simulated trading engine. Built with React Native, Expo, Zustand state management, and custom animated UI components.",
-      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Reanimated 3"],
+      description: "A production-grade digital wallet and cryptocurrency simulator enhanced with Gemini AI Spending Advisor analysis, real-time anomaly detection triggers, and natural language transactions search. Features biometric security locks, real-time balance history charts, dynamic exchange rates, and instant peer-to-peer transfers. Built with React Native, Expo, Zustand, and Google Gemini API.",
+      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Reanimated 3", "Gemini API"],
       repoLink: "https://github.com/Adonias-hibeste/velo-wallet",
       imageUrl: "/projects/velo/velo_dashboard_dark.png",
       screenshots: [
@@ -130,8 +130,18 @@ export default async function Home() {
         "/projects/velo/velo_dashboard_dark.png",
         "/projects/velo/velo_dashboard_light.png",
         "/projects/velo/velo_send.png",
-        "/projects/velo/velo_crypto.png"
+        "/projects/velo/velo_crypto.png",
+        "/projects/velo/velo_ai_advisor.png",
+        "/projects/velo/velo_ai_chat.png"
       ],
+      features: [
+        "AI Spending Advisor: Contextual financial insights, budget recommendations, and saving strategies driven by Gemini AI.",
+        "Real-Time Anomaly Detection: Proactive pattern scanning flags suspicious transactions and large transfers instantly.",
+        "Conversational Transactions Search: NLP search interface allowing conversational queries like 'how much did I spend on food this month?'.",
+        "Biometric Security: Premium local authentication gatekeeping wallet access.",
+        "Animated balance history charts and dynamic live currency conversion."
+      ],
+      architecture: "React Native (Expo) · Zustand State Management · Reanimated 3 · Clean Architecture",
       order: 12
     },
     {
@@ -147,13 +157,20 @@ export default async function Home() {
         "/projects/gymflow/coach.png",
         "/projects/gymflow/history.png"
       ],
+      features: [
+        "AI Fitness Coach: Live chat interface with a dedicated wellness trainer powered by Gemini API.",
+        "Dynamic Workout Planner: Tailored routines built specifically around individual goals and historical records.",
+        "Physiological Sensor Simulation: Active simulation of heart rate and calorie metrics.",
+        "Visual Progress Analytics: Historical tracking with polished vector progress charts."
+      ],
+      architecture: "React Native (Expo) · Zustand State Management · Reanimated 3 · Clean Architecture",
       order: 13
     },
     {
       id: "acre",
       title: "Acre - Real Estate Showcase",
-      description: "A premium React Native & Expo real estate marketplace application showcasing enterprise-grade property browsing, search, and discovery capabilities. Features immersive property galleries, interactive category filtering, and a professional Executive Slate & Sapphire design language.",
-      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Lucide React Native"],
+      description: "A premium React Native & Expo real estate marketplace application featuring an AI-powered Property Valuation engine, projected appreciation trajectories, and natural language property search query filters. Features immersive property galleries, interactive category filtering, and an Executive design system. Built with React Native, Expo, Zustand, and Google Gemini API.",
+      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Lucide React Native", "Gemini API"],
       repoLink: "https://github.com/Adonias-hibeste/acre-realestate",
       imageUrl: "/projects/acre/acre_discover.png",
       screenshots: [
@@ -161,6 +178,14 @@ export default async function Home() {
         "/projects/acre/acre_detail.png",
         "/projects/acre/acre_saved.png"
       ],
+      features: [
+        "AI-Powered Valuation Engine: Generates dynamic real-time market value assessments, confidence intervals, and neighborhood qualitative indicators.",
+        "5-Year Appreciation Trajectory: Computes and renders a visual projected compounding valuation graph directly inline.",
+        "NLP Smart Search Bar: Conversational search parsing (e.g. '3 bed penthouse in Miami under 5m') using regex and AI fallbacks.",
+        "Executive design system themed in Slate & Deep Sapphire with premium luxury cards.",
+        "Immersive property detail gallery with floating schedules and agent messaging sheets."
+      ],
+      architecture: "React Native (Expo) · Zustand State Store · React Navigation · Clean Architecture",
       order: 14
     },
     {
@@ -177,6 +202,13 @@ export default async function Home() {
         "/projects/bite/bite_driver.png",
         "/projects/bite/bite_manager.png"
       ],
+      features: [
+        "Synchronized Role Modules: Fully simulated flows for Client, Vendor, Driver, and Manager interfaces.",
+        "Real-Time Telemetry & Tracking: Simulated GPS delivery progress and driver assignment maps.",
+        "Live Status Transitions: Order states (Preparing, Dispatched, Delivered) synchronized in real-time.",
+        "Robust BI Dashboard: In-app managers' analytics interface showing performance charts."
+      ],
+      architecture: "React Native (Expo) · Zustand Store · Reanimated 3 · Clean Architecture",
       order: 15
     },
     {
@@ -193,6 +225,13 @@ export default async function Home() {
         "/projects/slate/slate_voice.png",
         "/projects/slate/slate_analytics.png"
       ],
+      features: [
+        "AI Copilot Chat: Contextual smart note assistant integrated directly inside the text editor.",
+        "Interactive Mind Map Graph: Renders an active node network linking notes visually using custom Canvas math.",
+        "Live Waveform Voice Recorder: Record audio notes with real-time waveform visualization.",
+        "Canvas Analytics: Rich custom charts detailing note-taking velocity and category distributions."
+      ],
+      architecture: "Native Android (Kotlin) · Jetpack Compose · Coroutines & Flow · Clean Architecture",
       order: 16
     }
   ];
@@ -202,15 +241,29 @@ export default async function Home() {
       orderBy: { order: "asc" },
     });
 
-    // Merge DB projects (Enterprise) with our Showcase projects
-    const combinedProjects = [...dbProjects, ...showcaseProjects];
+    // Merge DB projects (Enterprise) with our Showcase projects.
+    // Showcase projects are the source of truth for features, architecture, and screenshots.
     const uniqueProjectsMap = new Map();
-    combinedProjects.forEach(p => {
+    showcaseProjects.forEach(p => {
+      uniqueProjectsMap.set(p.title.toLowerCase().trim(), p);
+    });
+
+    dbProjects.forEach(p => {
       const title = p.title.toLowerCase().trim();
-      if (!uniqueProjectsMap.has(title)) {
+      if (uniqueProjectsMap.has(title)) {
+        const showcase = uniqueProjectsMap.get(title);
+        uniqueProjectsMap.set(title, {
+          ...showcase,
+          ...p,
+          features: showcase.features,
+          architecture: showcase.architecture,
+          screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : p.screenshots,
+        });
+      } else {
         uniqueProjectsMap.set(title, p);
       }
     });
+
     projects = Array.from(uniqueProjectsMap.values());
 
     const dbSkills = await prisma.skill.findMany({
