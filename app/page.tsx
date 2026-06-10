@@ -155,7 +155,7 @@ export default async function Home() {
         "/projects/gymflow/gymflow_dashboard.png",
         "/projects/gymflow/gymflow_active.png",
         "/projects/gymflow/gymflow_meals.png",
-        "/projects/gymflow/gymflow_progress.png",
+        "/projects/gymflow/gymflow_progress-portrait.png",
         "/projects/gymflow/gymflow_goals.png"
       ],
       features: [
