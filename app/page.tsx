@@ -192,25 +192,28 @@ export default async function Home() {
     },
     {
       id: "bite",
-      title: "Bite — Multivendor Delivery Suite",
-      description: "An enterprise-grade multivendor food delivery platform showcase application. Features synchronized role-based modules for Client, Vendor, Driver, and Manager portals, integrated with simulated GPS telemetry, real-time status transitions, and robust BI dashboards. Built with a premium beU-inspired neon green and charcoal theme.",
-      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Lucide React Native"],
+      title: "Bite Ecosystem",
+      description: "An AI-powered, comprehensive simulated food delivery platform featuring 4 interconnected applications (Consumer, Vendor, Driver, and Admin). It deeply integrates the Google Generative AI SDK (Gemini) for dynamic food discovery and real-time fleet route optimization, showcasing end-to-end expertise in mobile app architecture and intelligent system fallbacks.",
+      technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Leaflet", "Google Gemini AI"],
       repoLink: "https://github.com/Adonias-hibeste/bite-delivery",
-      imageUrl: "/projects/bite/bite_client.png",
+      imageUrl: "/projects/bite/bite_fleet_active_route.png",
       screenshots: [
-        "/projects/bite/bite_roles.png",
-        "/projects/bite/bite_client.png",
-        "/projects/bite/bite_vendor.png",
-        "/projects/bite/bite_driver.png",
-        "/projects/bite/bite_manager.png"
+        "/projects/bite/bite_eats_home.png",
+        "/projects/bite/bite_eats_ai_assistant.png",
+        "/projects/bite/bite_fleet_idle.png",
+        "/projects/bite/bite_fleet_active_route.png",
+        "/projects/bite/bite_merchant_dashboard.png",
+        "/projects/bite/bite_merchant_order_details.png",
+        "/projects/bite/bite_command_analytic.png"
       ],
       features: [
-        "Synchronized Role Modules: Fully simulated flows for Client, Vendor, Driver, and Manager interfaces.",
-        "Real-Time Telemetry & Tracking: Simulated GPS delivery progress and driver assignment maps.",
-        "Live Status Transitions: Order states (Preparing, Dispatched, Delivered) synchronized in real-time.",
-        "Robust BI Dashboard: In-app managers' analytics interface showing performance charts."
+        "AI Food Discovery: Analyzes user preferences to generate dynamic meal recommendations.",
+        "AI Route Optimization: Processes telemetry to calculate efficient delivery vectors.",
+        "Graceful Degradation: Intelligent fallbacks when AI quota limits are reached.",
+        "Zero-API-key OpenStreetMap interactive maps via Leaflet integration.",
+        "Synchronized Role Modules: Fully simulated flows for Client, Vendor, Driver, and Manager interfaces via Zustand."
       ],
-      architecture: "React Native (Expo) · Zustand Store · Reanimated 3 · Clean Architecture",
+      architecture: "React Native (Expo) · Zustand Store · Google Generative AI SDK · Leaflet Map",
       order: 15
     },
     {
