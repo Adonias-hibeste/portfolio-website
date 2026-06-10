@@ -161,12 +161,13 @@ export default async function ProjectsPage() {
             description: "A high-performance AI-powered personalized workout planner and fitness coach. Features real-time workout tracking, physiological sensor simulation, an interactive AI fitness coach chat, and visual historical progress charts. Built with React Native, Expo, Zustand state management, and custom vector UI elements.",
             technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Reanimated 3", "Gemini API"],
             repoLink: "https://github.com/Adonias-hibeste/gymflow",
-            imageUrl: "/projects/gymflow/dashboard.png",
+            imageUrl: "/projects/gymflow/gymflow_dashboard.png",
             screenshots: [
-                "/projects/gymflow/dashboard.png",
-                "/projects/gymflow/workout.png",
-                "/projects/gymflow/coach.png",
-                "/projects/gymflow/history.png"
+                "/projects/gymflow/gymflow_dashboard.png",
+                "/projects/gymflow/gymflow_active.png",
+                "/projects/gymflow/gymflow_meals.png",
+                "/projects/gymflow/gymflow_progress.png",
+                "/projects/gymflow/gymflow_goals.png"
             ],
             features: [
                 "AI Fitness Coach: Live chat interface with a dedicated wellness trainer powered by Gemini API.",
