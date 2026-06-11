@@ -230,8 +230,8 @@ export default async function ProjectsPage() {
         {
             id: "slate",
             title: "Slate — AI Smart Notebook",
-            description: "A native Android smart notebook with AI copilot chat, interactive mind map graph, voice recorder with live waveform visualizer, and custom Canvas analytics charts. Built with Kotlin and Jetpack Compose.",
-            technologies: ["Kotlin", "Jetpack Compose", "Material 3", "Coroutines", "Canvas API", "Android SDK"],
+            description: "A production-grade, native Android smart notebook engineered with Kotlin and Jetpack Compose. Slate features a Pro Max design aesthetic — true Obsidian/Black backgrounds, glassmorphism overlay cards, neon-glow neural graph connections, and a floating Dynamic Island toolbar in the editor. The AI Copilot is deeply integrated into the note-editing flow with a contextual chat panel, intelligent summarization, action item extraction, and multilingual translation powered by a live AI backend. The analytics engine renders custom Canvas charts with staggered-fade animations, and the Voice Recorder features a live, sine-wave waveform visualizer driven by Kotlin coroutines.",
+            technologies: ["Kotlin", "Jetpack Compose", "Material 3", "Coroutines & Flow", "Canvas API", "Android SDK", "MVVM"],
             repoLink: "https://github.com/Adonias-hibeste/slate-notebook",
             imageUrl: "/projects/slate/slate_dashboard.png",
             screenshots: [
@@ -242,12 +242,14 @@ export default async function ProjectsPage() {
                 "/projects/slate/slate_analytics.png"
             ],
             features: [
-                "AI Copilot Chat: Contextual smart note assistant integrated directly inside the text editor.",
-                "Interactive Mind Map Graph: Renders an active node network linking notes visually using custom Canvas math.",
-                "Live Waveform Voice Recorder: Record audio notes with real-time waveform visualization.",
-                "Canvas Analytics: Rich custom charts detailing note-taking velocity and category distributions."
+                "AI Copilot Chat: Contextual GPT-powered assistant embedded inside the editor — summarizes, extracts action items, and translates notes into any language on demand.",
+                "Pro Max Glassmorphism UI: True Obsidian/Black substrate with glass-blur overlay cards, neon amber accent glows, and a floating Dynamic Island toolbar.",
+                "Neural Mind Map Graph: A live drag-and-drop Canvas graph renders inter-note relationships — neon double-stroke connections visually link notes sharing the same tags.",
+                "Live Waveform Voice Recorder: Audio dictation with a real-time sine-wave animated waveform, streamed using Kotlin coroutines and rendered on a custom Canvas.",
+                "Custom Analytics Dashboard: Category donut charts and weekly productivity bar charts with glow-gradient fill and staggered entrance animations.",
+                "Edge-to-Edge Editor: Distraction-free transparent canvas with markdown tag pills, auto-tagging suggestions, and inline AI result insertion cards."
             ],
-            architecture: "Native Android (Kotlin) · Jetpack Compose · Coroutines & Flow · Clean Architecture",
+            architecture: "Native Android (Kotlin) · Jetpack Compose · MVVM + Coroutines & Flow · Clean Architecture · Custom Canvas Rendering",
             order: 16
         }
     ];
