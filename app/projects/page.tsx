@@ -229,7 +229,7 @@ export default async function ProjectsPage() {
         },
         {
             id: "slate",
-            title: "Slate — AI Smart Notebook",
+            title: "Slate",
             description: "A production-grade, native Android smart notebook engineered with Kotlin and Jetpack Compose. Slate features a Pro Max design aesthetic — true Obsidian/Black backgrounds, glassmorphism overlay cards, neon-glow neural graph connections, and a floating Dynamic Island toolbar in the editor. The AI Copilot is deeply integrated into the note-editing flow with a contextual chat panel, intelligent summarization, action item extraction, and multilingual translation powered by a live AI backend. The analytics engine renders custom Canvas charts with staggered-fade animations, and the Voice Recorder features a live, sine-wave waveform visualizer driven by Kotlin coroutines.",
             technologies: ["Kotlin", "Jetpack Compose", "Material 3", "Coroutines & Flow", "Canvas API", "Android SDK", "MVVM"],
             repoLink: "https://github.com/Adonias-hibeste/slate-notebook",
@@ -267,17 +267,12 @@ export default async function ProjectsPage() {
         const title = p.title.toLowerCase().trim();
         if (uniqueProjectsMap.has(title)) {
             const showcase = uniqueProjectsMap.get(title);
-            // Showcase is the source of truth — only pull in DB fields that showcase doesn't define
             uniqueProjectsMap.set(title, {
-                ...(p as any),           // DB base (order, liveLink, etc.)
-                ...showcase,    // Showcase ALWAYS wins for everything it has
-                // Explicitly enforce showcase overrides
-                description: showcase.description || p.description,
-                features: showcase.features && showcase.features.length > 0 ? showcase.features : [],
-                architecture: showcase.architecture || "",
-                imageUrl: showcase.imageUrl || p.imageUrl,
-                screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : (p.screenshots || []),
-                technologies: (showcase.technologies && showcase.technologies.length > 0) ? showcase.technologies : p.technologies,
+                ...showcase,
+                ...p,
+                features: showcase.features,
+                architecture: showcase.architecture,
+                screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : p.screenshots,
             });
         } else {
             uniqueProjectsMap.set(title, p);
