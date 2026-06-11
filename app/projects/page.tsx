@@ -267,12 +267,17 @@ export default async function ProjectsPage() {
         const title = p.title.toLowerCase().trim();
         if (uniqueProjectsMap.has(title)) {
             const showcase = uniqueProjectsMap.get(title);
+            // Showcase is the source of truth — only pull in DB fields that showcase doesn't define
             uniqueProjectsMap.set(title, {
-                ...showcase,
-                ...p,
-                features: showcase.features,
-                architecture: showcase.architecture,
-                screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : p.screenshots,
+                ...(p as any),           // DB base (order, liveLink, etc.)
+                ...showcase,    // Showcase ALWAYS wins for everything it has
+                // Explicitly enforce showcase overrides
+                description: showcase.description || p.description,
+                features: showcase.features && showcase.features.length > 0 ? showcase.features : [],
+                architecture: showcase.architecture || "",
+                imageUrl: showcase.imageUrl || p.imageUrl,
+                screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : (p.screenshots || []),
+                technologies: (showcase.technologies && showcase.technologies.length > 0) ? showcase.technologies : p.technologies,
             });
         } else {
             uniqueProjectsMap.set(title, p);
