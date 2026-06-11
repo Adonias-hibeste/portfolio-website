@@ -192,7 +192,7 @@ export default async function Home() {
     },
     {
       id: "bite",
-      title: "Bite Ecosystem",
+      title: "Bite",
       description: "An AI-powered, comprehensive simulated food delivery platform featuring 4 interconnected applications (Consumer, Vendor, Driver, and Admin). It deeply integrates the Google Generative AI SDK (Gemini) for dynamic food discovery and real-time fleet route optimization, showcasing end-to-end expertise in mobile app architecture and intelligent system fallbacks.",
       technologies: ["React Native", "Expo", "TypeScript", "Zustand", "Leaflet", "Google Gemini AI"],
       repoLink: "https://github.com/Adonias-hibeste/bite-delivery",
