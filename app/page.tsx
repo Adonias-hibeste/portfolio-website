@@ -9,6 +9,14 @@ export default async function Home() {
 
   const showcaseProjects = [
     {
+      id: "ambient",
+      title: "Ambient",
+      description: "A Pro-Max tier Smart Home IoT and Automation dashboard application built with native Android and Kotlin. Features advanced Glassmorphism UI, interactive compose canvas components, custom thermostats, micro-animations and energy monitoring layout.",
+      imageUrl: "/projects/ambient/ambient_dashboard_ui.png",
+      technologies: ["Kotlin", "Jetpack Compose", "Android", "Coroutines Flow"],
+      githubUrl: "https://github.com/Adonias-hibeste/ambient-smart-home"
+    },
+    {
       id: "candle",
       title: "Candle",
       description: "A highly sophisticated, Pro-Max tier cryptocurrency portfolio tracker and AI advisor application built with native Android and Kotlin. Designed to compete with top exchanges on visual aesthetics, featuring micro-animations, true glassmorphism, glowing borders, and a high-density data layout. Integrated AI Advisor provides personalized portfolio rebalancing suggestions.",

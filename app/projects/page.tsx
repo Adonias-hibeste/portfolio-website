@@ -19,6 +19,14 @@ export default async function ProjectsPage() {
     const dbProjects = await getProjects();
     
     const showcaseProjects = [
+      {
+        id: "ambient",
+        title: "Ambient",
+        description: "A Pro-Max tier Smart Home IoT and Automation dashboard application built with native Android and Kotlin. Features advanced Glassmorphism UI, interactive compose canvas components, custom thermostats, micro-animations and energy monitoring layout.",
+        imageUrl: "/projects/ambient/ambient_dashboard_ui.png",
+        technologies: ["Kotlin", "Jetpack Compose", "Android", "Coroutines Flow"],
+        githubUrl: "https://github.com/Adonias-hibeste/ambient-smart-home"
+      },
   {
     id: "candle",
     title: "Candle",
