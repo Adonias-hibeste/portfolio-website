@@ -19,6 +19,22 @@ export default async function ProjectsPage() {
     const dbProjects = await getProjects();
     
     const showcaseProjects = [
+  {
+    id: "candle",
+    title: "Candle",
+    description: "A highly sophisticated, Pro-Max tier cryptocurrency portfolio tracker and AI advisor application built with native Android and Kotlin. Designed to compete with top exchanges on visual aesthetics, featuring micro-animations, true glassmorphism, glowing borders, and a high-density data layout. Integrated AI Advisor provides personalized portfolio rebalancing suggestions.",
+    technologies: ["Kotlin", "Jetpack Compose", "Material 3", "Coroutines Flow", "Android SDK"],
+    repoLink: "https://github.com/Adonias-hibeste/candle-crypto",
+    imageUrl: "/projects/candle/dashboard.png",
+    screenshots: [
+      "/projects/candle/dashboard.png",
+      "/projects/candle/markets.png",
+      "/projects/candle/asset_detail.png",
+      "/projects/candle/ai_advisor.png",
+      "/projects/candle/profile.png"
+    ],
+    order: 0
+  },
         {
             id: "vpn-app",
             title: "Secure VPN",
