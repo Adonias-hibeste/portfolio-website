@@ -345,6 +345,26 @@ export default async function Home() {
       ],
       architecture: "Next.js (App Router) · Framer Motion · Tailwind CSS v4 · Zero-Trust UI Simulation",
       order: 20
+    },
+    {
+      id: "swell",
+      title: "Swell AI Headless E-Commerce",
+      description: "A highly sophisticated 'Pro Max' tier headless e-commerce workspace featuring a Dark Luxury aesthetic. Deeply integrates a Gemini-powered AI Personal Stylist that simulates real-time contextual reasoning, dynamically filtering and highlighting recommended products via fluid spatial layout transitions.",
+      technologies: ["Next.js 16", "Tailwind CSS v4", "Framer Motion", "TypeScript", "Generative AI"],
+      repoLink: "https://github.com/Adonias-hibeste/swell-commerce",
+      imageUrl: "/projects/swell/swell.png",
+      screenshots: [
+        "/projects/swell/swell.png"
+      ],
+      features: [
+        "Dark Luxury Aesthetic: Handcrafted, immersive dark theme using absolute deep blacks, frosted glass overlays, and muted amber accents.",
+        "AI Personal Shopper: Conversational assistant dynamically highlights relevant styles and greyscales unmatched products in real time.",
+        "Fluid Micro-Interactions: Physics-based 3D hover effects, staggered grid entrances, and fluid layout filtering powered by Framer Motion.",
+        "Simulated Generative Output: Contextual AI rationale streaming visualization.",
+        "Performant Headless Frontend: Architected for instantaneous transitions and minimal layout shifting."
+      ],
+      architecture: "Next.js (App Router) · Framer Motion · Tailwind CSS v4 · AI Integration",
+      order: 21
     }
   ];
 
