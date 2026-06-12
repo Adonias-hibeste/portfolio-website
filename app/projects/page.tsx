@@ -361,6 +361,26 @@ export default async function ProjectsPage() {
             ],
             architecture: "Native iOS (Swift) · ARKit · MVVM",
             order: 20
+        },
+        {
+            id: "briefing",
+            title: "Briefing AI Document Workspace",
+            description: "A highly interactive, Pro Max enterprise document intelligence platform built with Next.js and Tailwind CSS v4. Features automated ingestion simulations, smart semantic entity extraction, and a real-time generative AI streaming chat that contextually anchors to the active document.",
+            technologies: ["Next.js 16", "Tailwind CSS v4", "Framer Motion", "TypeScript"],
+            repoLink: "https://github.com/Adonias-hibeste/briefing-ai",
+            imageUrl: "/projects/briefing/briefing.png",
+            screenshots: [
+                "/projects/briefing/briefing.png"
+            ],
+            features: [
+                "Fluid Spatial Interface: Handcrafted, glassmorphic UI using Tailwind CSS v4 and Framer Motion layout transitions.",
+                "Automated Ingestion Simulation: A progressive file analysis simulation visualizing metadata extraction and semantic embeddings.",
+                "Smart Insight Extraction: Automatically isolates Executive Summaries, Key Entities, and Action Items.",
+                "Generative AI Streaming Chat: Embedded AI chatbot simulating token-by-token streaming responses.",
+                "Interactive Annotations: Highlighted document tokens act as triggers to query the AI directly."
+            ],
+            architecture: "Next.js (App Router) · Framer Motion · Tailwind CSS v4 · Zero-Trust UI Simulation",
+            order: 21
         }
     ];
 
