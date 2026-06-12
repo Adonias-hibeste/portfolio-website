@@ -326,6 +326,7 @@ export default async function Home() {
         uniqueProjectsMap.set(title, {
           ...showcase,
           ...p,
+          imageUrl: showcase.imageUrl || p.imageUrl,
           features: showcase.features,
           architecture: showcase.architecture,
           screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : p.screenshots,
@@ -335,7 +336,8 @@ export default async function Home() {
       }
     });
 
-    projects = Array.from(uniqueProjectsMap.values());
+    projects = Array.from(uniqueProjectsMap.values())
+      .filter((p: any) => p.imageUrl && p.imageUrl.trim() !== "");
 
     const dbSkills = await prisma.skill.findMany({
       orderBy: { order: "asc" },

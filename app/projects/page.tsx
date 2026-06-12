@@ -359,6 +359,7 @@ export default async function ProjectsPage() {
             uniqueProjectsMap.set(title, {
                 ...showcase,
                 ...p,
+                imageUrl: showcase.imageUrl || p.imageUrl,
                 features: showcase.features,
                 architecture: showcase.architecture,
                 screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : p.screenshots,
@@ -371,6 +372,7 @@ export default async function ProjectsPage() {
     const uniqueProjects = Array.from(uniqueProjectsMap.values());
 
     const filteredProjects: ProjectData[] = uniqueProjects
+        .filter((p: any) => p.imageUrl && p.imageUrl.trim() !== "")
         .filter((p: any) => {
             const titleLower = p.title.toLowerCase();
             return !ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
