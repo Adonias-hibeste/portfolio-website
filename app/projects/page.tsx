@@ -275,6 +275,31 @@ export default async function ProjectsPage() {
             ],
             architecture: "Native Android (Kotlin) · Jetpack Compose · MVVM + Coroutines & Flow · Clean Architecture · Custom Canvas Rendering",
             order: 16
+        },
+        {
+            id: "heartsync",
+            title: "HeartSync — Health & AI Coach",
+            description: "A highly sophisticated dual-platform application built with Kotlin and Jetpack Compose for Android and Wear OS. Features a Pro Max UI/UX design, integrated AI Health Coach for real-time biometric tracking, and advanced Canvas data visualizations.",
+            technologies: ["Android", "Wear OS", "Kotlin", "Jetpack Compose", "MVI", "Canvas API"],
+            repoLink: "https://github.com/Adonias-hibeste/heartsync-android",
+            imageUrl: "/projects/heartsync/heartsync_mobile_dashboard.png",
+            screenshots: [
+                "/projects/heartsync/heartsync_mobile_dashboard.png",
+                "/projects/heartsync/heartsync_mobile_aicoach.png",
+                "/projects/heartsync/heartsync_mobile_ecglab.png",
+                "/projects/heartsync/heartsync_wear_dashboard.png",
+                "/projects/heartsync/heartsync_wear_live_hr.png",
+                "/projects/heartsync/heartsync_wear_workout.png"
+            ],
+            features: [
+                "Dual-Platform Architecture: Unified business logic backing both Android mobile and Wear OS smartwatch apps.",
+                "AI Health Coach Integration: Built-in Gemini AI analysis summarizing real-time biometric metrics.",
+                "Complex Activity Rings: Multi-layered, liquid-smooth canvas animations.",
+                "Interactive Real-Time Heart Rate Chart: Live pulsing animations for tracking cardiovascular health.",
+                "Fluid Navigation: Seamless transitions using SwipeDismissableNavHost."
+            ],
+            architecture: "Native Android (Kotlin) · Jetpack Compose · MVI/MVVM StateFlow · Clean Architecture",
+            order: 17
         }
     ];
 
