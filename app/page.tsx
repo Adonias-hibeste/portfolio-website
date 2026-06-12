@@ -264,7 +264,46 @@ export default async function Home() {
       ],
       architecture: "Native Android (Kotlin) · Jetpack Compose · MVVM + Coroutines & Flow · Clean Architecture · Custom Canvas Rendering",
       order: 16
-
+    },
+    {
+      id: "breaker",
+      title: "Breaker AI",
+      description: "A premium AI-powered podcast application built with SwiftUI, AVFoundation, and SwiftData. Features a highly sophisticated glassmorphism UI overlay, an intelligent bespoke audio player, and real-time simulated AI transcript parsing. Completely driven by a strict MVVM architecture.",
+      technologies: ["SwiftUI", "SwiftData", "AVFoundation", "MVVM"],
+      repoLink: "https://github.com/Adonias-hibeste/breaker-showcase",
+      imageUrl: "/projects/breaker/breaker_discover.png",
+      screenshots: [
+        "/projects/breaker/breaker_discover.png",
+        "/projects/breaker/breaker_player.png",
+        "/projects/breaker/breaker_library.png"
+      ],
+      features: [
+        "Glassmorphism UI: Beautiful frosted glass effects using UltraThinMaterial.",
+        "Intelligent Audio Player: Custom playback scrubber and global state management.",
+        "AI Transcripts: Real-time simulated AI transcript parsing for episodes."
+      ],
+      architecture: "Native iOS (Swift) · SwiftData · MVVM",
+      order: 17
+    },
+    {
+      id: "cadence",
+      title: "Cadence Running Coach",
+      description: "An elite fitness tracking iOS app utilizing MapKit for route plotting and AI-driven post-run analysis. Cadence combines precise telemetry data with a futuristic UI, sophisticated custom SwiftUI pace split charts, and Apple Fitness-inspired activity rings.",
+      technologies: ["SwiftUI", "MapKit", "CoreLocation", "MVVM"],
+      repoLink: "https://github.com/Adonias-hibeste/cadence-showcase",
+      imageUrl: "/projects/cadence/cadence_dashboard.png",
+      screenshots: [
+        "/projects/cadence/cadence_dashboard.png",
+        "/projects/cadence/cadence_tracker.png",
+        "/projects/cadence/cadence_summary.png"
+      ],
+      features: [
+        "MapKit Route Rendering: Live tracking using MKPolyline over custom MapKit interfaces.",
+        "Custom Pace Charting: Sophisticated pace splits charts built completely from native SwiftUI primitives.",
+        "AI Coach Analysis: Contextual breakdowns of run performance (Heart Rate Zones) in a frosted UI."
+      ],
+      architecture: "Native iOS (Swift) · MapKit · CoreLocation · MVVM",
+      order: 18
     }
   ];
 
