@@ -304,6 +304,27 @@ export default async function Home() {
       ],
       architecture: "Native iOS (Swift) · MapKit · CoreLocation · MVVM",
       order: 18
+    },
+    {
+      id: "roomy",
+      title: "Roomy AR Interior Designer",
+      description: "A Pro-Max tier augmented reality interior design iOS application. Features simulated server-side AI-powered layout assessments, custom DragGesture physics for real-time furniture placement, and a premium Glassmorphism UI.",
+      technologies: ["SwiftUI", "Swift 5.0", "ARKit", "Xcodegen"],
+      repoLink: "https://github.com/Adonias-hibeste/roomy-ar-designer",
+      imageUrl: "/projects/roomy/roomy_discover.png",
+      screenshots: [
+        "/projects/roomy/roomy_discover.png",
+        "/projects/roomy/roomy_scan.png",
+        "/projects/roomy/roomy_ai_layout.png"
+      ],
+      features: [
+        "AI Room Assessment: Simulates complex server-side interior design algorithms on-device.",
+        "Interactive AR Placements: Fluid DragGesture physics to manually organize furniture layouts.",
+        "Trending Aesthetics Dashboard: Photorealistic layout discovery with Japandi and Mid-Century styles.",
+        "Premium Glassmorphism UI: Beautiful frosted glass overlay elements using `.ultraThinMaterial`."
+      ],
+      architecture: "Native iOS (Swift) · ARKit · MVVM",
+      order: 19
     }
   ];
 
