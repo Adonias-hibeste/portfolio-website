@@ -365,6 +365,27 @@ export default async function Home() {
       ],
       architecture: "Next.js (App Router) · Framer Motion · Tailwind CSS v4 · AI Integration",
       order: 21
+    },
+    {
+      id: "height",
+      title: "Height — Real-Time AI Kanban Board",
+      description: "A professional, real-time Kanban project management tool featuring a built-in AI Product Manager. It generates a full set of Kanban tickets from plain English feature goals—complete with story point estimates, assignees, and label tags streamed in real time. Built with Next.js App Router, TypeScript, and a Deep Space blue design system using Tailwind CSS v4. Features native HTML5 drag-and-drop, sprint velocity tracking, and an instant full-text search.",
+      technologies: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "React State", "HTML5 Drag & Drop API", "Framer Motion"],
+      repoLink: "https://github.com/Adonias-hibeste/height-kanban",
+      imageUrl: "/projects/height/height_board.png",
+      screenshots: [
+        "/projects/height/height_board.png",
+        "/projects/height/height_ai_modal.png"
+      ],
+      features: [
+        "AI Product Manager: Describe a feature goal in plain English and the AI generates a full set of Kanban tickets streamed in real time.",
+        "Drag-and-Drop Kanban: Native HTML5 drag-and-drop for smooth, performant card movement.",
+        "Sprint Velocity Tracking: Live progress bar tracking completed story points vs total sprint points. AI Insight widget predicts sprint completion date.",
+        "Real-Time Search: Instant full-text filtering across all columns by ticket title, label, or ID without debounce delay.",
+        "Deep Space Design System: Professional, tech-forward dark theme with glowing accents and frosted glass-morphism panels."
+      ],
+      architecture: "Next.js (App Router) · React State · Tailwind CSS v4 · HTML5 Drag & Drop",
+      order: 22
     }
   ];
 
