@@ -256,7 +256,7 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", damping: 20, stiffness: 200 }}
               onClick={() => setSelectedProject(project)}
-              className={`group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-br from-[#111118] to-[#0c0c10] border border-white/5 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] ${
+              className={`group flex flex-col h-full cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-br from-[#111118] to-[#0c0c10] border border-white/5 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] ${
                 project.category === "web" ? "lg:col-span-2" : ""
               }`}
             >
@@ -296,7 +296,7 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
               </div>
 
               {/* Info */}
-              <div className="p-6">
+              <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[10px] font-semibold uppercase tracking-[2px] text-primary/80">
                     {project.type}
@@ -313,7 +313,7 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
                 <p className="text-sm text-gray-400 leading-relaxed mb-4 line-clamp-2">
                   {project.tagline || project.desc}
                 </p>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5 mt-auto">
                   {project.stack.slice(0, 4).map((t) => (
                     <span
                       key={t}
