@@ -23,10 +23,10 @@ export function ScrollReveal({
     });
 
     const directions = {
-        up: { y: 60, x: 0 },
-        down: { y: -60, x: 0 },
-        left: { y: 0, x: 60 },
-        right: { y: 0, x: -60 },
+        up: { y: 30, x: 0 },
+        down: { y: -30, x: 0 },
+        left: { y: 0, x: 30 },
+        right: { y: 0, x: -30 },
     };
 
     const variants = {
@@ -39,9 +39,9 @@ export function ScrollReveal({
             x: 0,
             y: 0,
             transition: {
-                duration: 0.6,
+                duration: 0.8,
                 delay,
-                ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
             },
         },
     };

@@ -11,9 +11,9 @@ export function HeroSection() {
             {/* Grid Background */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
             
-            {/* Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-primary/20 rounded-full blur-[120px] -z-10 opacity-50" />
-
+            {/* Ambient Glows */}
+            <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-primary/10 rounded-full blur-[120px] -z-10 opacity-40" />
+            <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-secondary/10 rounded-full blur-[100px] -z-10 opacity-30" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
                     
@@ -29,7 +29,7 @@ export function HeroSection() {
                         </div>
                         
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-space font-bold tracking-tighter mb-6 text-white leading-[1.1]">
-                            Building <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Building</span> <br />
                             <span className="text-primary inline-block">
                                 <TypewriterText
                                     sequence={[
@@ -43,7 +43,7 @@ export function HeroSection() {
                                     className="text-primary"
                                 />
                             </span>
-                            <br /> Mobile Apps.
+                            <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Mobile Apps.</span>
                         </h1>
                         
                         <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-lg font-sans leading-relaxed">

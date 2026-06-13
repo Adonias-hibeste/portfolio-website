@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ClientProjectShowcase, CLIENT_PROJECTS, ProjectData } from "@/components/ClientProjectShowcase";
-import { ProjectModal } from "@/components/ProjectModal";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -14,8 +13,6 @@ interface ProjectsSectionProps {
 }
 
 export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
-    const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
-
     // Process passion projects
     const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite'];
     const BANNED_PROJECTS = ['secure vpn', 'vpn', 'fare', 'documind']; // From user request "remove the apps starting from secure vpn until fare which are put at last"
@@ -83,16 +80,6 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
                     <ClientProjectShowcase showFilters={true} projects={allProjects} />
                 </div>
             </div>
-            
-            {/* Modal for any project clicked */}
-            <AnimatePresence>
-                {selectedProject && (
-                    <ProjectModal
-                        project={selectedProject}
-                        onClose={() => setSelectedProject(null)}
-                    />
-                )}
-            </AnimatePresence>
         </section>
     );
 }

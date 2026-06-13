@@ -10,8 +10,7 @@ import {
   Smartphone,
   Globe,
 } from "lucide-react";
-import { ProjectModal } from "./ProjectModal";
-
+import { useRouter } from "next/navigation";
 /* ─────────────────────────────────────────────
    Project Data Interface
    ───────────────────────────────────────────── */
@@ -201,7 +200,7 @@ interface ProjectShowcaseProps {
 
 export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters = true }: ProjectShowcaseProps) {
   const [filter, setFilter] = useState<Category>("all");
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const router = useRouter();
 
   const filtered =
     filter === "all"
@@ -253,10 +252,10 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
               layout
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: "spring", damping: 20, stiffness: 200 }}
-              onClick={() => setSelectedProject(project)}
-              className="group flex flex-col h-full cursor-pointer rounded-[2rem] overflow-hidden bg-card border border-white/5 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => router.push(`/projects/${project.id}`)}
+              className="group flex flex-col h-full cursor-pointer rounded-[2rem] overflow-hidden bg-card border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,168,150,0.15)] relative"
             >
               {/* Preview */}
               <div className="relative overflow-hidden bg-background aspect-[4/3] w-full">
@@ -327,16 +326,6 @@ export function ClientProjectShowcase({ projects = CLIENT_PROJECTS, showFilters 
           ))}
         </AnimatePresence>
       </motion.div>
-
-      {/* Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 }
