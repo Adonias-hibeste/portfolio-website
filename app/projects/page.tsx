@@ -20,6 +20,20 @@ export default async function ProjectsPage() {
     
     const showcaseProjects = [
       {
+        id: "fare",
+        title: "Fare",
+        description: "A Pro-Max tier ride-hailing application featuring a real interactive OpenStreetMap integration via flutter_map, realistic simulated driver movement, dynamic pricing AI insights, and a highly polished dark-themed user profile with a digital wallet interface.",
+        technologies: ["Flutter 3.x", "Dart", "flutter_map", "flutter_animate", "latlong2"],
+        repoLink: "https://github.com/Adonias-hibeste/fare-app",
+        imageUrl: "/projects/fare/fare_discover.png",
+        screenshots: [
+          "/projects/fare/fare_discover.png",
+          "/projects/fare/fare_activity.png",
+          "/projects/fare/fare_profile.png"
+        ],
+        order: -2
+      },
+      {
         id: "ambient",
         title: "Ambient",
         description: "A Pro-Max tier Smart Home IoT and Automation dashboard application built with native Android and Kotlin. Features advanced Glassmorphism UI, interactive compose canvas components, custom thermostats, micro-animations and energy monitoring layout.",
