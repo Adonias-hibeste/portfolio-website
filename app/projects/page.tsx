@@ -20,6 +20,20 @@ export default async function ProjectsPage() {
     
     const showcaseProjects = [
       {
+        id: "circle",
+        title: "Circle",
+        description: "A Pro-Max tier private social network application built with Flutter. Designed for exclusive communities, it replaces noisy feeds with a focused, premium, visually breathtaking cinematic experience. Features an AI Vibe Check dashboard that summarizes community sentiment.",
+        technologies: ["Flutter 3.x", "Dart", "Riverpod", "flutter_animate", "glassmorphism"],
+        repoLink: "https://github.com/Adonias-hibeste/circle-network",
+        imageUrl: "/projects/circle/circle_discover.png",
+        screenshots: [
+          "/projects/circle/circle_feed.png",
+          "/projects/circle/circle_discover.png",
+          "/projects/circle/circle_profile.png"
+        ],
+        order: -3
+      },
+      {
         id: "fare",
         title: "Fare",
         description: "A Pro-Max tier ride-hailing application featuring a real interactive OpenStreetMap integration via flutter_map, realistic simulated driver movement, dynamic pricing AI insights, and a highly polished dark-themed user profile with a digital wallet interface.",
