@@ -386,6 +386,26 @@ export default async function Home() {
       ],
       architecture: "Next.js (App Router) · React State · Tailwind CSS v4 · HTML5 Drag & Drop",
       order: 22
+    },
+    {
+      id: "planbook",
+      title: "Planbook — AI Educational Planner",
+      description: "A Pro Max Flutter MVP featuring an intelligent daily schedule timeline with ambient glows, glassmorphism bottom nav, and an AI Smart Shift Assistant. Automatically detects workload conflicts and proposes optimal study schedule reallocation with staggered micro-animations.",
+      technologies: ["Flutter 3.x", "Dart", "flutter_animate", "Google Fonts", "Implicit Animations"],
+      repoLink: "https://github.com/Adonias-hibeste/planbook",
+      imageUrl: "/projects/planbook/planbook_dashboard_dark.png",
+      screenshots: [
+        "/projects/planbook/planbook_dashboard_dark.png",
+        "/projects/planbook/planbook_feature.png"
+      ],
+      features: [
+        "AI Smart Shift: Detects upcoming exam load and proposes optimal schedule swaps to maximize retention.",
+        "Ambient Glow Dashboard: Radial gradient ambient lighting behind a staggered timeline with glassmorphism cards.",
+        "Custom Animated Bottom Nav: Expanding label animations on selection with blur-frosted glass shell.",
+        "Workload Conflict Detection: Heuristic-driven engine flags overloaded study blocks in real time."
+      ],
+      architecture: "Flutter 3.x · Dart · flutter_animate · GlassContainer BackdropFilter · Clean Architecture",
+      order: 23
     }
   ];
 
