@@ -100,13 +100,17 @@ export default async function ProjectsPage() {
     order: 0
   },
         {
-            id: "vpn-app",
-            title: "Secure VPN",
-            description: "A premium, high-performance VPN application featuring a minimalist dark-theme UI, one-tap secure connectivity, and real-time speed monitoring. Built with Flutter and Riverpod.",
-            technologies: ["Flutter", "Riverpod", "Lucide Icons", "Secure VPN"],
-            repoLink: "https://github.com/Adonias-hibeste/Vpn-app",
-            imageUrl: "/projects/vpn.png",
-            screenshots: ["/projects/vpn.png", "/projects/vpn_nodes.png", "/projects/vpn_stats.png"],
+            id: "tunnel",
+            title: "Tunnel",
+            description: "A Pro-Max tier, high-performance VPN application featuring a deep minimalist dark-theme UI, one-tap secure connectivity with a glowing pulse animation, and real-time speed monitoring. Built with Flutter and flutter_animate.",
+            technologies: ["Flutter 3.x", "Dart", "flutter_animate", "lucide_icons"],
+            repoLink: "https://github.com/Adonias-hibeste/tunnel-vpn",
+            imageUrl: "/projects/tunnel/tunnel_home.png",
+            screenshots: [
+              "/projects/tunnel/tunnel_home.png",
+              "/projects/tunnel/tunnel_connected.png",
+              "/projects/tunnel/tunnel_servers.png"
+            ],
             order: 1
         },
         {
