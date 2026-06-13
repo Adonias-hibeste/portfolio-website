@@ -174,13 +174,13 @@ export default async function ProjectsPage() {
             order: 7
         },
         {
-            id: "meditrack-pro",
-            title: "Meditrack Pro",
-            description: "AI-driven healthcare companion for vitals tracking and symptom analysis. Built with Flutter and BLoC for high-performance medical data management.",
-            technologies: ["Flutter", "BLoC", "Firebase", "HealthKit"],
-            repoLink: "https://github.com/Adonias-hibeste/flutter-meditrack-pro",
-            imageUrl: "/projects/meditrack.png",
-            screenshots: ["/projects/meditrack.png", "/projects/meditrack_chat.png"],
+            id: "vitals",
+            title: "Vitals Pro",
+            description: "A Pro-Max tier medical telemetry and AI copilot application built with Flutter. Features a live ECG Canvas painter, glassmorphism UI, advanced fl_chart recovery tracking, and a secure Nexi Medical AI chat interface.",
+            technologies: ["Flutter 3.x", "Dart", "flutter_animate", "fl_chart", "Glassmorphism"],
+            repoLink: "https://github.com/Adonias-hibeste/vitals-pro-max",
+            imageUrl: "/projects/vitals/vitals_dashboard.png",
+            screenshots: ["/projects/vitals/vitals_dashboard.png", "/projects/vitals/vitals_chat.png", "/projects/vitals/vitals_records.png"],
             order: 8
         },
         {
