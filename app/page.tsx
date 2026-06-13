@@ -39,16 +39,6 @@ export default async function Home() {
       order: -3
     },
     {
-      id: "fare",
-      title: "Fare",
-      description: "A Pro-Max tier ride-hailing application featuring a real interactive OpenStreetMap integration via flutter_map, realistic simulated driver movement, dynamic pricing AI insights, and a highly polished dark-themed user profile with a digital wallet interface.",
-      technologies: ["Flutter 3.x","Dart","flutter_map","flutter_animate","latlong2"],
-      repoLink: "https://github.com/Adonias-hibeste/fare-app",
-      imageUrl: "/projects/fare/fare_discover.png",
-      screenshots: ["/projects/fare/fare_discover.png","/projects/fare/fare_activity.png","/projects/fare/fare_profile.png"],
-      order: -2
-    },
-    {
       id: "ambient",
       title: "Ambient",
       description: "A Pro-Max tier Smart Home IoT and Automation dashboard application built with native Android and Kotlin. Features advanced Glassmorphism UI, interactive compose canvas components, custom thermostats, micro-animations and energy monitoring layout.",
@@ -65,36 +55,6 @@ export default async function Home() {
       imageUrl: "/projects/candle/dashboard.png",
       screenshots: ["/projects/candle/dashboard.png","/projects/candle/markets.png","/projects/candle/asset_detail.png","/projects/candle/ai_advisor.png","/projects/candle/profile.png"],
       order: 0
-    },
-    {
-      id: "tunnel",
-      title: "Tunnel",
-      description: "A Pro-Max tier, high-performance VPN application featuring a deep minimalist dark-theme UI, one-tap secure connectivity with a glowing pulse animation, and real-time speed monitoring. Built with Flutter and flutter_animate.",
-      technologies: ["Flutter 3.x","Dart","flutter_animate","lucide_icons"],
-      repoLink: "https://github.com/Adonias-hibeste/tunnel-vpn",
-      imageUrl: "/projects/tunnel/tunnel_home.png",
-      screenshots: ["/projects/tunnel/tunnel_home.png","/projects/tunnel/tunnel_connected.png","/projects/tunnel/tunnel_servers.png"],
-      order: 1
-    },
-    {
-      id: "vitals",
-      title: "Vitals Pro",
-      description: "A Pro-Max tier medical telemetry and AI copilot application built with Flutter. Features a live ECG Canvas painter, glassmorphism UI, advanced fl_chart recovery tracking, and a secure Nexi Medical AI chat interface.",
-      technologies: ["Flutter 3.x","Dart","flutter_animate","fl_chart","Glassmorphism"],
-      repoLink: "https://github.com/Adonias-hibeste/vitals-pro-max",
-      imageUrl: "/projects/vitals/vitals_dashboard.png",
-      screenshots: ["/projects/vitals/vitals_dashboard.png","/projects/vitals/vitals_chat.png","/projects/vitals/vitals_records.png"],
-      order: 8
-    },
-    {
-      id: "pitch-studio",
-      title: "Pitch Studio",
-      description: "A premium AI-powered pitch deck builder for founders and PMs. Features a Figma-inspired slide editor with full-width canvas, animated node graphs, custom sparkline analytics, and an AI Draft generator with an animated glowing orb UI.",
-      technologies: ["Flutter 3.x","Dart","flutter_animate","google_fonts","Custom Painter"],
-      repoLink: "https://github.com/Adonias-hibeste/pitch-studio",
-      imageUrl: "/projects/pitch/pitch_dashboard.png",
-      screenshots: ["/projects/pitch/pitch_dashboard.png","/projects/pitch/pitch_editor.png","/projects/pitch/pitch_ai.png"],
-      order: 9
     },
     {
       id: "velo-wallet",
@@ -239,18 +199,6 @@ export default async function Home() {
       features: ["AI Product Manager: Describe a feature goal in plain English and the AI generates a full set of Kanban tickets streamed in real time.","Drag-and-Drop Kanban: Native HTML5 drag-and-drop for smooth, performant card movement.","Sprint Velocity Tracking: Live progress bar tracking completed story points vs total sprint points. AI Insight widget predicts sprint completion date.","Real-Time Search: Instant full-text filtering across all columns by ticket title, label, or ID without debounce delay.","Deep Space Design System: Professional, tech-forward dark theme with glowing accents and frosted glass-morphism panels."],
       architecture: "Next.js (App Router) · React State · Tailwind CSS v4 · HTML5 Drag & Drop",
       order: 23
-    },
-    {
-      id: "planbook",
-      title: "Planbook — AI Educational Planner",
-      description: "A Pro Max Flutter MVP featuring an intelligent daily schedule timeline with ambient glows, glassmorphism bottom nav, and an AI Smart Shift Assistant. Automatically detects workload conflicts and proposes optimal study schedule reallocation with staggered micro-animations.",
-      technologies: ["Flutter 3.x","Dart","flutter_animate","Google Fonts","Implicit Animations"],
-      repoLink: "https://github.com/Adonias-hibeste/planbook",
-      imageUrl: "/projects/planbook/planbook_dashboard_dark.png",
-      screenshots: ["/projects/planbook/planbook_dashboard_dark.png","/projects/planbook/planbook_feature.png"],
-      features: ["AI Smart Shift: Detects upcoming exam load and proposes optimal schedule swaps to maximize retention.","Ambient Glow Dashboard: Radial gradient ambient lighting behind a staggered timeline with glassmorphism cards.","Custom Animated Bottom Nav: Expanding label animations on selection with blur-frosted glass shell.","Workload Conflict Detection: Heuristic-driven engine flags overloaded study blocks in real time."],
-      architecture: "Flutter 3.x · Dart · flutter_animate · GlassContainer BackdropFilter · Clean Architecture",
-      order: 24
     }
   ];
 
