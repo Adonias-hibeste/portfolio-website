@@ -123,7 +123,7 @@ export function ProjectModal({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[80] bg-black/85 backdrop-blur-lg flex items-center justify-center p-4"
+        className="fixed inset-0 z-[80] bg-background/90 backdrop-blur-lg flex items-center justify-center p-4"
         onClick={onClose}
       >
         <motion.div
@@ -132,8 +132,7 @@ export function ProjectModal({
           exit={{ opacity: 0, y: 50, scale: 0.96 }}
           transition={{ type: "spring", damping: 28, stiffness: 300 }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl"
-          style={{ background: "linear-gradient(145deg, #0f0f14 0%, #0a0a0d 100%)", border: "1px solid rgba(255,255,255,0.08)" }}
+          className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl bg-card border border-white/5"
         >
           {/* Close */}
           <button
@@ -146,13 +145,13 @@ export function ProjectModal({
           {/* ── Hero Screenshot Strip ── */}
           {screenshots.length > 0 && (
             <div
-              className={`relative overflow-hidden rounded-t-3xl ${isMobile ? "bg-[#080810]" : "bg-[#0a0a12]"}`}
+              className={`relative overflow-hidden rounded-t-3xl bg-background border-b border-white/5`}
               style={{ height: isMobile ? "340px" : "320px" }}
             >
               {/* Subtle gradient mesh background */}
               <div className="absolute inset-0 opacity-30"
                 style={{
-                  background: "radial-gradient(ellipse at 20% 50%, rgba(204,255,0,0.06) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(100,180,255,0.04) 0%, transparent 60%)"
+                  background: "radial-gradient(ellipse at 20% 50%, var(--primary) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, var(--secondary) 0%, transparent 60%)"
                 }}
               />
 
@@ -163,7 +162,7 @@ export function ProjectModal({
                     <div
                       key={i}
                       onClick={() => { setActiveIndex(i); setLightboxOpen(true); }}
-                      className={`relative cursor-zoom-in flex-shrink-0 rounded-[20px] overflow-hidden border border-white/10 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-primary/40 ${i === 1 ? "scale-105 border-primary/30 shadow-[0_0_30px_rgba(204,255,0,0.12)]" : "scale-95 opacity-80"}`}
+                      className={`relative cursor-zoom-in flex-shrink-0 rounded-[20px] overflow-hidden border border-white/10 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-primary/40 ${i === 1 ? "scale-105 border-primary/30 shadow-[0_0_30px_rgba(0,168,150,0.12)]" : "scale-95 opacity-80"}`}
                       style={{ width: "110px", height: "240px" }}
                     >
                       <Image src={s.src} alt={s.label} fill className="object-cover" />
@@ -203,15 +202,11 @@ export function ProjectModal({
               )}
 
               {/* Gradient fade at bottom */}
-              <div className="absolute bottom-0 inset-x-0 h-20 pointer-events-none"
-                style={{ background: "linear-gradient(to top, #0f0f14, transparent)" }}
-              />
+              <div className="absolute bottom-0 inset-x-0 h-20 pointer-events-none bg-gradient-to-t from-card to-transparent" />
 
               {/* Badge */}
               <div className="absolute top-5 left-5">
-                <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 text-primary"
-                  style={{ background: "rgba(0,0,0,0.6)" }}
-                >
+                <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-md border border-white/10 text-primary bg-background/60">
                   {project.isEnterprise ? "🔒 Enterprise" : "⚡ Open Source"}
                 </span>
               </div>
@@ -220,14 +215,14 @@ export function ProjectModal({
 
           {/* ── Thumbnail Row (mobile only when > 1 screenshot) ── */}
           {isMobile && screenshots.length > 1 && (
-            <div className="flex gap-2.5 overflow-x-auto px-8 py-3 justify-center">
+            <div className="flex gap-2.5 overflow-x-auto px-8 py-3 justify-center bg-card">
               {screenshots.map((s, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveIndex(i)}
                   className={`flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
                     i === activeIndex
-                      ? "border-primary shadow-[0_0_12px_rgba(204,255,0,0.3)] scale-105"
+                      ? "border-primary shadow-[0_0_12px_rgba(0,168,150,0.3)] scale-105"
                       : "border-transparent opacity-40 hover:opacity-70"
                   }`}
                   style={{ width: "44px", height: "80px" }}
@@ -241,7 +236,7 @@ export function ProjectModal({
           )}
 
           {/* ── Main Content ── */}
-          <div className="px-8 md:px-12 pb-12 pt-6">
+          <div className="px-8 md:px-12 pb-12 pt-6 bg-card">
 
             {/* Header */}
             <div className="mb-8">
@@ -254,23 +249,23 @@ export function ProjectModal({
                   {project.category === "mobile" ? "Mobile Application" : "Web Platform"}
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight font-space">
                 {project.title}
               </h2>
-              <p className="text-gray-400 text-base leading-relaxed max-w-3xl">
+              <p className="text-gray-400 text-base leading-relaxed max-w-3xl font-sans">
                 {project.desc}
               </p>
             </div>
 
             {/* ── Tab Bar ── */}
-            <div className="flex gap-1 mb-8 p-1 rounded-xl bg-white/5 border border-white/8 w-fit">
+            <div className="flex gap-1 mb-8 p-1 rounded-xl bg-background border border-white/5 w-fit">
               {(["overview", "tech"] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-5 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
                     activeTab === tab
-                      ? "bg-primary text-black shadow-[0_0_16px_rgba(204,255,0,0.2)]"
+                      ? "bg-primary text-background shadow-[0_0_16px_rgba(0,168,150,0.2)]"
                       : "text-gray-500 hover:text-white"
                   }`}
                 >
@@ -297,12 +292,9 @@ export function ProjectModal({
                         return (
                           <div
                             key={i}
-                            className="flex gap-4 p-4 rounded-2xl border border-white/5 transition-all hover:border-primary/20 hover:bg-white/2"
-                            style={{ background: "rgba(255,255,255,0.02)" }}
+                            className="flex gap-4 p-4 rounded-2xl border border-white/5 transition-all hover:border-primary/20 bg-background"
                           >
-                            <div className="flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center mt-0.5"
-                              style={{ background: "rgba(204,255,0,0.08)", border: "1px solid rgba(204,255,0,0.15)" }}
-                            >
+                            <div className="flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center mt-0.5 bg-primary/10 border border-primary/20">
                               <CheckCircle2 className="w-4 h-4 text-primary" />
                             </div>
                             <div>
@@ -342,8 +334,7 @@ export function ProjectModal({
                       {project.stack.map((t) => (
                         <span
                           key={t}
-                          className="px-3 py-1.5 rounded-lg text-sm font-medium text-white transition-all hover:border-primary/30"
-                          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+                          className="px-3 py-1.5 rounded-lg text-sm font-medium text-white transition-all hover:border-primary/30 bg-background border border-white/10"
                         >
                           {t}
                         </span>
@@ -358,9 +349,7 @@ export function ProjectModal({
                         <Cpu className="w-4 h-4 text-primary" />
                         <h4 className="text-xs font-bold uppercase tracking-[3px] text-gray-400">Architecture Pattern</h4>
                       </div>
-                      <div className="px-5 py-4 rounded-2xl font-mono text-sm text-gray-300 leading-relaxed"
-                        style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
-                      >
+                      <div className="px-5 py-4 rounded-2xl font-mono text-sm text-gray-300 leading-relaxed bg-background border border-white/5">
                         {project.architecture}
                       </div>
                     </div>
@@ -370,15 +359,14 @@ export function ProjectModal({
             </AnimatePresence>
 
             {/* ── CTA Row ── */}
-            <div className="border-t border-white/8 pt-8 mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="border-t border-white/5 pt-8 mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex flex-wrap gap-3">
                 {project.liveLink && (
                   <a
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-bold uppercase tracking-wider transition-all hover:bg-white/10"
-                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-bold uppercase tracking-wider transition-all hover:bg-white/10 bg-background border border-white/10"
                   >
                     <Globe className="w-4 h-4" /> Live Demo
                   </a>
@@ -388,8 +376,7 @@ export function ProjectModal({
                     href={project.githubLink || project.repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-bold uppercase tracking-wider transition-all hover:bg-white/10"
-                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-bold uppercase tracking-wider transition-all hover:bg-white/10 bg-background border border-white/10"
                   >
                     <Github className="w-4 h-4" /> View Code
                   </a>
@@ -399,11 +386,7 @@ export function ProjectModal({
               <a
                 href="/#contact"
                 onClick={onClose}
-                className="flex items-center gap-2 px-7 py-3 rounded-full text-black font-bold text-sm uppercase tracking-wider transition-all hover:opacity-90"
-                style={{
-                  background: "linear-gradient(135deg, #ccff00, #a8d400)",
-                  boxShadow: "0 0 24px rgba(204,255,0,0.3)"
-                }}
+                className="flex items-center gap-2 px-7 py-3 rounded-full text-background font-bold text-sm uppercase tracking-wider transition-all hover:opacity-90 bg-primary shadow-[0_0_24px_rgba(0,168,150,0.3)]"
               >
                 <Sparkles className="w-4 h-4" />
                 Build Something Like This
@@ -411,7 +394,7 @@ export function ProjectModal({
             </div>
 
             {project.isEnterprise && (
-              <div className="flex items-center justify-center gap-2 text-gray-600 text-xs mt-4">
+              <div className="flex items-center justify-center gap-2 text-gray-500 text-xs mt-4">
                 <Lock className="w-3.5 h-3.5" />
                 <span>Built under NDA · Architecture details available during consultation</span>
               </div>

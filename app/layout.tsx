@@ -1,14 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ConditionalNavbar } from "@/components/ConditionalNavbar";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: '--font-space-grotesk',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: '--font-jetbrains-mono',
+});
 
 export const metadata: Metadata = {
-  title: "Adonias Hibeste | Mobile App Developer",
-  description: "Portfolio of Adonias Hibeste, a creative Mobile App Developer based in Addis Ababa, Ethiopia.",
+  title: "Adonias Hibeste | Senior Mobile Developer",
+  description: "Portfolio of Adonias Hibeste, a Senior Mobile Developer specializing in Flutter, React Native, and iOS.",
 };
 
 export default function RootLayout({
@@ -19,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased min-h-screen bg-background text-foreground`}
+        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground`}
       >
         <AnalyticsProvider />
         <ConditionalNavbar />
