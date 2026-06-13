@@ -20,6 +20,20 @@ export default async function ProjectsPage() {
     
     const showcaseProjects = [
       {
+        id: "courier",
+        title: "Courier",
+        description: "A Pro-Max tier instant delivery application built with Flutter. Features a breathtaking live map tracking experience with a pulsating neon courier marker, an AI Route Estimator, and a premium neon wallet. Wrapped in a High-Velocity Dark Mode with electric lime green accents.",
+        technologies: ["Flutter 3.x", "Dart", "flutter_map", "latlong2", "flutter_animate"],
+        repoLink: "https://github.com/Adonias-hibeste/courier-app",
+        imageUrl: "/projects/courier/courier_tracking.png",
+        screenshots: [
+          "/projects/courier/courier_dashboard.png",
+          "/projects/courier/courier_tracking.png",
+          "/projects/courier/courier_wallet.png"
+        ],
+        order: -5
+      },
+      {
         id: "storefront",
         title: "Storefront",
         description: "A Pro-Max tier luxury e-commerce application built with Flutter. Focuses on stunning product photography, an ultra-minimalist deep dark theme, and flawless cinematic Hero transitions. Features an AI Stylist that curates a 'Complete the Look' wardrobe based on your aesthetic profile.",
