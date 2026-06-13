@@ -20,6 +20,20 @@ export default async function ProjectsPage() {
     
     const showcaseProjects = [
       {
+        id: "storefront",
+        title: "Storefront",
+        description: "A Pro-Max tier luxury e-commerce application built with Flutter. Focuses on stunning product photography, an ultra-minimalist deep dark theme, and flawless cinematic Hero transitions. Features an AI Stylist that curates a 'Complete the Look' wardrobe based on your aesthetic profile.",
+        technologies: ["Flutter 3.x", "Dart", "flutter_animate", "glassmorphism"],
+        repoLink: "https://github.com/Adonias-hibeste/storefront-app",
+        imageUrl: "/projects/storefront/storefront_discover.png",
+        screenshots: [
+          "/projects/storefront/storefront_discover.png",
+          "/projects/storefront/storefront_detail.png",
+          "/projects/storefront/storefront_cart.png"
+        ],
+        order: -4
+      },
+      {
         id: "circle",
         title: "Circle",
         description: "A Pro-Max tier private social network application built with Flutter. Designed for exclusive communities, it replaces noisy feeds with a focused, premium, visually breathtaking cinematic experience. Features an AI Vibe Check dashboard that summarizes community sentiment.",
