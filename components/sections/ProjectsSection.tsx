@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { ClientProjectShowcase, CLIENT_PROJECTS, ProjectData } from "@/components/ClientProjectShowcase";
+import { ClientProjectShowcase, ProjectData } from "@/components/ClientProjectShowcase";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -13,41 +13,28 @@ interface ProjectsSectionProps {
 }
 
 export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
-    // Process passion projects
-    const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababbond', 'hababondlite', 'hababbondlite'];
-    const BANNED_PROJECTS = ['secure vpn', 'vpn', 'fare', 'documind']; // From user request "remove the apps starting from secure vpn until fare which are put at last"
-    
-    const passionProjects = projects.filter((p: any) => {
-        const titleLower = p.title.toLowerCase();
-        const isEnterprise = ENTERPRISE_KEYWORDS.some(kw => titleLower.includes(kw));
-        const isBanned = BANNED_PROJECTS.some(kw => titleLower.includes(kw));
-        return !isEnterprise && !isBanned;
-    });
-
-    const mappedPassionProjects: ProjectData[] = passionProjects.map(p => {
+    const mappedProjects: ProjectData[] = projects.map(p => {
         const category = p.title.toLowerCase().includes('app') || 
-            p.technologies.includes('Flutter') || 
-            p.technologies.includes('React Native') ||
-            p.technologies.includes('SwiftUI') ||
-            p.technologies.includes('Swift') ? "mobile" : "web";
+            p.technologies?.includes('Flutter') || 
+            p.technologies?.includes('React Native') ||
+            p.technologies?.includes('SwiftUI') ||
+            p.technologies?.includes('Swift') ? "mobile" : "web";
             
         return {
             id: p.id,
             title: p.title,
-            type: "Passion Project",
+            type: p.isEnterprise ? "Enterprise Client" : "Passion Project",
             category: category as "mobile" | "web",
             tagline: p.description.split('.')[0] + '.',
             desc: p.description,
-            stack: p.technologies,
+            stack: p.technologies || [],
             imageUrl: p.imageUrl,
             screenshots: p.screenshots?.map((src: string) => ({ src, label: "Screenshot" })) || [],
             liveLink: p.liveLink,
             repoLink: p.repoLink || p.githubLink,
-            isEnterprise: false
+            isEnterprise: p.isEnterprise
         };
     });
-
-    const allProjects = [...CLIENT_PROJECTS, ...mappedPassionProjects];
 
     return (
         <section id="projects" className="py-32 relative bg-background border-y border-white/5">
@@ -77,7 +64,7 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
 
                 {/* Main Showcase containing both enterprise and mapped passion projects */}
                 <div className="mt-12">
-                    <ClientProjectShowcase showFilters={true} projects={allProjects} />
+                    <ClientProjectShowcase showFilters={true} projects={mappedProjects} />
                 </div>
             </div>
         </section>

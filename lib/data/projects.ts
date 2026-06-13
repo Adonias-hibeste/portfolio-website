@@ -4,6 +4,147 @@ export const ENTERPRISE_KEYWORDS = ['doulado', 'sefere', 'hababond', 'hababbond'
 
 export const showcaseProjects = [
   {
+    id: "doulado",
+    title: "Doulado",
+    description: "Practice management for professional doulas. Enterprise-grade mobile application for professional doulas and birth workers. Manages clients, scheduling, billing/invoicing, telehealth sessions, real-time chat, clinical notes with rich text, file management, and push notifications. Built with Flutter + Riverpod + Dio with a custom REST API backend.",
+    technologies: ["Flutter", "Riverpod", "Dio", "Freezed", "SSE", "Flutter Quill"],
+    architecture: "Feature-first modular · 11 modules",
+    imageUrl: "/projects/doulado/dashboard.png",
+    screenshots: [
+      "/projects/doulado/dashboard.png",
+      "/projects/doulado/client_profile.png",
+      "/projects/doulado/chat.png",
+      "/projects/doulado/settings.png",
+    ],
+    features: [
+      "11 feature modules",
+      "SSE real-time messaging",
+      "Freezed type-safe models",
+      "Telehealth WebRTC bridge",
+      "Rich-text clinical notes with Quill",
+      "Billing & invoicing system",
+    ],
+    order: -10
+  },
+  {
+    id: "sefere-social",
+    title: "Sefere Social",
+    description: "Social network for the Habeshan diaspora. Culturally-tailored social networking platform for the Ethiopian and Habeshan diaspora. Features people discovery, events, services, real-time chat, camera with ML face detection, location-based discovery, and push notifications. Built with Flutter + Firebase + Clean Architecture.",
+    technologies: ["Flutter", "Firebase Suite", "Provider", "RxDart", "Google ML Kit"],
+    architecture: "Clean Architecture · Data → Domain → Presentation",
+    imageUrl: "/projects/sefere-social/swipe.png",
+    screenshots: [
+      "/projects/sefere-social/swipe.png",
+      "/projects/sefere-social/events.png",
+      "/projects/sefere-social/services.png",
+      "/projects/sefere-social/network.png",
+      "/projects/sefere-social/chat.png",
+    ],
+    features: [
+      "Clean Architecture with DDD",
+      "Google ML Kit face verification",
+      "Firebase full suite integration",
+      "Multi-language support",
+      "Location-based community discovery",
+    ],
+    order: -9
+  },
+  {
+    id: "hababondlite",
+    title: "Hababond Dating App",
+    description: "Premium dating app for the Ethiopian community. Feature-rich dating app with swipe-to-match, WebRTC video calling, Google Maps discovery, ML face verification, in-app purchases, multi-auth (Google/Facebook/Apple), and push notifications with CallKit.",
+    technologies: ["Flutter", "Firebase", "BLoC 9", "WebRTC", "Google Maps", "ML Kit"],
+    architecture: "Feature-module · BLoC + Provider hybrid",
+    imageUrl: "/projects/hababondlite/home_discovery.jpg",
+    screenshots: [
+      "/projects/hababondlite/home_discovery.jpg",
+      "/projects/hababondlite/swipe_card.png",
+      "/projects/hababondlite/matches.png",
+      "/projects/hababondlite/account.png",
+      "/projects/hababondlite/filters.png",
+    ],
+    features: [
+      "WebRTC real-time video calls",
+      "70+ dependencies enterprise app",
+      "Google Maps + Geolocator discovery",
+      "In-app purchase monetization",
+      "CallKit incoming call integration",
+    ],
+    order: -8
+  },
+  {
+    id: "hababond-social",
+    title: "Hababond Social",
+    description: "Full-featured social media & marketplace. Full-featured social media app with social feed, marketplace, real-time messaging, user search, profile management, and push notifications. Modern UI with Google Fonts and custom SVG assets. Built for a global audience.",
+    technologies: ["Flutter", "Google Fonts", "Flutter SVG"],
+    architecture: "Feature-first modular · 9 modules",
+    imageUrl: "/projects/hababond-social/splash.png",
+    screenshots: [
+      "/projects/hababond-social/splash.png",
+      "/projects/hababond-social/login.png",
+      "/projects/hababond-social/feed.png",
+      "/projects/hababond-social/messages.png",
+      "/projects/hababond-social/profile.png",
+      "/projects/hababond-social/settings.png",
+      "/projects/hababond-social/marketplace.png",
+      "/projects/hababond-social/product_detail.png",
+      "/projects/hababond-social/item_chat.png",
+    ],
+    features: [
+      "9 feature modules",
+      "Marketplace integration",
+      "Modern UI with SVG assets",
+      "Feature-first architecture",
+      "Dark mode experience",
+    ],
+    order: -7
+  },
+  {
+    id: "sefere-web",
+    title: "Sefere Web Portal",
+    description: "Multi-role community management platform. Multi-role web portal for the Sefere platform with admin, organizer, professional, and advertiser dashboards. Role-based Firebase Auth, Firestore analytics, Cloud Functions, i18n support, and Vercel deployment.",
+    technologies: ["Next.js 16", "React 19", "Firebase", "TailwindCSS 4", "Framer Motion"],
+    architecture: "Next.js App Router · Firebase backend",
+    imageUrl: "/projects/sefere-web/hero_en.png",
+    screenshots: [
+      "/projects/sefere-web/hero_en.png",
+      "/projects/sefere-web/hero_am.png",
+      "/projects/sefere-web/discover.png",
+      "/projects/sefere-web/features.png",
+      "/projects/sefere-web/portal_selection.png",
+    ],
+    features: [
+      "Multi-role dashboard system",
+      "Comprehensive Firestore security rules",
+      "Firebase Cloud Functions",
+      "Bilingual support (EN + AM)",
+      "Vercel deployment",
+    ],
+    order: -6
+  },
+  {
+    id: "sefere-theme-studio",
+    title: "Sefere Theme Studio",
+    description: "Visual theme editor & design system. Visual theme editor for the Sefere platform. Allows real-time customization of colors, typography, spacing, and component styles with live preview. Exports production-ready theme tokens for mobile and web apps.",
+    technologies: ["Next.js 16", "React 19", "TypeScript 5", "TailwindCSS 4", "Framer Motion 12"],
+    architecture: "Next.js App Router · React Context state",
+    imageUrl: "/projects/sefere-theme-studio/colors.png",
+    screenshots: [
+      "/projects/sefere-theme-studio/colors.png",
+      "/projects/sefere-theme-studio/typography.png",
+      "/projects/sefere-theme-studio/layout.png",
+      "/projects/sefere-theme-studio/motion.png",
+      "/projects/sefere-theme-studio/presets.png",
+    ],
+    features: [
+      "63KB ThemeEditor component",
+      "Real-time preview",
+      "Next.js 16 + React 19 cutting-edge stack",
+      "Theme export & import",
+    ],
+    order: -5
+  },
+  {
     id: "courier",
     title: "Courier",
     description: "A Pro-Max tier instant delivery application built with Flutter. Features a breathtaking live map tracking experience with a pulsating neon courier marker, an AI Route Estimator, and a premium neon wallet. Wrapped in a High-Velocity Dark Mode with electric lime green accents.",
@@ -216,8 +357,12 @@ export async function getMergedProjects() {
     uniqueProjectsMap.set(p.title.toLowerCase().trim(), { ...p, isEnterprise: false });
   });
 
+  const BANNED_PROJECTS = ['secure vpn', 'vpn', 'fare', 'documind'];
+
   dbProjects.forEach(p => {
     const title = p.title.toLowerCase().trim();
+    if (BANNED_PROJECTS.some(kw => title.includes(kw))) return;
+
     const isEnterprise = ENTERPRISE_KEYWORDS.some(kw => title.includes(kw));
     
     if (uniqueProjectsMap.has(title)) {
@@ -225,9 +370,10 @@ export async function getMergedProjects() {
       uniqueProjectsMap.set(title, {
         ...showcase,
         ...p,
+        id: showcase.id || p.id,
         imageUrl: showcase.imageUrl || p.imageUrl,
-        features: showcase.features,
-        architecture: showcase.architecture,
+        features: showcase.features || p.features,
+        architecture: showcase.architecture || p.architecture,
         screenshots: (showcase.screenshots && showcase.screenshots.length > 0) ? showcase.screenshots : p.screenshots,
         isEnterprise: isEnterprise
       });
