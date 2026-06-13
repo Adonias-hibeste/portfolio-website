@@ -184,6 +184,16 @@ export default async function ProjectsPage() {
             order: 8
         },
         {
+            id: "pitch-studio",
+            title: "Pitch Studio",
+            description: "A premium AI-powered pitch deck builder for founders and PMs. Features a Figma-inspired slide editor with full-width canvas, animated node graphs, custom sparkline analytics, and an AI Draft generator with an animated glowing orb UI.",
+            technologies: ["Flutter 3.x", "Dart", "flutter_animate", "google_fonts", "Custom Painter"],
+            repoLink: "https://github.com/Adonias-hibeste/pitch-studio",
+            imageUrl: "/projects/pitch/pitch_dashboard.png",
+            screenshots: ["/projects/pitch/pitch_dashboard.png", "/projects/pitch/pitch_editor.png", "/projects/pitch/pitch_ai.png"],
+            order: 9
+        },
+        {
             id: "swiftui-chat",
             title: "SwiftUI Chat",
             description: "A real-time messaging application with end-to-end encryption. Features premium iOS aesthetics, blur effects, and high-performance socket integration.",
