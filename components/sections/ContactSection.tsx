@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Send, Mail, Linkedin, Github } from "lucide-react";
+import { Send, Mail, Linkedin, Github, Phone } from "lucide-react";
 
 export function ContactSection() {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -44,21 +44,35 @@ export function ContactSection() {
                     {/* Info Side */}
                     <div>
                         <ScrollReveal>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                                <span className="text-primary text-sm font-mono tracking-wider uppercase">Let's Connect</span>
+                            <div className="flex flex-wrap gap-3 mb-6">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                                    <span className="text-primary text-xs font-mono tracking-wider uppercase font-semibold">Let's Connect</span>
+                                </div>
+                                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                    <span className="text-emerald-400 text-xs font-mono tracking-wider uppercase font-semibold">Available for Projects</span>
+                                </div>
                             </div>
                             <h2 className="text-4xl md:text-6xl font-space font-bold text-white mb-6 leading-tight">
                                 Have an idea? <br />
                                 <span className="text-secondary italic">Let's build it.</span>
                             </h2>
                             <p className="text-gray-400 text-lg mb-12">
-                                I'm currently available for freelance projects and full-time roles. If you're looking for a Senior Mobile Developer to bring your vision to life, drop me a message.
+                                I'm currently available for freelance projects and full-time roles. If you're looking for a Full-Stack Mobile & AI Engineer to bring your vision to life, drop me a message.
                             </p>
 
                             <div className="flex gap-4">
                                 <a 
-                                    href="mailto:adoniassahilehibeste12@gmail.com" 
+                                    href="tel:+251987081856" 
+                                    className="w-14 h-14 rounded-full bg-background border border-white/10 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary/50 transition-all group"
+                                    title="Call me: +251 987 081 856"
+                                >
+                                    <Phone className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                                </a>
+                                <a 
+                                    href="mailto:adonias.software.developer@gmail.com" 
                                     className="w-14 h-14 rounded-full bg-background border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all group"
+                                    title="Email: adonias.software.developer@gmail.com"
                                 >
                                     <Mail className="w-6 h-6 group-hover:scale-110 transition-transform" />
                                 </a>
@@ -66,6 +80,7 @@ export function ContactSection() {
                                     href="https://www.linkedin.com/in/adonias-hibeste" 
                                     target="_blank" rel="noreferrer"
                                     className="w-14 h-14 rounded-full bg-background border border-white/10 flex items-center justify-center text-gray-400 hover:text-blue-500 hover:border-blue-500/50 transition-all group"
+                                    title="LinkedIn Profile"
                                 >
                                     <Linkedin className="w-6 h-6 group-hover:scale-110 transition-transform" />
                                 </a>
@@ -73,6 +88,7 @@ export function ContactSection() {
                                     href="https://github.com/Adonias-hibeste" 
                                     target="_blank" rel="noreferrer"
                                     className="w-14 h-14 rounded-full bg-background border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all group"
+                                    title="GitHub Profile"
                                 >
                                     <Github className="w-6 h-6 group-hover:scale-110 transition-transform" />
                                 </a>

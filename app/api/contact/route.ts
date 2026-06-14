@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
 
 export async function POST(request: Request) {
     try {
@@ -23,45 +22,97 @@ export async function POST(request: Request) {
             );
         }
 
-        // Check if Resend API key is configured
-        if (!process.env.RESEND_API_KEY) {
-            console.error('RESEND_API_KEY is not configured');
+        // Check if Gmail credentials are configured
+        const clientId = process.env.GMAIL_CLIENT_ID;
+        const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+        const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+        const userEmail = process.env.GMAIL_USER_EMAIL || 'adonias.software.developer@gmail.com';
+
+        if (!clientId || !clientSecret || !refreshToken) {
+            console.error('Gmail OAuth2 environment variables are not configured');
             return NextResponse.json(
                 { error: 'Email service is not configured. Please contact the administrator.' },
                 { status: 500 }
             );
         }
 
-        // Initialize Resend only when needed
-        const resend = new Resend(process.env.RESEND_API_KEY);
-
-        // Send email using Resend
-        const { data, error } = await resend.emails.send({
-            from: 'Portfolio Contact <onboarding@resend.dev>', // Resend's test email
-            to: ['adoniassahilehibeste12@gmail.com'],
-            replyTo: email,
-            subject: `Portfolio Contact from ${name}`,
-            html: `
-                <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Message:</strong></p>
-                <p>${message.replace(/\n/g, '<br>')}</p>
-            `,
+        // 1. Exchange Refresh Token for Access Token
+        const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                client_id: clientId,
+                client_secret: clientSecret,
+                refresh_token: refreshToken,
+                grant_type: 'refresh_token',
+            }),
         });
 
-        if (error) {
-            console.error('Resend error:', error);
+        if (!tokenResponse.ok) {
+            const tokenErr = await tokenResponse.text();
+            console.error('Failed to retrieve Google Access Token:', tokenErr);
             return NextResponse.json(
-                { error: 'Failed to send email. Please try again later.' },
+                { error: 'Failed to retrieve access token' },
                 { status: 500 }
             );
         }
 
+        const tokenData = await tokenResponse.json();
+        const accessToken = tokenData.access_token;
+
+        // 2. Construct raw RFC 822 Email Message
+        const subject = `Portfolio Contact from ${name}`;
+        const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`;
+        
+        const emailBody = [
+            `From: ${userEmail}`,
+            `To: adonias.software.developer@gmail.com`,
+            `Reply-To: ${email}`,
+            `Subject: ${utf8Subject}`,
+            `MIME-Version: 1.0`,
+            `Content-Type: text/html; charset=utf-8`,
+            ``,
+            `<h2>New Contact Form Submission</h2>`,
+            `<p><strong>Name:</strong> ${name}</p>`,
+            `<p><strong>Email:</strong> ${email}</p>`,
+            `<p><strong>Message:</strong></p>`,
+            `<p>${message.replace(/\n/g, '<br>')}</p>`
+        ].join('\r\n');
+
+        // Safe Base64URL encoding for Gmail API
+        const base64SafeEmail = Buffer.from(emailBody)
+            .toString('base64')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_')
+            .replace(/=+$/, '');
+
+        // 3. Send email via Gmail API
+        const gmailResponse = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                raw: base64SafeEmail
+            })
+        });
+
+        if (!gmailResponse.ok) {
+            const gmailErr = await gmailResponse.text();
+            console.error('Gmail API Error response:', gmailErr);
+            return NextResponse.json(
+                { error: 'Failed to send email via Gmail API' },
+                { status: 500 }
+            );
+        }
+
+        const gmailData = await gmailResponse.json();
+
         return NextResponse.json({
             success: true,
             message: 'Message sent successfully!',
-            emailId: data?.id
+            emailId: gmailData.id
         });
 
     } catch (error) {

@@ -59,7 +59,7 @@ export default function ContactPage() {
                             </div>
                             <div>
                                 <h3 className="font-semibold text-white mb-1">Email</h3>
-                                <p className="text-gray-400">adoniassahilehibeste12@gmail.com</p>
+                                <p className="text-gray-400">adonias.software.developer@gmail.com</p>
                             </div>
                         </div>
                         <div className="flex items-start space-x-4">

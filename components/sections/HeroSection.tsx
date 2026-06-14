@@ -1,70 +1,82 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Code2, Smartphone, Terminal } from "lucide-react";
-import { TypewriterText } from "@/components/TypewriterText";
+import { ArrowRight, Star, ShieldCheck, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export function HeroSection() {
     return (
-        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-background">
+        <section className="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden bg-background">
             {/* Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
             
             {/* Ambient Glows */}
-            <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-primary/10 rounded-full blur-[120px] -z-10 opacity-40" />
-            <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-secondary/10 rounded-full blur-[100px] -z-10 opacity-30" />
+            <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10 opacity-60" />
+            <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] -z-10 opacity-40" />
+            
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                <div className="grid lg:grid-cols-12 gap-16 items-center">
                     
-                    {/* Text Content */}
+                    {/* Left Column: Text & CTAs */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="text-left"
+                        className="lg:col-span-7 text-left flex flex-col justify-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 mb-6">
-                            <span className="text-secondary text-sm font-mono tracking-wider uppercase">Senior Mobile Architect</span>
+                        {/* Tagline Badge */}
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-8 self-start hover:bg-primary/25 transition-all duration-300">
+                            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+                            <span className="text-primary text-xs font-mono tracking-wider uppercase font-semibold">Full-Stack Mobile & AI Engineer</span>
                         </div>
                         
-                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-space font-bold tracking-tighter mb-6 text-white leading-[1.1]">
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Building</span> <br />
-                            <span className="text-primary inline-block">
-                                <TypewriterText
-                                    sequence={[
-                                        'World-Class',
-                                        2000,
-                                        'High-Performance',
-                                        2000,
-                                        'Native-Feel',
-                                        2000,
-                                    ]}
-                                    className="text-primary"
-                                />
-                            </span>
-                            <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Mobile Apps.</span>
+                        {/* Catchy Headline */}
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-space font-bold tracking-tight mb-6 text-white leading-[1.1]">
+                            I engineer apps <br />
+                            across <span className="text-primary italic relative">every</span> platform.
                         </h1>
                         
-                        <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-lg font-sans leading-relaxed">
-                            I engineer scalable, beautifully animated applications in <span className="text-white font-medium">Flutter</span>, <span className="text-white font-medium">React Native</span>, and <span className="text-white font-medium">Swift</span>. From enterprise systems to consumer products.
+                        {/* Sub-headline */}
+                        <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl font-sans leading-relaxed">
+                            Specializing in high-performance <span className="text-white font-medium">Flutter</span>, <span className="text-white font-medium">React Native</span>, <span className="text-white font-medium">Swift</span>, <span className="text-white font-medium">Kotlin</span>, and <span className="text-white font-medium">Web</span> platforms. Deeply integrating <span className="text-white font-medium">Generative AI</span> to deliver premium user experiences and bulletproof backend integrations.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row items-start gap-4">
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                        {/* Social Proof Stats Grid */}
+                        <div className="grid grid-cols-3 gap-6 py-6 border-y border-white/5 mb-10 max-w-xl">
+                            <div>
+                                <div className="text-2xl sm:text-3xl font-space font-bold text-white flex items-center gap-1">
+                                    5.0<Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+                                </div>
+                                <div className="text-xs text-gray-500 font-mono mt-1">UPWORK RATING</div>
+                            </div>
+                            <div>
+                                <div className="text-2xl sm:text-3xl font-space font-bold text-white">25+</div>
+                                <div className="text-xs text-gray-500 font-mono mt-1">APPS SHIPPED</div>
+                            </div>
+                            <div>
+                                <div className="text-2xl sm:text-3xl font-space font-bold text-white flex items-center gap-1.5">
+                                    100%<ShieldCheck className="w-5 h-5 text-primary" />
+                                </div>
+                                <div className="text-xs text-gray-500 font-mono mt-1">SATISFACTION</div>
+                            </div>
+                        </div>
+
+                        {/* Call to Actions */}
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1 sm:flex-none">
                                 <Link
                                     href="#projects"
-                                    className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-background font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 shadow-[0_0_20px_rgba(0,168,150,0.3)] hover:shadow-[0_0_30px_rgba(0,168,150,0.5)]"
+                                    className="group flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-background font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-all duration-300 shadow-[0_0_20px_rgba(0,168,150,0.25)] hover:shadow-[0_0_30px_rgba(0,168,150,0.45)]"
                                 >
                                     View My Work
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </motion.div>
                             
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1 sm:flex-none">
                                 <Link
                                     href="#contact"
-                                    className="flex items-center justify-center px-8 py-4 rounded-full bg-transparent border-2 border-white/10 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/5 hover:border-white/20 transition-all duration-300"
+                                    className="flex items-center justify-center px-8 py-4 rounded-full bg-transparent border border-white/10 hover:border-white/20 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/5 transition-all duration-300"
                                 >
                                     Let's Talk
                                 </Link>
@@ -72,70 +84,119 @@ export function HeroSection() {
                         </div>
                     </motion.div>
 
-                    {/* Visual/Mockup Content */}
-                    <div className="relative lg:h-[600px] w-full flex items-center justify-center perspective-1000">
-                        {/* Floating Tech Badges */}
-                        <motion.div 
-                            animate={{ y: [-10, 10, -10], rotate: [-2, 2, -2] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute top-10 left-10 p-4 rounded-2xl bg-card border border-white/10 backdrop-blur-md shadow-2xl z-20 flex items-center gap-3"
-                        >
-                            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                                <Smartphone size={20} />
-                            </div>
-                            <div>
-                                <p className="text-sm font-bold text-white">Flutter & Swift</p>
-                                <p className="text-xs text-gray-400 font-mono">Native Performance</p>
-                            </div>
-                        </motion.div>
+                    {/* Right Column: Three Phones Fully Visible Side-by-Side */}
+                    <div className="lg:col-span-5 relative h-[520px] sm:h-[620px] w-full flex items-center justify-center">
+                        {/* Ambient background glow */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/8 rounded-full blur-[120px] pointer-events-none" />
 
-                        <motion.div 
-                            animate={{ y: [10, -10, 10], rotate: [2, -2, 2] }}
-                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute bottom-20 right-0 p-4 rounded-2xl bg-card border border-white/10 backdrop-blur-md shadow-2xl z-20 flex items-center gap-3"
-                        >
-                            <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
-                                <Code2 size={20} />
-                            </div>
-                            <div>
-                                <p className="text-sm font-bold text-white">Clean Arch</p>
-                                <p className="text-xs text-gray-400 font-mono">Scalable Systems</p>
-                            </div>
-                        </motion.div>
+                        <div className="flex items-end justify-center gap-4 sm:gap-6 w-full [perspective:1200px]">
+                            {/* Velo — Left, tilted, slightly lower */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 60, rotateY: 20 }}
+                                animate={{ opacity: 1, y: 0, rotateY: 8 }}
+                                transition={{ duration: 0.9, ease: "easeOut", delay: 0 }}
+                                className="flex flex-col items-center gap-3 [transform-style:preserve-3d]"
+                            >
+                                <Link href="/projects/velo-wallet" className="group block">
+                                    <motion.div
+                                        animate={{ y: [-6, 6, -6] }}
+                                        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+                                        whileHover={{ 
+                                            scale: 1.06, rotateY: 0, y: -10,
+                                            boxShadow: "0 30px 60px rgba(0, 168, 150, 0.35)"
+                                        }}
+                                        className="relative w-[130px] sm:w-[155px] aspect-[9/19.5] overflow-hidden rounded-[1.8rem] border border-white/10 hover:border-emerald-500/30 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer transition-all duration-300 mb-4"
+                                    >
+                                        <div className="absolute -inset-8 bg-emerald-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                        <div className="relative w-full h-full">
+                                            <Image 
+                                                src="/projects/velo/velo_dashboard_dark.png" 
+                                                alt="Velo Digital Wallet"
+                                                fill
+                                                className="object-cover"
+                                                priority
+                                            />
+                                        </div>
+                                    </motion.div>
+                                </Link>
+                                <div className="text-center">
+                                    <p className="text-white text-xs font-space font-bold tracking-wide">Velo</p>
+                                    <p className="text-[10px] text-gray-500 font-mono">Digital Wallet</p>
+                                </div>
+                            </motion.div>
 
-                        {/* Central Visual (Abstract shapes/Mockup placeholder) */}
-                        <motion.div 
-                            initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
-                            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                            transition={{ duration: 1, ease: "easeOut" }}
-                            className="relative w-full max-w-[400px] aspect-[4/5] rounded-[2.5rem] bg-gradient-to-br from-card to-background border border-white/10 shadow-[0_0_60px_rgba(0,168,150,0.15)] overflow-hidden flex flex-col"
-                        >
-                            <div className="h-12 border-b border-white/5 flex items-center px-6 gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                                <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                            </div>
-                            <div className="p-6 flex-1 flex flex-col">
-                                <div className="flex items-center gap-2 text-primary mb-6">
-                                    <Terminal size={20} />
-                                    <span className="font-mono text-sm">~/projects/mobile</span>
+                            {/* Doulado — Center, larger, elevated */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 80, scale: 0.9 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
+                                className="flex flex-col items-center gap-3 -mt-10 [transform-style:preserve-3d]"
+                            >
+                                <Link href="/projects/doulado" className="group block">
+                                    <motion.div
+                                        animate={{ y: [-10, 10, -10] }}
+                                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                                        whileHover={{ 
+                                            scale: 1.06, y: -14,
+                                            boxShadow: "0 35px 70px rgba(59, 130, 246, 0.45)"
+                                        }}
+                                        className="relative w-[150px] sm:w-[175px] aspect-[9/19.5] overflow-hidden rounded-[2rem] border-2 border-white/15 hover:border-blue-500/40 bg-gray-900 shadow-[0_25px_60px_rgba(0,168,150,0.2)] cursor-pointer transition-all duration-300"
+                                    >
+                                        <div className="absolute -inset-8 bg-blue-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                        <div className="relative w-full h-full">
+                                            <Image 
+                                                src="/projects/doulado/dashboard.png" 
+                                                alt="Doulado Dashboard"
+                                                fill
+                                                className="object-cover"
+                                                priority
+                                            />
+                                        </div>
+                                    </motion.div>
+                                </Link>
+                                <div className="text-center">
+                                    <p className="text-white text-xs font-space font-bold tracking-wide">Doulado</p>
+                                    <p className="text-[10px] text-gray-500 font-mono">Dating Platform</p>
                                 </div>
-                                <div className="space-y-4 font-mono text-sm text-gray-400">
-                                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}><span className="text-secondary">const</span> developer = new <span className="text-primary">Adonias</span>();</motion.p>
-                                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>developer.compile();</motion.p>
-                                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.0 }} className="text-green-400">✓ Build successful in 0.8s</motion.p>
-                                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.5 }} className="w-full h-[1px] bg-white/10 my-4" />
-                                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.0 }} className="text-white">Deploying to App Store...</motion.p>
-                                    <motion.div 
-                                        initial={{ width: 0 }} 
-                                        animate={{ width: "100%" }} 
-                                        transition={{ delay: 3.5, duration: 1 }}
-                                        className="h-1 bg-primary rounded-full mt-2"
-                                    />
+                            </motion.div>
+
+                            {/* Bite — Right, tilted opposite, slightly lower */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 60, rotateY: -20 }}
+                                animate={{ opacity: 1, y: 0, rotateY: -8 }}
+                                transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
+                                className="flex flex-col items-center gap-3 [transform-style:preserve-3d]"
+                            >
+                                <Link href="/projects/bite" className="group block">
+                                    <motion.div
+                                        animate={{ y: [-5, 8, -5] }}
+                                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                                        whileHover={{ 
+                                            scale: 1.06, rotateY: 0, y: -10,
+                                            boxShadow: "0 30px 60px rgba(245, 158, 11, 0.35)"
+                                        }}
+                                        className="relative w-[130px] sm:w-[155px] aspect-[9/19.5] overflow-hidden rounded-[1.8rem] border border-white/10 hover:border-amber-500/30 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer transition-all duration-300 mb-4"
+                                    >
+                                        <div className="absolute -inset-8 bg-amber-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                        <div className="relative w-full h-full">
+                                            <Image 
+                                                src="/projects/bite/bite_eats_home.png" 
+                                                alt="Bite Food Delivery"
+                                                fill
+                                                className="object-cover"
+                                                priority
+                                            />
+                                        </div>
+                                    </motion.div>
+                                </Link>
+                                <div className="text-center">
+                                    <p className="text-white text-xs font-space font-bold tracking-wide">Bite</p>
+                                    <p className="text-[10px] text-gray-500 font-mono">Food Delivery</p>
                                 </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>

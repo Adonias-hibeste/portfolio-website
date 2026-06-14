@@ -93,12 +93,16 @@ export default function ProjectDetailClient({ project }: { project: any }) {
       title: project.title,
       type: project.isEnterprise ? "Enterprise" : "Open Source",
       category: project.title.toLowerCase().includes('app') || 
-               project.technologies.some((t: string) => t.toLowerCase().includes('flutter')) || 
-               project.technologies.some((t: string) => t.toLowerCase().includes('react native')) ||
-               project.technologies.some((t: string) => t.toLowerCase().includes('swiftui')) ||
-               project.technologies.some((t: string) => t.toLowerCase().includes('swift')) ||
-               project.technologies.some((t: string) => t.toLowerCase().includes('kotlin')) ||
-               project.technologies.some((t: string) => t.toLowerCase().includes('jetpack compose')) ? "mobile" : "web",
+               project.technologies.some((t: string) => {
+                 const low = t.toLowerCase();
+                 return low.includes('flutter') || 
+                        low.includes('react native') || 
+                        low.includes('swift') || 
+                        low.includes('kotlin') || 
+                        low.includes('compose') || 
+                        low.includes('android') || 
+                        low.includes('ios');
+               }) ? "mobile" : "web",
       tagline: project.description.split('.')[0] + '.',
       desc: project.description,
       stack: project.technologies,
@@ -131,7 +135,7 @@ export default function ProjectDetailClient({ project }: { project: any }) {
       {/* ── Navigation ── */}
       <div className="fixed top-0 inset-x-0 z-50 h-20 bg-background/80 backdrop-blur-md border-b border-white/5 flex items-center px-4 md:px-8 transition-all duration-300">
         <div className="max-w-6xl mx-auto w-full flex justify-between items-center">
-            <Link href="/projects" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group">
+            <Link href="/#projects" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group">
                 <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                 <span className="font-space font-medium">Back to Projects</span>
             </Link>
@@ -235,12 +239,37 @@ export default function ProjectDetailClient({ project }: { project: any }) {
               
               {/* Left Column: Story & Features */}
               <div className="space-y-12">
+                  {project.role && (
+                      <section className="p-6 rounded-2xl bg-card border border-white/5">
+                          <h4 className="text-xs uppercase font-mono tracking-wider text-primary font-bold mb-2">My Engineering Role</h4>
+                          <p className="text-white text-lg font-medium">{project.role}</p>
+                      </section>
+                  )}
+
+                  {project.problem && (
+                      <section>
+                          <h3 className="text-2xl font-bold text-white mb-4 font-space uppercase tracking-widest">The Problem</h3>
+                          <p className="text-gray-400 leading-relaxed text-lg whitespace-pre-wrap">
+                              {project.problem}
+                          </p>
+                      </section>
+                  )}
+
                   <section>
-                      <h3 className="text-2xl font-bold text-white mb-6 font-space uppercase tracking-widest">Executive Summary</h3>
+                      <h3 className="text-2xl font-bold text-white mb-4 font-space uppercase tracking-widest">The Solution</h3>
                       <p className="text-gray-400 leading-relaxed text-lg whitespace-pre-wrap">
                           {p.desc}
                       </p>
                   </section>
+
+                  {project.outcome && (
+                      <section className="p-6 rounded-2xl bg-primary/5 border border-primary/20">
+                          <h3 className="text-2xl font-bold text-white mb-4 font-space uppercase tracking-widest">The Outcome</h3>
+                          <p className="text-gray-300 leading-relaxed text-lg whitespace-pre-wrap font-medium">
+                              {project.outcome}
+                          </p>
+                      </section>
+                  )}
 
                   {p.features && p.features.length > 0 && (
                       <section>
@@ -299,7 +328,7 @@ export default function ProjectDetailClient({ project }: { project: any }) {
                                   <Globe className="w-4 h-4" /> Live Application
                               </a>
                           )}
-                          {p.repoLink && (
+                          {p.repoLink && !p.isEnterprise && (
                               <a href={p.repoLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full px-5 py-3.5 rounded-xl text-white font-bold text-sm uppercase tracking-wider bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
                                   <Github className="w-4 h-4" /> Source Code
                               </a>

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ClientProjectShowcase, ProjectData } from "@/components/ClientProjectShowcase";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 
 interface ProjectsSectionProps {
     projects?: any[];
@@ -14,11 +14,18 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
     const mappedProjects: ProjectData[] = projects.map(p => {
-        const category = p.title.toLowerCase().includes('app') || 
-            p.technologies?.includes('Flutter') || 
-            p.technologies?.includes('React Native') ||
-            p.technologies?.includes('SwiftUI') ||
-            p.technologies?.includes('Swift') ? "mobile" : "web";
+        const techList = (p.technologies || []).map((t: string) => t.toLowerCase());
+        const isMobile = p.title.toLowerCase().includes('app') ||
+            techList.some((t: string) => 
+                t.includes('flutter') || 
+                t.includes('react native') || 
+                t.includes('swift') || 
+                t.includes('kotlin') || 
+                t.includes('compose') || 
+                t.includes('android') || 
+                t.includes('ios')
+            );
+        const category = isMobile ? "mobile" : "web";
             
         return {
             id: p.id,
@@ -52,18 +59,26 @@ export function ProjectsSection({ projects = [] }: ProjectsSectionProps) {
                                 Real-world applications built for scale, alongside personal passion projects exploring new paradigms.
                             </p>
                         </div>
-                        <Link 
-                            href="/projects"
-                            className="group flex items-center gap-2 text-primary font-mono text-sm hover:text-white transition-colors"
-                        >
-                            VIEW FULL ARCHIVE
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
                     </div>
                 </ScrollReveal>
 
+                {/* NDA Explanation Banner */}
+                <div className="mt-8 mb-10 max-w-4xl">
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex items-start gap-4">
+                        <div className="p-2 rounded-full bg-amber-500/10 text-amber-500 shrink-0 mt-0.5 border border-amber-500/20">
+                            <Lock className="w-4 h-4" />
+                        </div>
+                        <div>
+                            <h4 className="text-white font-space font-medium text-sm mb-1">Enterprise Client Work & NDA</h4>
+                            <p className="text-gray-400 text-sm leading-relaxed">
+                                Source code for enterprise projects is protected under Non-Disclosure Agreements. The case studies below focus on high-level architecture, technical problem-solving, and the business impact delivered.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Main Showcase containing both enterprise and mapped passion projects */}
-                <div className="mt-12">
+                <div className="mt-8">
                     <ClientProjectShowcase showFilters={true} projects={mappedProjects} />
                 </div>
             </div>

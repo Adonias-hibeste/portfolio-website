@@ -3,8 +3,25 @@ import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
     return (
-        <footer className="bg-background border-t border-white/5 py-12">
+        <footer className="bg-background border-t border-white/5 py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Full-width CTA Banner */}
+                <div className="border-b border-white/5 pb-16 mb-16 flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+                    <div>
+                        <h3 className="text-2xl md:text-3xl font-space font-bold text-white mb-3">
+                            Ready to build something extraordinary?
+                        </h3>
+                        <p className="text-gray-400 max-w-lg font-sans text-base">
+                            Let's talk about engineering a premium, high-performance application for your business.
+                        </p>
+                    </div>
+                    <Link
+                        href="#contact"
+                        className="group flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-background font-bold text-sm uppercase tracking-widest hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_0_20px_rgba(0,168,150,0.2)]"
+                    >
+                        Start a Project
+                    </Link>
+                </div>
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                     <div>
                         <Link href="/" className="font-space text-2xl font-bold tracking-tighter text-white flex items-center gap-1">

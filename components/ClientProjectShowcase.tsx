@@ -30,12 +30,13 @@ export interface ProjectData {
   repoLink?: string;
   githubLink?: string;
   isEnterprise?: boolean;
+  order?: number;
 }
 
 /* ─────────────────────────────────────────────
    Main Exported Component
    ───────────────────────────────────────────── */
-type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift";
+type Category = "all" | "mobile" | "web" | "flutter" | "react-native" | "swift" | "kotlin";
 
 interface ProjectShowcaseProps {
   projects?: ProjectData[];
@@ -55,6 +56,8 @@ export function ClientProjectShowcase({ projects = [], showFilters = true }: Pro
       ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("react native")))
       : filter === "swift"
       ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("swift")))
+      : filter === "kotlin"
+      ? projects.filter((p) => p.stack.some(s => s.toLowerCase().includes("kotlin") || s.toLowerCase().includes("jetpack compose")))
       : projects.filter((p) => p.category === filter);
 
   const filters: { key: Category; label: string; icon: React.ReactNode }[] = [
@@ -62,6 +65,7 @@ export function ClientProjectShowcase({ projects = [], showFilters = true }: Pro
     { key: "flutter", label: "Flutter", icon: <Smartphone className="w-4 h-4" /> },
     { key: "react-native", label: "React Native", icon: <Smartphone className="w-4 h-4" /> },
     { key: "swift", label: "Swift / iOS", icon: <Smartphone className="w-4 h-4" /> },
+    { key: "kotlin", label: "Kotlin / Android", icon: <Smartphone className="w-4 h-4" /> },
     { key: "web", label: "Web", icon: <Globe className="w-4 h-4" /> },
   ];
 
@@ -102,31 +106,46 @@ export function ClientProjectShowcase({ projects = [], showFilters = true }: Pro
               className="group flex flex-col h-full cursor-pointer rounded-[2rem] overflow-hidden bg-card border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,168,150,0.15)] relative"
             >
               {/* Preview */}
-              <div className="relative overflow-hidden bg-background aspect-[4/3] w-full">
+              <div className="relative overflow-hidden bg-background aspect-[4/3] w-full flex items-center justify-center">
                 {(project.screenshots?.[0]?.src || project.imageUrl) ? (
-                  <Image
-                    src={project.screenshots?.[0]?.src || project.imageUrl || ""}
-                    alt={project.title}
-                    fill
-                    className={`transition-transform duration-700 group-hover:scale-105 ${
-                      project.category === "mobile" ? "object-contain p-4" : "object-cover"
-                    }`}
-                  />
+                  project.category === "mobile" ? (
+                    <div className="absolute inset-0 flex items-center justify-center p-3 bg-gradient-to-b from-card/30 to-background/50">
+                      <div className="relative aspect-[9/18.5] h-full rounded-[1.75rem] ring-4 ring-white/10 overflow-hidden bg-background shadow-2xl transition-transform duration-700 group-hover:scale-[1.03]">
+                        <Image
+                          src={project.screenshots?.[0]?.src || project.imageUrl || ""}
+                          alt={project.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <Image
+                      src={project.screenshots?.[0]?.src || project.imageUrl || ""}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-600 bg-background">
                     No Preview
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-100" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center backdrop-blur-[2px] opacity-0 group-hover:opacity-100">
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-100 pointer-events-none" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-primary/5 transition-colors duration-300 flex items-center justify-center backdrop-blur-[1px] opacity-0 group-hover:opacity-100">
                   <span className="px-6 py-3 rounded-full bg-primary text-background font-bold text-sm flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                     View Case Study <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
 
                 {/* Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-background/80 backdrop-blur-md border border-white/10 text-primary">
+                <div className="absolute top-4 left-4 z-10">
+                  <span className={`text-[10px] font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-background/85 backdrop-blur-md border ${
+                    project.isEnterprise 
+                      ? "border-amber-500/30 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.15)]" 
+                      : "border-primary/20 text-primary"
+                  }`}>
                     {project.isEnterprise ? "Enterprise" : "Passion"}
                   </span>
                 </div>
@@ -139,8 +158,8 @@ export function ClientProjectShowcase({ projects = [], showFilters = true }: Pro
                     {project.category === 'mobile' ? 'Mobile App' : 'Web App'}
                   </span>
                   {project.isEnterprise && (
-                    <span className="text-[10px] text-gray-500 font-mono flex items-center gap-1">
-                      <Lock className="w-3 h-3" /> NDA
+                    <span className="text-[10px] text-amber-500/80 font-mono flex items-center gap-1 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                      <Lock className="w-3 h-3" /> Proprietary Code / NDA
                     </span>
                   )}
                 </div>

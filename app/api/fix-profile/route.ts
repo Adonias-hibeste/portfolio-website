@@ -36,7 +36,7 @@ export async function GET() {
                     name: "Adonias Hibeste",
                     title: "Full Stack Developer",
                     bio: "Passionate developer building amazing web applications.",
-                    email: "adoniassahilehibeste12@gmail.com",
+                    email: "adonias.software.developer@gmail.com",
                     telegram: "@Adoni_2112",
                     linkedin: "https://www.linkedin.com/in/adonias-hibeste",
                     github: "https://github.com/Adonias-hibeste", // Assuming this from repo URL
@@ -48,7 +48,7 @@ export async function GET() {
                     name: "Adonias Hibeste",
                     title: "Full Stack Developer",
                     bio: "Passionate developer building amazing web applications.",
-                    email: "adoniassahilehibeste12@gmail.com",
+                    email: "adonias.software.developer@gmail.com",
                     telegram: "@Adoni_2112",
                     linkedin: "https://www.linkedin.com/in/adonias-hibeste",
                     github: "https://github.com/Adonias-hibeste",
