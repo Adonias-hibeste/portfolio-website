@@ -100,7 +100,7 @@ export function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="md:hidden fixed top-24 left-1/2 -translate-x-1/2 w-[95%] z-40 bg-background/80 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
+                        className="md:hidden fixed top-24 left-0 right-0 mx-auto w-[95%] z-40 bg-background/80 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden"
                     >
                         <div className="px-6 py-8 flex flex-col space-y-6">
                             {/* Mobile Availability */}
