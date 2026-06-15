@@ -80,14 +80,14 @@ export function TestimonialsSection() {
                                 className="group rounded-2xl bg-background border border-white/5 hover:border-primary/20 overflow-hidden transition-all duration-300 hover:shadow-[0_20px_60px_-15px_rgba(0,168,150,0.15)]"
                             >
                                 {/* Metadata Header */}
-                                <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
-                                    <div className="flex items-center gap-3">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-5 sm:px-6 py-4 border-b border-white/5">
+                                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                                         <div className="flex items-center gap-1">
-                                            <BadgeCheck className="w-4 h-4 text-primary" />
+                                            <BadgeCheck className="w-4 h-4 text-primary shrink-0" />
                                             <span className="text-white text-sm font-semibold font-space">Verified Upwork Review</span>
                                         </div>
-                                        <span className="text-gray-600 text-xs">·</span>
-                                        <span className="text-xs text-gray-500 font-mono">{testimonial.project}</span>
+                                        <span className="hidden sm:inline text-gray-600 text-xs">·</span>
+                                        <span className="text-xs text-gray-500 font-mono line-clamp-1">{testimonial.project}</span>
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <div className="flex gap-0.5">
@@ -95,7 +95,7 @@ export function TestimonialsSection() {
                                                 <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
                                             ))}
                                         </div>
-                                        <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded font-mono">
+                                        <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded font-mono whitespace-nowrap">
                                             {testimonial.date}
                                         </span>
                                     </div>

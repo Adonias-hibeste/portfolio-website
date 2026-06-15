@@ -32,7 +32,7 @@ export function Footer() {
                         </p>
                     </div>
 
-                    <div className="flex gap-8">
+                    <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 mt-4 md:mt-0">
                         <Link href="#about" className="text-sm font-mono text-gray-400 hover:text-white transition-colors">
                             About
                         </Link>

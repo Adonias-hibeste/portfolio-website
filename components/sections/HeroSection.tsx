@@ -31,7 +31,7 @@ export function HeroSection() {
                         </div>
                         
                         {/* Catchy Headline */}
-                        <h1 className="text-5xl sm:text-6xl md:text-7xl font-space font-bold tracking-tight mb-6 text-white leading-[1.1]">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-space font-bold tracking-tight mb-6 text-white leading-[1.1]">
                             I engineer apps <br />
                             across <span className="text-primary italic relative">every</span> platform.
                         </h1>
@@ -89,7 +89,7 @@ export function HeroSection() {
                         {/* Ambient background glow */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/8 rounded-full blur-[120px] pointer-events-none" />
 
-                        <div className="flex items-end justify-center gap-4 sm:gap-6 w-full [perspective:1200px]">
+                        <div className="flex items-end justify-center gap-2 sm:gap-6 w-full [perspective:1200px]">
                             {/* Velo — Left, tilted, slightly lower */}
                             <motion.div
                                 initial={{ opacity: 0, y: 60, rotateY: 20 }}
@@ -105,7 +105,7 @@ export function HeroSection() {
                                             scale: 1.06, rotateY: 0, y: -10,
                                             boxShadow: "0 30px 60px rgba(0, 168, 150, 0.35)"
                                         }}
-                                        className="relative w-[130px] sm:w-[155px] aspect-[9/19.5] overflow-hidden rounded-[1.8rem] border border-white/10 hover:border-emerald-500/30 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer transition-all duration-300 mb-4"
+                                        className="relative w-[95px] sm:w-[155px] aspect-[9/19.5] overflow-hidden rounded-[1.2rem] sm:rounded-[1.8rem] border border-white/10 hover:border-emerald-500/30 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer transition-all duration-300 mb-4"
                                     >
                                         <div className="absolute -inset-8 bg-emerald-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                         <div className="relative w-full h-full">
@@ -140,7 +140,7 @@ export function HeroSection() {
                                             scale: 1.06, y: -14,
                                             boxShadow: "0 35px 70px rgba(59, 130, 246, 0.45)"
                                         }}
-                                        className="relative w-[150px] sm:w-[175px] aspect-[9/19.5] overflow-hidden rounded-[2rem] border-2 border-white/15 hover:border-blue-500/40 bg-gray-900 shadow-[0_25px_60px_rgba(0,168,150,0.2)] cursor-pointer transition-all duration-300"
+                                        className="relative w-[115px] sm:w-[175px] aspect-[9/19.5] overflow-hidden rounded-[1.4rem] sm:rounded-[2rem] border-2 border-white/15 hover:border-blue-500/40 bg-gray-900 shadow-[0_25px_60px_rgba(0,168,150,0.2)] cursor-pointer transition-all duration-300"
                                     >
                                         <div className="absolute -inset-8 bg-blue-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                         <div className="relative w-full h-full">
@@ -156,7 +156,7 @@ export function HeroSection() {
                                 </Link>
                                 <div className="text-center">
                                     <p className="text-white text-xs font-space font-bold tracking-wide">Doulado</p>
-                                    <p className="text-[10px] text-gray-500 font-mono">Dating Platform</p>
+                                    <p className="text-[10px] text-gray-500 font-mono">Practice Management</p>
                                 </div>
                             </motion.div>
 
@@ -175,7 +175,7 @@ export function HeroSection() {
                                             scale: 1.06, rotateY: 0, y: -10,
                                             boxShadow: "0 30px 60px rgba(245, 158, 11, 0.35)"
                                         }}
-                                        className="relative w-[130px] sm:w-[155px] aspect-[9/19.5] overflow-hidden rounded-[1.8rem] border border-white/10 hover:border-amber-500/30 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer transition-all duration-300 mb-4"
+                                        className="relative w-[95px] sm:w-[155px] aspect-[9/19.5] overflow-hidden rounded-[1.2rem] sm:rounded-[1.8rem] border border-white/10 hover:border-amber-500/30 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-pointer transition-all duration-300 mb-4"
                                     >
                                         <div className="absolute -inset-8 bg-amber-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                         <div className="relative w-full h-full">

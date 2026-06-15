@@ -54,8 +54,8 @@ export function AboutSection() {
                                 <div className="absolute inset-0 bg-primary/20 rounded-[3rem] blur-3xl group-hover:bg-primary/30 transition-all duration-500 -z-10" />
                                 
                                 {/* Image container card */}
-                                <div className="relative w-[300px] h-[420px] sm:w-[360px] sm:h-[500px] md:w-[380px] md:h-[530px] rounded-[3.5rem] overflow-hidden border border-white/10 bg-background/50 backdrop-blur-md p-4 shadow-[0_30px_60px_rgba(0,0,0,0.8)] transition-all duration-500 group-hover:-translate-y-2 group-hover:border-primary/30">
-                                    <div className="relative w-full h-full rounded-[2.7rem] overflow-hidden">
+                                <div className="relative w-[260px] h-[370px] sm:w-[360px] sm:h-[500px] md:w-[380px] md:h-[530px] rounded-[3rem] sm:rounded-[3.5rem] overflow-hidden border border-white/10 bg-background/50 backdrop-blur-md p-3 sm:p-4 shadow-[0_30px_60px_rgba(0,0,0,0.8)] transition-all duration-500 group-hover:-translate-y-2 group-hover:border-primary/30">
+                                    <div className="relative w-full h-full rounded-[2.3rem] sm:rounded-[2.7rem] overflow-hidden">
                                         <Image
                                             src="/profile.jpg"
                                             alt="Adonias"
