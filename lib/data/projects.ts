@@ -12,12 +12,12 @@ export const showcaseProjects = [
     description: "Practice management for professional doulas. Enterprise-grade mobile application for professional doulas and birth workers. Manages clients, scheduling, billing/invoicing, telehealth sessions, real-time chat, clinical notes with rich text, file management, and push notifications. Built with Flutter + Riverpod + Dio with a custom REST API backend.",
     technologies: ["Flutter", "Riverpod", "Dio", "Freezed", "SSE", "Flutter Quill", "Node.js", "Express", "PostgreSQL"],
     architecture: "Feature-first modular · 11 modules",
-    imageUrl: "/projects/doulado/dashboard.png",
+    imageUrl: "/projects/doulado/doulado_dashboard.png",
     screenshots: [
-      "/projects/doulado/dashboard.png",
-      "/projects/doulado/client_profile.png",
-      "/projects/doulado/chat.png",
-      "/projects/doulado/settings.png",
+      "/projects/doulado/doulado_dashboard.png",
+      "/projects/doulado/doulado_profile.png",
+      "/projects/doulado/doulado_chat.png",
+      "/projects/doulado/doulado_settings.png",
     ],
     features: [
       "11 feature modules",
