@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, Shield, Cpu } from "lucide-react";
+import { ArrowRight, Star, Shield, Cpu, Globe, Activity, Map } from "lucide-react";
 
 interface Project {
     id: string;
@@ -25,18 +25,24 @@ interface FeaturedSectionProps {
 }
 
 export function FeaturedSection({ projects }: FeaturedSectionProps) {
-    // Filter and order the 3 flagship projects
-    const featuredProjects = projects.filter(p => 
-        p.id === "doulado" || p.id === "bite" || p.id === "velo-wallet" ||
-        p.title.toLowerCase().includes("doulado") || 
-        p.title.toLowerCase().includes("bite") || 
-        p.title.toLowerCase().includes("velo")
-    );
+    // Filter and order the flagship projects
+    const featuredProjects = projects.filter(p => {
+        const t = p.title.toLowerCase();
+        return p.id === "doulado" || p.id === "bite" || p.id === "velo-wallet" || 
+               p.id === "sefere-social" || p.id === "gymflow" || p.id === "fare" ||
+               t.includes("doulado") || t.includes("bite") || t.includes("velo") ||
+               t.includes("sefere") || t.includes("gymflow") || t.includes("fare");
+    });
 
     const getOrder = (p: Project) => {
-        if (p.id === "doulado" || p.title.toLowerCase().includes("doulado")) return 1;
-        if (p.id === "bite" || p.title.toLowerCase().includes("bite")) return 2;
-        return 3; // Velo
+        const t = p.title.toLowerCase();
+        if (p.id === "doulado" || t.includes("doulado")) return 1;
+        if (p.id === "bite" || t.includes("bite")) return 2;
+        if (p.id === "sefere-social" || t.includes("sefere")) return 3;
+        if (p.id === "velo-wallet" || t.includes("velo")) return 4;
+        if (p.id === "gymflow" || t.includes("gymflow")) return 5;
+        if (p.id === "fare" || t.includes("fare")) return 6;
+        return 7;
     };
 
     const sortedFeatured = [...featuredProjects].sort((a, b) => getOrder(a) - getOrder(b));
@@ -55,6 +61,27 @@ export function FeaturedSection({ projects }: FeaturedSectionProps) {
                 text: "Systems & Fleet Orchestration",
                 icon: <Cpu className="w-4 h-4 text-primary" />,
                 tagline: "4-App simulated ecosystem with AI routing and dynamic user roles."
+            };
+        }
+        if (t.includes("sefere")) {
+            return {
+                text: "Global Scale Social Network",
+                icon: <Globe className="w-4 h-4 text-primary" />,
+                tagline: "Culturally-tailored social networking platform featuring ML face verification."
+            };
+        }
+        if (t.includes("gymflow")) {
+            return {
+                text: "AI Physiological Simulator",
+                icon: <Activity className="w-4 h-4 text-primary" />,
+                tagline: "Personalized AI fitness coach with real-time telemetry simulation."
+            };
+        }
+        if (t.includes("fare")) {
+            return {
+                text: "Real-Time Fleet Maps",
+                icon: <Map className="w-4 h-4 text-primary" />,
+                tagline: "Premium ride-hailing platform featuring dynamic OpenStreetMap routing."
             };
         }
         return {
