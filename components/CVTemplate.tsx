@@ -1,3 +1,4 @@
+import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -5,122 +6,136 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         backgroundColor: "#FFFFFF",
         fontFamily: "Helvetica",
-        paddingTop: 35,
-        paddingBottom: 35,
-        paddingLeft: 40,
-        paddingRight: 40,
+        paddingTop: 28,
+        paddingBottom: 28,
+        paddingLeft: 38,
+        paddingRight: 38,
     },
-    // Header Styles
+    // ── Header ──────────────────────────────────────────────
     header: {
-        marginBottom: 15,
+        marginBottom: 10,
         textAlign: "center",
     },
     headerName: {
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: "bold",
         color: "#000000",
-        marginBottom: 4,
-        textTransform: "uppercase",
+        marginBottom: 2,
+        letterSpacing: 1,
+    },
+    headerTitle: {
+        fontSize: 11,
+        color: "#444444",
+        marginBottom: 5,
+        letterSpacing: 0.3,
     },
     headerContact: {
-        fontSize: 10,
+        fontSize: 9.5,
         color: "#333333",
         flexDirection: "row",
         justifyContent: "center",
         flexWrap: "wrap",
-        gap: 4,
     },
     contactLink: {
         color: "#333333",
         textDecoration: "none",
     },
-    separator: {
-        marginHorizontal: 4,
+    separatorDot: {
+        marginHorizontal: 6,
+        color: "#999999",
     },
-    
-    // Core Structural Styles
+    // ── Section ──────────────────────────────────────────────
     section: {
-        marginBottom: 12,
+        marginBottom: 10,
     },
     sectionTitle: {
-        fontSize: 12,
+        fontSize: 10.5,
         fontWeight: "bold",
         textTransform: "uppercase",
         color: "#000000",
-        borderBottomWidth: 1,
+        borderBottomWidth: 0.75,
         borderBottomColor: "#000000",
         paddingBottom: 2,
-        marginBottom: 8,
-        letterSpacing: 0.5,
+        marginBottom: 7,
+        letterSpacing: 0.8,
     },
-    bodyText: {
-        fontSize: 10,
-        color: "#000000",
-        lineHeight: 1.5,
+    // ── Experience item ──────────────────────────────────────
+    itemWrapper: {
+        marginBottom: 9,
     },
-    
-    // Skills
-    skillsContainer: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-    },
-    skillsText: {
-        fontSize: 10,
-        color: "#000000",
-        lineHeight: 1.5,
-    },
-    
     itemHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        marginBottom: 3,
+        marginBottom: 1,
     },
     itemTitleBlock: {
         flex: 1,
+        paddingRight: 8,
     },
-    itemTitle: {
-        fontSize: 12,
+    itemCompany: {
+        fontSize: 11,
         fontWeight: "bold",
         color: "#000000",
-        marginBottom: 1,
     },
-    itemSubtitle: {
-        fontSize: 11,
+    itemPosition: {
+        fontSize: 10,
         fontStyle: "italic",
         color: "#222222",
-    },
-    itemDateLocation: {
-        fontSize: 10,
-        color: "#444444",
-        textAlign: "right",
         marginBottom: 1,
     },
-    bulletContainer: {
-        flexDirection: "row",
-        marginBottom: 4,
-        paddingLeft: 8,
+    itemTagline: {
+        fontSize: 9,
+        color: "#555555",
+        marginBottom: 3,
     },
-    bulletPoint: {
-        width: 12,
-        fontSize: 10,
+    itemDateLocation: {
+        fontSize: 9,
         color: "#444444",
+        textAlign: "right",
+    },
+    // ── Bullets ──────────────────────────────────────────────
+    bulletRow: {
+        flexDirection: "row",
+        marginBottom: 2.5,
+        paddingLeft: 4,
+    },
+    bulletDot: {
+        width: 10,
+        fontSize: 9.5,
+        color: "#444444",
+        marginTop: 0.5,
     },
     bulletText: {
         flex: 1,
-        fontSize: 10,
+        fontSize: 9.5,
         lineHeight: 1.4,
         color: "#222222",
     },
-    itemWrapper: {
-        marginBottom: 10,
+    // ── Skills ───────────────────────────────────────────────
+    skillsText: {
+        fontSize: 9.5,
+        color: "#222222",
+        lineHeight: 1.5,
     },
-    paragraphText: {
-        fontSize: 10,
-        lineHeight: 1.4,
+    // ── Education ────────────────────────────────────────────
+    itemTitle: {
+        fontSize: 10.5,
+        fontWeight: "bold",
+        color: "#000000",
+    },
+    itemSubtitle: {
+        fontSize: 9.5,
+        fontStyle: "italic",
+        color: "#333333",
+    },
+    // ── Summary ──────────────────────────────────────────────
+    summaryText: {
+        fontSize: 9.5,
+        lineHeight: 1.5,
         color: "#222222",
         textAlign: "justify",
-    }
+    },
 });
 
 interface CVData {
@@ -135,6 +150,13 @@ interface CVData {
     linkedin?: string | null;
     telegram?: string | null;
     skills: { name: string }[];
+    projects?: {
+        title: string;
+        description: string;
+        technologies: string[];
+        liveLink?: string;
+        githubLink?: string;
+    }[];
     experiences: {
         position: string;
         company: string;
@@ -143,7 +165,6 @@ interface CVData {
         endDate?: string;
         current: boolean;
         description: string;
-        subItems?: { title: string; description: string }[];
     }[];
     educations: {
         institution: string;
@@ -157,124 +178,161 @@ interface CVData {
     }[];
 }
 
-export const CVTemplate = ({ data }: { data: CVData }) => {
-    const formatMonthYear = (dateString: string) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-    };
+/** Parse description: first paragraph is the tagline, then bullet lines starting with • */
+function parseDescription(description: string): { tagline: string; bullets: string[] } {
+    const lines = description.split('\n').map(l => l.trim()).filter(Boolean);
+    const tagline = lines[0] && !lines[0].startsWith('•') ? lines[0] : '';
+    const bullets = lines
+        .filter(l => l.startsWith('•'))
+        .map(l => l.replace(/^•\s*/, '').trim());
+    return { tagline, bullets };
+}
 
-    // Construct the contact line array safely
-    const contactItems: React.ReactNode[] = [];
-    
-    if (data.location) {
-        contactItems.push(<Text key="loc">{data.location}</Text>);
-    }
-    if (data.phone) {
-        contactItems.push(<Text key="phone">{data.phone}</Text>);
-    }
+function formatMonthYear(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
+export const CVTemplate = ({ data }: { data: CVData }) => {
+    // Build contact items
+    const contactParts: React.ReactNode[] = [];
+    if (data.location) contactParts.push(<Text key="loc">{data.location}</Text>);
+    if (data.phone) contactParts.push(<Text key="phone">{data.phone}</Text>);
     if (data.email) {
-        contactItems.push(
+        contactParts.push(
             <Link src={`mailto:${data.email}`} style={styles.contactLink} key="email">
                 {data.email}
             </Link>
         );
     }
-    
-    // Ensure Portfolio website is included and labeled professionally
+    if (data.linkedin) {
+        const cleanLinkedin = data.linkedin.replace(/^https?:\/\//, '');
+        contactParts.push(
+            <Link src={data.linkedin} style={styles.contactLink} key="linkedin">
+                {cleanLinkedin}
+            </Link>
+        );
+    }
+    if (data.github) {
+        const cleanGh = data.github.replace(/^https?:\/\//, '');
+        contactParts.push(
+            <Link src={data.github} style={styles.contactLink} key="github">
+                {cleanGh}
+            </Link>
+        );
+    }
     if (data.website) {
         const cleanWeb = data.website.replace(/^https?:\/\//, '');
-        contactItems.push(
+        contactParts.push(
             <Link src={data.website} style={styles.contactLink} key="web">
-                Portfolio: {cleanWeb}
+                {cleanWeb}
             </Link>
         );
     }
 
-    // Render contact line with professional separators
-    const renderedContact = contactItems.map((item, index) => (
-        <View style={{ flexDirection: "row", alignItems: "center" }} key={index}>
-            {item}
-            {index < contactItems.length - 1 && (
-                <Text style={[styles.separator, { color: "#999999", marginHorizontal: 8 }]}>•</Text>
-            )}
-        </View>
-    ));    return (
-        <Document title={`${data.name} - CV`}>
-            <Page size="A4" style={[styles.page, { paddingVertical: 25, paddingHorizontal: 35 }]}>
-                
-                {/* --- HEADER --- */}
-                <View style={[styles.header, { marginBottom: 12 }]}>
-                    <Text style={[styles.headerName, { fontSize: 22 }]}>{data.name}</Text>
+    const skillNames = data.skills.map(s => s.name).join(' • ');
+
+    return (
+        <Document title={`${data.name} — CV`} author={data.name}>
+            <Page size="A4" style={styles.page}>
+
+                {/* ── HEADER ── */}
+                <View style={styles.header}>
+                    <Text style={styles.headerName}>{data.name.toUpperCase()}</Text>
+                    <Text style={styles.headerTitle}>{data.title}</Text>
                     <View style={styles.headerContact}>
-                        {renderedContact}
-                    </View>
-                </View>
-
-                {/* --- SUMMARY --- */}
-                {data.summary && (
-                    <View style={[styles.section, { marginBottom: 10 }]}>
-                        <Text style={[styles.sectionTitle, { fontSize: 11, marginBottom: 5 }]}>Professional Summary</Text>
-                        <Text style={[styles.bodyText, { fontSize: 9.5, textAlign: "justify" }]}>{data.summary}</Text>
-                    </View>
-                )}
-
-                {/* --- EXPERIENCE --- */}
-                {data.experiences && data.experiences.length > 0 && (
-                    <View style={styles.section}>
-                        <Text style={[styles.sectionTitle, { fontSize: 11, marginBottom: 6 }]}>Professional Experience</Text>
-                        {data.experiences.map((exp, index) => (
-                            <View key={index} style={[styles.itemWrapper, { marginBottom: 8 }]}>
-                                <View style={styles.itemHeader}>
-                                    <View style={styles.itemTitleBlock}>
-                                        <Text style={[styles.itemTitle, { fontSize: 11 }]}>{exp.company}</Text>
-                                        <Text style={[styles.itemSubtitle, { fontSize: 10 }]}>{exp.position}</Text>
-                                    </View>
-                                    <View>
-                                        {exp.location && <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>{exp.location}</Text>}
-                                        <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>
-                                            {formatMonthYear(exp.startDate)} – {exp.current ? "Present" : formatMonthYear(exp.endDate!)}
-                                        </Text>
-                                    </View>
-                                </View>
-                                <View>
-                                    <Text style={[styles.paragraphText, { fontSize: 9.5, lineHeight: 1.3 }]}>{exp.description}</Text>
-                                    {exp.subItems && exp.subItems.length > 0 && (
-                                        <View style={{ marginTop: 4, paddingLeft: 8 }}>
-                                            {exp.subItems.map((item, idx) => (
-                                                <View key={idx} style={{ marginBottom: 3 }}>
-                                                    <Text style={{ fontSize: 9, fontWeight: "bold", color: "#000000" }}>• {item.title}</Text>
-                                                    <Text style={[styles.paragraphText, { color: "#444444", fontSize: 8.5, lineHeight: 1.2 }]}>{item.description}</Text>
-                                                </View>
-                                            ))}
-                                        </View>
-                                    )}
-                                </View>
+                        {contactParts.map((item, i) => (
+                            <View key={i} style={{ flexDirection: "row", alignItems: "center" }}>
+                                {item}
+                                {i < contactParts.length - 1 && (
+                                    <Text style={styles.separatorDot}>|</Text>
+                                )}
                             </View>
                         ))}
                     </View>
+                </View>
+
+                {/* ── PROFESSIONAL SUMMARY ── */}
+                {data.summary && (
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>Professional Summary</Text>
+                        <Text style={styles.summaryText}>{data.summary}</Text>
+                    </View>
                 )}
 
-                {/* --- EDUCATION --- */}
+                {/* ── TECHNICAL SKILLS ── */}
+                {data.skills && data.skills.length > 0 && (
+                    <View style={[styles.section, { marginBottom: 8 }]}>
+                        <Text style={styles.sectionTitle}>Technical Skills</Text>
+                        <Text style={styles.skillsText}>{skillNames}</Text>
+                    </View>
+                )}
+
+                {/* ── PROFESSIONAL EXPERIENCE ── */}
+                {data.experiences && data.experiences.length > 0 && (
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>Professional Experience</Text>
+                        {data.experiences.map((exp, index) => {
+                            const { tagline, bullets } = parseDescription(exp.description);
+                            const dateRange = `${formatMonthYear(exp.startDate)} – ${exp.current ? 'Present' : (exp.endDate ? formatMonthYear(exp.endDate) : '')}`;
+                            return (
+                                <View key={index} style={styles.itemWrapper} wrap={false}>
+                                    <View style={styles.itemHeader}>
+                                        <View style={styles.itemTitleBlock}>
+                                            <Text style={styles.itemCompany}>{exp.company}</Text>
+                                            <Text style={styles.itemPosition}>{exp.position}</Text>
+                                        </View>
+                                        <View>
+                                            {exp.location && (
+                                                <Text style={styles.itemDateLocation}>{exp.location}</Text>
+                                            )}
+                                            <Text style={styles.itemDateLocation}>{dateRange}</Text>
+                                        </View>
+                                    </View>
+                                    {tagline ? (
+                                        <Text style={styles.itemTagline}>{tagline}</Text>
+                                    ) : null}
+                                    {bullets.map((bullet, bi) => (
+                                        <View key={bi} style={styles.bulletRow}>
+                                            <Text style={styles.bulletDot}>•</Text>
+                                            <Text style={styles.bulletText}>{bullet}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                            );
+                        })}
+                    </View>
+                )}
+
+                {/* ── EDUCATION ── */}
                 {data.educations && data.educations.length > 0 && (
-                    <View style={[styles.section, { marginTop: 4 }]}>
-                        <Text style={[styles.sectionTitle, { fontSize: 11, marginBottom: 5 }]}>Education</Text>
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>Education</Text>
                         {data.educations.map((edu, index) => (
                             <View key={index} style={[styles.itemWrapper, { marginBottom: 4 }]}>
                                 <View style={styles.itemHeader}>
                                     <View style={styles.itemTitleBlock}>
-                                        <Text style={[styles.itemTitle, { fontSize: 10 }]}>{edu.institution}</Text>
-                                        <Text style={[styles.itemSubtitle, { fontSize: 9 }]}>{edu.degree} in {edu.field}</Text>
+                                        <Text style={styles.itemTitle}>{edu.institution}</Text>
+                                        <Text style={styles.itemSubtitle}>
+                                            {edu.degree} in {edu.field}
+                                        </Text>
                                     </View>
                                     <View>
                                         {(edu.startDate || edu.endDate) && (
-                                            <Text style={[styles.itemDateLocation, { fontSize: 9 }]}>
-                                                {edu.startDate ? new Date(edu.startDate).getFullYear() : ""}
-                                                {edu.startDate && (edu.endDate || edu.current) ? " – " : ""}
-                                                {edu.current ? "Present" : (edu.endDate ? new Date(edu.endDate).getFullYear() : "")}
+                                            <Text style={styles.itemDateLocation}>
+                                                {edu.startDate ? new Date(edu.startDate).getFullYear() : ''}
+                                                {edu.startDate && (edu.endDate || edu.current) ? ' – ' : ''}
+                                                {edu.current ? 'Present' : (edu.endDate ? new Date(edu.endDate).getFullYear() : '')}
                                             </Text>
+                                        )}
+                                        {edu.location && (
+                                            <Text style={styles.itemDateLocation}>{edu.location}</Text>
                                         )}
                                     </View>
                                 </View>
+                                {edu.description && (
+                                    <Text style={[styles.summaryText, { marginTop: 2 }]}>{edu.description}</Text>
+                                )}
                             </View>
                         ))}
                     </View>
