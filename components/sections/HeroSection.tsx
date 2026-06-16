@@ -145,7 +145,7 @@ export function HeroSection() {
                                         <div className="absolute -inset-8 bg-blue-500/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                                         <div className="relative w-full h-full">
                                             <Image 
-                                                src="/projects/doulado/dashboard.png" 
+                                                src="/projects/doulado/doulado_dashboard.png" 
                                                 alt="Doulado Dashboard"
                                                 fill
                                                 className="object-cover"
