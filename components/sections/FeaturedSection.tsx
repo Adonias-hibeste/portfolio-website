@@ -28,17 +28,21 @@ export function FeaturedSection({ projects }: FeaturedSectionProps) {
     // Filter and order the flagship projects
     const featuredProjects = projects.filter(p => {
         const t = p.title.toLowerCase();
+        // Specifically exclude the web portal and theme studio
+        if (p.id === "sefere-web" || p.id === "sefere-theme-studio") return false;
+        if (t.includes("sefere web") || t.includes("sefere theme")) return false;
+
         return p.id === "doulado" || p.id === "bite" || p.id === "velo-wallet" || 
                p.id === "sefere-social" || p.id === "gymflow" || p.id === "fare" ||
                t.includes("doulado") || t.includes("bite") || t.includes("velo") ||
-               t.includes("sefere") || t.includes("gymflow") || t.includes("fare");
+               (t.includes("sefere") && t.includes("social")) || t.includes("gymflow") || t.includes("fare");
     });
 
     const getOrder = (p: Project) => {
         const t = p.title.toLowerCase();
         if (p.id === "doulado" || t.includes("doulado")) return 1;
         if (p.id === "bite" || t.includes("bite")) return 2;
-        if (p.id === "sefere-social" || t.includes("sefere")) return 3;
+        if (p.id === "sefere-social" || (t.includes("sefere") && t.includes("social"))) return 3;
         if (p.id === "velo-wallet" || t.includes("velo")) return 4;
         if (p.id === "gymflow" || t.includes("gymflow")) return 5;
         if (p.id === "fare" || t.includes("fare")) return 6;
