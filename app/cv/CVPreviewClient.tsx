@@ -95,6 +95,8 @@ export default function CVPreviewClient({ experiences, educations, profile, skil
             degree: edu.degree,
             field: edu.field,
             location: edu.location || undefined,
+            startDate: edu.startDate || undefined,
+            endDate: edu.endDate || undefined,
             current: edu.current,
             description: edu.description || undefined,
         })),
