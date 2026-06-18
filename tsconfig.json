@@ -37,6 +37,8 @@
     "**/*.mts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "generate-local-cv.ts",
+    "update-cv-experience.ts"
   ]
 }
