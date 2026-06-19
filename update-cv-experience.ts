@@ -56,7 +56,7 @@ async function main() {
       startDate: new Date('2021-01-01T00:00:00Z'),
       endDate: new Date('2021-12-31T23:59:59Z'),
       current: false,
-      description: '• Engineered and successfully delivered a localized social networking app from concept to App Store launch as a lead contractor, supporting the acquisition of 5,000 active users.\n• Architected the platform using Clean Architecture (DDD) with Flutter and Firebase, scaling to handle high traffic without refactoring.\n• Enabled location-based discovery via Geoflutterfire and integrated Google ML Kit face verification for secure user onboarding.',
+      description: '• Engineered and successfully delivered a localized social networking app tailored for the Ethiopian/Habesha diaspora in the US, taking it from concept to US App Store launch as a lead contractor, supporting the acquisition of 5,000 active users.\n• Architected the platform using Clean Architecture (DDD) with Flutter and Firebase, scaling to handle high traffic without refactoring.\n• Enabled location-based discovery via Geoflutterfire and integrated Google ML Kit face verification for secure user onboarding.',
       order: 5
     }
   ];
