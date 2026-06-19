@@ -190,6 +190,10 @@ function parseDescription(description: string): { tagline: string; bullets: stri
 
 function formatMonthYear(dateString: string): string {
     const date = new Date(dateString);
+    const day = date.getUTCDate();
+    if (day > 1 && day < 28) {
+        return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    }
     return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 

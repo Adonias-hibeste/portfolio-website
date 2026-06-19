@@ -26,7 +26,7 @@ async function main() {
       startDate: new Date('2024-01-01T00:00:00Z'),
       endDate: new Date('2024-12-31T23:59:59Z'),
       current: false,
-      description: '• Championed the integration of Google Gemini API and on-device ML Kit across client products, establishing the division\'s AI development standards.\n• Developed a luxury headless e-commerce platform (Storefront) integrating a Gemini-powered AI styling advisor [github.com/Adonias-hibeste/storefront-app], driving a 20% lift in checkout conversion.\n• Created Courier [github.com/Adonias-hibeste/courier-app], a fleet logistics platform spanning 4 apps with a Gemini-powered dynamic route optimizer.\n• Built Circle [github.com/Adonias-hibeste/circle-network], a private social network with custom Canvas feeds and Glassmorphism UI, sustaining 60fps scrolling.\n• Standardized a cross-platform design system synchronization layer, reducing per-project UI setup time from days to under 4 hours.',
+      description: '• Championed the integration of Google Gemini API and on-device ML Kit across client products, establishing Miquido\'s internal AI development standards.\n• Developed a luxury headless e-commerce platform (Storefront) integrating a Gemini-powered AI styling advisor, driving a 20% lift in checkout conversion.\n• Created Courier, a fleet logistics platform spanning 4 apps with a Gemini-powered dynamic route optimizer.\n• Built Circle, a private social network with custom Canvas feeds and Glassmorphism UI, sustaining 60fps scrolling.\n• Standardized a cross-platform design system synchronization layer, reducing per-project UI setup time from days to under 4 hours.',
       order: 2
     },
     {
@@ -50,7 +50,7 @@ async function main() {
       order: 4
     },
     {
-      position: 'Mobile App Founder & Lead Engineer (Concurrent)',
+      position: 'Lead Mobile Engineer (Contract)',
       company: 'Sefere PLC',
       location: 'Maryland, USA (Remote)',
       startDate: new Date('2021-01-01T00:00:00Z'),
