@@ -14,7 +14,7 @@ async function main() {
       company: 'Doulado LLC',
       location: 'Remote',
       startDate: new Date('2025-01-01T00:00:00Z'),
-      endDate: new Date('2026-06-10T23:59:59Z'),
+      endDate: new Date('2026-05-31T23:59:59Z'),
       current: false,
       description: '• Spearheaded the delivery of a HIPAA-conscious, enterprise mobile platform, migrating 5 legacy SaaS tools into a unified 11-module Flutter ecosystem.\n• Streamlined client workflows by engineering a seamless scheduling, clinical notes, and invoicing pipeline.\n• Integrated zero-latency SSE chat and a WebRTC-bridged telehealth module, scaling to 500+ concurrent live consultations daily.\n• Mentored a team of 4 engineers on feature-first modular architecture using Riverpod, reducing onboarding time and accelerating release cadences.\n• Structured a high-throughput Node.js/Express API with PostgreSQL, enforcing strict data isolation and role-based access control for 10,000+ active users.',
       order: 1
@@ -56,7 +56,7 @@ async function main() {
       startDate: new Date('2021-01-01T00:00:00Z'),
       endDate: new Date('2021-12-31T23:59:59Z'),
       current: false,
-      description: '• Founded and independently launched a localized social networking app from concept to App Store, acquiring 5,000 active users.\n• Designed the platform using Clean Architecture (DDD) with Flutter and Firebase, scaling to handle high traffic without refactoring.\n• Enabled location-based discovery via Geoflutterfire and integrated Google ML Kit face verification for secure user onboarding.',
+      description: '• Engineered and successfully delivered a localized social networking app from concept to App Store launch as a lead contractor, supporting the acquisition of 5,000 active users.\n• Architected the platform using Clean Architecture (DDD) with Flutter and Firebase, scaling to handle high traffic without refactoring.\n• Enabled location-based discovery via Geoflutterfire and integrated Google ML Kit face verification for secure user onboarding.',
       order: 5
     }
   ];
